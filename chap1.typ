@@ -66,26 +66,56 @@ QFT 在现代物理中的地位
 
 *物理学基本单位*
 
-物理学的基本元素包括*时间、空间、物质（能力）*，这就是三个物理学基本单位。
+#definition(subname: [单位和量纲])[
+  物理学中的基本*单位*是描述物理量的最小单位，它们是相互独立的，不能由其他单位组合而成。而*量纲*是更抽象的概念，不再局限于具体的单位，而是描述物理量的性质和关系。
+
+  每个物理量都有一个对应的量纲，它表示该物理量在不同单位下的变化规律。通过量纲分析，可以推导出物理公式的正确性和一致性。
+]
+
+物理学的基本元素包括*时间、空间、物质（能力）*，这就是三个物理学基本单位。所以一般一个物理量可以写成
+$
+  [Q] = L^alpha T^beta M^gamma
+$
+量纲本质上是一种关于“尺度变换”的 bookkeeping。SI 认为长度、时间、质量是三个基本单位，其他单位都是由这三个基本单位组合而成的。于是
+$
+  [x] = L, [t] = T, [m] = M\
+  [v] = L T^(-1), [a] = L T^(-2), [F] = M L T^(-2), [E] = M L^2 T^(-2)
+$
+但“长度、时间、质量必须是三个相互独立的量纲”并不是逻辑必然，这是经典物理时代很自然的一种选择。现代物理告诉我们，它们之间其实存在非常特殊的、普适的联系。
 
 - 狭义相对论有常数$c$，由狭义相对论光速不变假设给出
   $
     c = 299792.458 "km/s"
   $
+  可以把时间转成长度
+  $
+    [c] = L T^(-1), [c t] = L <--> 1"s" tilde 3 times 10^8 "m"
+  $
+  所以我们不把$x,t$看成两个独立的量纲，而是把它们看成同一个量纲$L$的不同表现形式。于是四矢量
+  $
+    x^mu = (c t, vb(x))
+  $
 - 量子力学有常数$hbar$，由时空转动的生成元的量纲常数给出
   $
     hbar = 6.5821220 times 10^(-22) "MeV s"
+  $
+  同样可以把时间和能量联系起来
+  $
+    E = hbar omega
   $
 
 *自然单位制*中只有一个基本单位
 - $c=1$：长度单位和时间单位关联起来
 - $hbar=1$：能量单位和动量单位关联起来
+  $
+    [L] = [T] = E^(-1), [M] = [E] = [p]
+  $
 
-物理学量纲的起源是*维数转移*，即通过物理学基本单位的定义，将一个物理量的维数转化为另一个物理量的维数。
+物理学量纲的起源是*维数转移*，即利用普适常数把它改写成另一种量纲的数值。从数学上看，这像是在做*量纲空间降维*，在自然单位制下所有物理量都可以用能量的量纲来表示。
 
 == 量子力学与Hilbert空间
 
-#definition(subname: [量子力学基本原理（其一）])[
+#theorem(subname: [量子力学基本原理（其一）])[
   物理状态用Hilbert空间$cal(H)$中的态矢量$ket(Psi)$表示。相差一个复数因子的两个态矢量，描写同一物理状态。
 ]
 
@@ -105,12 +135,40 @@ QFT 在现代物理中的地位
 ]
 
 #definition(subname: [完备的基矢组])[
-  如果矢量集$$
+  *线性无关*：如果矢量集${psi_1, psi_2, ..., psi_n}$中不存在非平凡的线性组合为零，则称它们是线性无关的。
+
+  *完备*：如果矢量集${psi_1, psi_2, ..., psi_n}$的线性组合可以表示空间中任意矢量，则称它们是完备的。
+  $
+    ket(Psi) = sum_i c_i ket(psi_i), forall ket(Psi) in cal(H)
+  $
 ]
 
+#definition(subname: [内积空间])[
+  在复矢量空间$L$中定义一个内积$braket(psi, phi)$，它是一个从$L times L$到复数域$CC$的映射
+  $
+    braket(dot) : L times L -> CC, (psi, phi) |-> braket(psi, phi)
+  $
+  满足以下条件：
+  - 共轭对称性：$braket(psi, phi) = braket(phi, psi)^*$
+  - 正定性：$braket(psi, psi) >= 0$，且当且仅当$psi=0$时取等号。
+  - 线性性：
+    - $braket(alpha psi + beta phi, chi) = alpha braket(psi, chi) + beta braket(phi, chi)$
+    - $braket(psi, alpha phi + beta chi) = alpha^* braket(psi, phi) + beta^* braket(psi, chi)$
+  如果两个矢量$psi$和$phi$满足$braket(psi, phi) = 0$，则称它们是*正交*的。
+]
+也可以说这是$L$的共轭空间$L^*$上的矢量和$L$上的矢量之间的映射
+$
+  braket(dot) : L^* times L -> CC, (bra(psi), ket(phi)) |-> braket(psi, phi)
+$
+其中
+$
+  L^* = {bra(psi) | ket(psi) in L}, bra(psi) = ket(psi)^dagger
+$
+#definition(subname: [Hilbert空间])[
+  如果内积空间$L$是完备的，则称它为Hilbert空间$cal(H)$。
+]
 
-
-#definition(subname: [量子力学基本原理（其二）])[
+#theorem(subname: [量子力学基本原理（其二）])[
   可观察物理量由Hermite算符$hat(A)$表示，测量它的结果是$hat(A)$的本征值$lambda$，测量后体系处于对应的本征态$psi$。
 ]
 
@@ -197,8 +255,7 @@ $
   hat(a)^dagger (vb(p)) ket(psi) = ket(psi + vb(p))
 $
 
-
-#definition(subname: [量子力学基本原理（其三）])[
+#theorem(subname: [量子力学基本原理（其三）])[
   如果体系处于归一化态$Psi$。通过实验测量它位于一组正交归一态${Psi_i}$的概率为：
   $
     PP_i = abs(braket(Psi_i, Psi))^2
@@ -221,6 +278,9 @@ $
 $
   sum_i ketbra(Psi_i) = hat(I)
 $
+#newpara()
+
+在量子力学中，态和粒子之间的关系是通过态矢量和算符来描述的。态矢量表示系统的状态，而算符表示可观测的物理量。但到目前为止，看不出态和粒子有什么关系。虽然态的属性和波相似，但还不是波，因为没有时空背景。
 
 #newpara()
 经典物理中的光的偏振就有态的叠加、几率的思想。在$z$方向传播的平面电磁波是
@@ -237,7 +297,7 @@ $
 - 椭圆偏振态：$ket(psi) = cos alpha ket(h) + sin alpha e^(i delta) ket(v)$
 而*穿透概率*就是内积，其中$abs(braket(psi', psi))^2$为偏振态$ket(psi)$对透振态$ket(psi')$偏振片的穿透概率
 $
-  abs(braket(psi', psi))^2 = cos^2 theta + sin^2 theta + 2 cos theta sin theta cos delta
+  abs(braket(psi', psi))^2 = cos^2 theta + sin^2 theta + 2 cos 2theta sin 2theta cos delta/2
 $
 
 == 对称性
@@ -267,7 +327,15 @@ $
   - 封闭性：$h_1 dot h_2 in cal(H)$，对于所有$h_1,h_2 in cal(H)$
   - 单位元：$e in cal(H)$
   - 逆元：对于每个$h in cal(H)$，存在$h^(-1) in cal(H)$
+    $
+      h dot h^(-1) = h^(-1) dot h = e
+    $
+  就称$cal(H)$为群$cal(G)$的*子群*。
 
+我们再定义几个常见的群
+- $"GL"(n)$：$n$阶一般线性群，由所有$n times n$可逆矩阵组成
+- $"U"(n)$：$n$阶酉群，由所有$n times n$酉矩阵组成，特别地$"U"(1): e^(i theta)$，$theta in RR$，是复平面上单位圆上的旋转群
+- $"SO"(n)$：$n$阶特殊正交群，由所有$n times n$行列式为1的正交矩阵组成，$n$维空间转动群
 
 #definition(subname: [群表示])[
   群$cal(G)$的表示是将群元素映射到线性变换的映射
@@ -276,21 +344,52 @@ $
   $
   其中$"GL"(V)$是向量空间$V$上的可逆线性变换群。表示必须满足
   $
-    T(g dot h) = T(g) T(h)," " g,h in cal(G)\
-    T(g^(-1)) = T(g)^(-1)," " g in cal(G)\
-    T(e) = I
+    T(g dot h) & = T(g) T(h)," " g,h in cal(G) \
+     T(g^(-1)) & = T(g)^(-1)," " g in cal(G) \
+          T(e) & = I
   $
   对于所有$g,h in cal(G)$。
 
   $cal(G)$到$"GL"(n)$的同态$T: cal(G) -> "GL"(n)$称为$n$维表示。若$V$是有限维的，则称表示为有限维表示。
 ]
 
-群$cal(G)$的任一表示空间为$V$的表示$T$定义了许多矩阵表示。
+群$cal(G)$的任一表示空间为$V$的表示$T$定义了许多矩阵表示。因为若${v_1,...,v_n}$是$V$的一组基，即
+$
+  T(g) v_k = T(g)_(k j) v_j
+$
+定义的$T(g)_(k j)$就是表示$T$在基${v_1,...,v_n}$下的矩阵元素。$V$的基底的每一种不同选择，给出一个由$T$确定的$cal(G)$的新的矩阵表示。例如
+$
+  v_j = S_(j i) v'_i
+$
+给出新的基底${v'_1,...,v'_n}$所对应的矩阵表示
+$
+  T'(g) = S^(-1) T(g) S
+$
+由
+$
+  (T')_(l i) v'_i = T v'_l = T S^(-1)_(l j) S_(k i) v'_i = S^(-1)_(l k) T v_k = S^(-1)_(l k) T_(k j) v_j = S^(-1)_(l k) T_(k j) S_(j i) v'_i
+$
+- 两个复$n$维向量空间之间的线性变换，如果它们的矩阵表示在某个基下是相似的，那么它们描述的是同一个线性变换。
 
+#definition(subname: [子表示])[
+  群$cal(G)$的表示$G: g |-> T(g)$对应的表示空间$V$若具有一个在$G-$线性作用下不变的子空间$U$，则称$U$是$V$的*不变子空间*，并称$T$在$U$上的限制为$cal(G)$的一个*子表示*。
+]
+
+#definition(subname: [不可约表示])[
+  群$cal(G)$的表示$T$若没有非平凡的不变子空间，则称$T$是*不可约表示*。
+]
+不可约表示中的任何一个元素出发通过若干次群变换，总可以将其变成任何一个指定的元素，而可约表示做不到。
+
+#definition(subname: [直和])[
+  群$cal(G)$的两个表示$T_1$和$T_2$的直和$T_1 plus.o T_2$是将两个表示作用在同一个向量空间上的和。
+]
+若一个表示$T$经过适当的基变换后可以写成若干个不可约表示的直和，则称$T$是可约表示。
 
 === 对称性
 
-物理体系具有*对称性*指不同观察者观察同一实验得到同样的实验结果。
+#definition(subname: [对称性])[
+  物理体系具有*对称性*指不同观察者观察同一实验得到同样的实验结果。
+]
 
 观察者$cal(O)$通过实验测量处于归一化态$Psi$的物理体系位于一组正交归一态${Psi_1, Psi_2, ..., Psi_n}$的几率与另一个观察者$cal(O)'$对同一个物理体系的状态$Psi'$通过实验测量位于对应的正交归一态${Psi_1', Psi_2', ..., Psi_n'}$的几率相同
 $
@@ -315,8 +414,37 @@ $
 ]
 
 #definition(subname: [幺正、反幺正算符])[
+  幺正算符满足
+  $
+    braket(U Psi, U Phi) = braket(Psi, Phi)
+  $
+  即
+  $
+    U^(-1) = U^dagger
+  $
+  且有线性
+  $
+    U (alpha Psi + beta Phi) = alpha U Psi + beta U Phi
+  $
+  #newpara()
 
+  反幺正算符满足
+  $
+    braket(U Psi, U Phi) = braket(Psi, Phi)^*
+  $
+  且有*反线性*
+  $
+    U (alpha Psi + beta Phi) = alpha^* U Psi + beta^* U Phi
+  $
 ]
+我们把反线性算符都采用如下的Hermite共轭定义
+$
+  braket(Phi, A^dagger Psi) = braket(A Phi, Psi)^* = braket(Psi, A Phi)
+$
+就有，对于幺正和反幺正算符$U$，都有
+$
+  U^dagger = U^(-1)
+$
 
 #theorem(subname: [])[
   对称性变换是幺正或反幺正算符。
@@ -403,7 +531,220 @@ $
 $
   U(T_2) U(T_1) ket(Psi) = e^(i phi(T_2, T_1)) U(T_2 T_1) ket(Psi)
 $
-下面只讨论$phi(T_2, T_1) = 0$的情况。
+下面我们只讨论$phi(T_2, T_1) = 0$的情况。
 
 === 连续对称性
 
+$hat(U) = 1$是一个恒等变换，它把态矢量映射到自身，是一个幺正算符
+$
+  hat(U)=1: ket(Psi) |-> ket(Psi)
+$
+#note(subname: [反幺正算符不可能连续趋于恒等算符])[
+  如果$hat(A)$是反幺正算符，则
+  $
+    hat(A)(i ket(psi)) = -i hat(A) ket(psi)
+  $
+  变换$hat(A)(theta), theta -> 0$时
+  $
+    hat(A)(theta) -> 1
+  $
+  但
+  $
+    hat(A)(theta)(i ket(psi)) -> -i ket(psi)
+  $
+  这是不可能的，所以反幺正算符不可能连续趋于恒等算符。
+]
+任何可以通过一些参数的连续变化变成恒等变换的对称性变换，由连续性要求一定要由幺正算符而不是反幺正算符来代表。特别地，当无穷接近恒等变换时，可以引入无穷小的实參数来描述
+$
+  hat(U) = 1 + i epsilon hat(t)
+$
+$hat(U)$的幺正性要求
+$
+  hat(U)^dagger hat(U) = (1 - i epsilon hat(t)^dagger)(1 + i epsilon hat(t)) = 1 + i epsilon (hat(t) - hat(t)^dagger) + O(epsilon^2) = 1
+$
+这意味着
+$
+  hat(t) = hat(t)^dagger
+$
+$hat(t)$是Hermite算符，称为*生成元*。它是连续对称性变换的无穷小生成元，也是一个物理可观测量的候选者。
+
+一类由一组有限个实连续参数$theta^alpha$描述，所有变换都连续地连接到恒等变换的变换形成的群叫联通Lie群。它的生成元$hat(t)^alpha$是Hermite算符，称为Lie代数。例如$"SO"(3)$的Lie代数是$"so"(3)$，它的生成元是角动量算符$hat(J)^i$。
+
+两个群变换复合以后仍然是一个群变换
+$
+  T(overline(theta)) T(theta) in cal(G)
+$
+所以一定能用某个新的参数表示
+$
+  theta_"new" = f(theta, overline(theta))
+$
+因此
+$
+  T(overline(theta)) T(theta) = T(f(theta, overline(theta)))
+$
+这里的$f$就是群乘法在参数空间中的表达。就有
+$
+  hat(U)(T(overline(theta))) hat(U)(T(theta)) = hat(U)(T(f(theta, overline(theta))))
+$
+#newpara()
+恒等变换对应$theta = 0$
+$
+  f^a (theta, 0) = f^a (0, theta) = theta^a
+$
+因此在恒等元附近
+$
+  f^a (theta, overline(theta)) = theta^a + overline(theta)^a +f^a_(b c) overline(theta)^b theta^c + O(theta^3)
+$
+一阶就是普通相加，二阶开始出现群真正的非平凡结构。同时展开$U(T(theta))$在恒等元附近
+$
+  hat(U)(T(theta)) = 1 + i theta^a hat(Q)_a + 1/2 theta^b theta^c hat(Q)_(b c) + O(theta^3)
+$
+其中$hat(Q)_a, hat(Q)_(b c) = hat(Q)_(c b)$是不依赖$theta, overline(theta)$的算符。且$hat(Q)_a$是Hermite算符。
+
+我们把
+$
+  hat(U)(T(overline(theta))) hat(U)(T(theta)) = hat(U)(T(f(theta, overline(theta))))
+$
+展开，比较二阶项
+$
+  (1 + i overline(theta)^a hat(Q)_a + 1/2 overline(theta)^b overline(theta)^c hat(Q)_(b c) + O(overline(theta)^3)) (1 + i theta^a hat(Q)_a + 1/2 theta^b theta^c hat(Q)_(b c) + O(theta^3))\
+  = 1 + i (theta^a + overline(theta)^a + f^a_(b c) overline(theta)^b theta^c) hat(Q)_a + 1/2 (theta^b + overline(theta)^b + f^b_(d e) overline(theta)^d theta^e)(theta^c + overline(theta)^c + f^c_(f g) overline(theta)^f theta^g) hat(Q)_(b c) + O(theta^3, overline(theta)^3)\
+  1 + i(theta^a + overline(theta)^a + f^a_(b c) overline(theta)^b theta^c) hat(Q)_a + 1/2 (theta^b + overline(theta)^b)(theta^c + overline(theta)^c + f^c_(f g) overline(theta)^f theta^g) hat(Q)_(b c) + O(theta^3, overline(theta)^3)\
+  = 1 + i(theta^a + overline(theta)^a) hat(Q)_a + overline(theta)^b theta^c (i f^a_(b c) hat(Q)_a + hat(Q)_(b c)) + 1/2 overline(theta)^b overline(theta)^c hat(Q)_(b c) + 1/2 theta^b theta^c hat(Q)_(b c) + O(theta^3, overline(theta)^3)
+$
+得到
+$
+  hat(Q)_(b c) = - hat(Q)_b hat(Q)_c - i f^a_(b c) hat(Q)_a
+$
+同理
+$
+  hat(Q)_(c b) = - hat(Q)_c hat(Q)_b - i f^a_(c b) hat(Q)_a
+$
+相减得到
+$
+  hat(Q)_b hat(Q)_c - hat(Q)_c hat(Q)_b = - i f^a_(b c) hat(Q)_a + i f^a_(c b) hat(Q)_a
+$
+从而得到Lie代数的对易关系
+$
+  [hat(Q)_b, hat(Q)_c] = i C^a_(b c) hat(Q)_a
+$
+其中
+$
+  C^a_(b c) = - f^a_(b c) + f^a_(c b)
+$
+并且有生成元对称化
+$
+  hat(Q)_(b c) = - 1/2 (hat(Q)_b hat(Q)_c + hat(Q)_c hat(Q)_b) - i/2 (f^a_(b c) + f^a_(c b)) hat(Q)_a
+$
+这就是Lie代数的结构常数。通过它可以定义出展开地所有高阶项，将无穷小变换叠加到有限大变换。
+
+#note[
+  我们一般习惯在张量记号中把基底用下标表示，分量用上标表示。这里的$theta^a$是Lie群的参数，$hat(Q)_a$是Lie代数的生成元。它们是对偶的。
+
+  例如Lorentz指标中
+  $
+    x_mu = eta_(mu nu) x^nu, eta_(mu nu) = diag(1, -1, -1, -1)
+  $
+  会改变空间分量符号
+  $
+    x^mu = (t,x,y,z), x_mu = (t,-x,-y,-z)
+  $
+]
+
+#newpara()
+另一方面在单位元附近群参数的可加性可将有限的参数分解为无穷多的单位元附近的参数的叠加
+$
+  hat(U)(T(theta)) & = lim_(N->oo) (hat(U)(T(theta/N)))^N = lim_(N->oo) (1 + i theta^a/N hat(Q)_a + O(theta^2/N^2))^N \
+                   & = e^(i theta^a hat(Q)_a)
+$
+所以Lie群的有限变换可以由Lie代数的生成元指数化得到，$hat(Q)_a$是Lie代数的生成元。注意到若$theta^alpha$有量纲，那么$hat(Q)_a$是其逆量纲。
+
+另外
+$
+  1/2(i hat(Q)_a theta^a)^2 =^"形式变换" -1/4 theta^b theta^c (hat(Q)_b hat(Q)_c + hat(Q)_c hat(Q)_b)
+$
+就有
+$
+  f^a_(b c) = - f^a_(c b)
+$
+#newpara()
+
+生成元天然可能就是某种物理可观测量。实际上一些最重要的物理量恰好就是生成元：
+- 空间平移的生成元：动量
+  $
+    U(vb(a)) = e^(i vb(a) dot hat(vb(p)))
+  $
+- 时间平移的生成元：Hamiltonian
+  $
+    U(t) = e^(i t hat(H))
+  $
+- 旋转的生成元：角动量
+  $
+    U(vb(theta)) = e^(i vb(theta) dot hat(vb(J)))
+  $
+生成元和参数对偶。
+
+
+#note(subname: [对易是否意味着量子力学？])[
+  事实上非对易本身并不意味着量子力学，其背后的Lie群/Lie代数式相当经典的。
+  $
+    {,}_"Piosson" = sum_i (pdv(, q^i) and pdv(, p_i)) <-> 1/(i hbar) [,]
+  $
+  #newpara()
+
+  如果$G$生成一个对称性，那么经典情况下
+  $
+    {H,G} = 0
+  $
+  Hamilton方程给出
+  $
+    dv(G, t) = {G,H} + pdv(G, t) = 0
+  $
+  这说明$G$是守恒量。量子力学中
+  $
+    [hat(H), hat(G)] = 0
+  $
+  Heisenberg方程也给出
+  $
+    dv(hat(G), t) = 1/(i hbar) [hat(G), hat(H)] + pdv(hat(G), t) = 0
+  $
+  于是同样得到$hat(G)$是守恒量。Noether定理在经典力学和量子力学都是Hamilton/Lie结构的必然结果。
+
+  在经典力学里虽然满足
+  $
+    {q,p} = 1
+  $
+  但在一个确定的相空间点
+  $
+    (q,p)
+  $
+  上，$q$和$p$是确定的。量子力学中
+  $
+    [hat(q), hat(p)] = i hbar
+  $
+  却意味着不存在同时把二者精确确定的共同本征态，并导致
+  $
+    Delta q Delta p >= hbar/2
+  $
+  这才是量子算符非对易真正不同于经典 Poisson 非对易的地方。
+
+  经典理论和量子理论都需要描述连续变换的生成元，而 Poisson bracket 和 commutator 恰好分别承担了完全相同的角色。
+
+  *物理可观测量作为算符的非对易性+Born规则/Hilbert空间结构才产生我们通常所说的量子现象。*
+  - 经典力学：状态是相空间中的一个点，$q,p$只是这个点的两个坐标，Piosson括号是相空间几何和生成关系
+    - 经典状态根本不是一个波函数，经典纯态是一个点，形式化地表示成相空间上的分布：
+      $
+        rho(q, p) = delta(q-q_0) delta(p-p_0)
+      $
+      因为$rho(q, p)$是一个联合概率分布
+      $
+        rho(q, p) >= 0, integral dd(q, p) rho(q, p) = 1
+      $
+  - 量子力学：状态是 Hilbert 空间中的向量，$q,p$是作用在状态上的算符，对易关系让本征值的测量结果不可能同时精确确定
+    - 位置和动量互为 Fourier 共轭：一个函数在 $x$ 空间越窄，它的 Fourier transform 在 $p$ 空间就越宽
+    - 量子力学一般没有这样的普通正定联合概率分布，Wigner function$W(x,p)$是一个准概率分布，可能为负
+]
+
+#note(subname: [Weyl–Wigner：正则量子化的更自然理解])[
+
+]
