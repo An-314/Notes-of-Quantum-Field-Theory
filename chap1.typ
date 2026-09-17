@@ -688,7 +688,7 @@ $
 #note(subname: [对易是否意味着量子力学？])[
   事实上非对易本身并不意味着量子力学，其背后的Lie群/Lie代数式相当经典的。
   $
-    {,}_"Piosson" = sum_i (pdv(, q^i) and pdv(, p_i)) <-> 1/(i hbar) [,]
+    {F,G}_"Piosson" = sum_i (pdv(F, q_i) pdv(G, p_i) - pdv(F, p_i) pdv(G, q_i)) <-> 1/(i hbar) [hat(F), hat(G)]
   $
   #newpara()
 
@@ -745,6 +745,161 @@ $
     - 量子力学一般没有这样的普通正定联合概率分布，Wigner function$W(x,p)$是一个准概率分布，可能为负
 ]
 
-#note(subname: [Weyl–Wigner：正则量子化的更自然理解])[
+#note(subname: [Weyl–Wigner：正则量子化])[
+  量子力学中空间平移由幺正算符表示
+  $
+    U(a) = e^(-i/hbar a hat(p))
+  $
+  要求$hat(p)$真正生成位置平移
+  $
+    U^dagger (a) hat(q) U(a) = hat(q) + a
+  $
+  对$a=0$求导
+  $
+    evaluated(dv(, a) U^dagger (a) hat(q) U(a))_(a=0) = 1
+  $
+  另一方面
+  $
+    evaluated(dv(, a) U^dagger (a) hat(q) U(a))_(a=0) &= evaluated(dv(, a) e^(i/hbar a hat(p)) hat(q) e^(-i/hbar a hat(p)))_(a=0) \
+    &= i/hbar evaluated(hat(p) U^dagger hat(q) U - U^dagger hat(q) hat(p) U)_(a=0)\
+    & = i/hbar (hat(p) hat(q) - hat(q) hat(p)) = i/hbar [hat(p), hat(q)]
+  $
+  从而自然能够得到，如果我们还要要求$hat(p)$是空间平移生成元，就必须有
+  $
+    [hat(q), hat(p)] = i hbar
+  $
+  这样 canonical commutation relation 就有明确的几何意义了。
+
+  经典 Hamilton 力学的相空间带有辛结构
+  $
+    omega = dd(q) and dd(p)
+  $
+  无穷小正则变换保持辛结构，它决定了 Poisson bracket
+  $
+    delta F = epsilon {F, G}_"Piosson"
+  $
+  量子力学中无穷小变换保持 Hilbert 空间的内积结构
+  $
+    delta hat(F) = i/hbar epsilon [hat(G), hat(F)]
+  $
+  因此对应关系
+  $
+    {F, G}_"Piosson" <-> 1/(i hbar) [hat(F), hat(G)]
+  $
+  保持的是：“生成元如何产生连续变换”的 Lie 结构。
+
+  因为$hat(q), hat(p)$是无界算符，有定义域问题，所以严格数学上直接操作$[hat(q), hat(p)] = i hbar$是不严格的。Weyl 的想法是研究它们指数化以后得到的有限变换
+  $
+    U(a) = e^(-i/hbar a hat(p)), V(b) = e^(i/hbar b hat(q))
+  $
+  它们分别代表位置平移和动量平移。它们满足
+  $
+    U(a) V(b) = e^(-i/hbar a b) V(b) U(a)
+  $
+  这里用到了
+  #theorem(subname: [BCH formula])[
+    $
+      e^A e^B = e^(A + B + 1/2 [A, B] + 1/12 ([A, [A, B]] + [B, [B, A]]) + ...)
+    $
+  ]
+  由于$e^[A,B]$是常数，所以可以交换，得到
+  $
+    U(a) V(b) = e^(-i/hbar a b) V(b) U(a)
+  $
+  这就是 Weyl relation。它说：先做位置平移，再做动量平移，和先做动量平移，再做位置平移，最终的量子态只差一个相位。所以辛几何结构
+  $
+    omega = dd(q) and dd(p)
+  $
+  在量子理论里，变成了平移算符之间的中心相位。
+
+  把位置平移和动量平移合起来
+  $
+    W(q,p) = e^(i/hbar (p hat(q) - q hat(p)))
+  $
+  这些算符不是普通的二维平移群，因为乘法时会多出一个 phase。大致有
+  $
+    W(z_1) W(z_2) = e^(i/(2hbar) omega(z_1, z_2)) W(z_1 + z_2)
+  $
+  其中
+  $
+    z = (q, p), omega(z_1, z_2) = q_1 p_2 - q_2 p_1
+  $
+  $omega$正是经典辛形式，把$omega$嵌进了量子幺正算符的乘法法则。*量子化就是把经典相空间的平移群变成带中心相位的 Heisenberg 群表示。*
+
+  经典物理量是相空间函数，我们想构造一个对应
+  $
+    f(q,p) <-> hat(f)
+  $
+  普通正则量子化会遇到 ordering ambiguity
+  $
+    hat(q) hat(p) != hat(p) hat(q)
+  $
+  Weyl 的办法是采用完全对称排序，例如
+  $
+    q p <-> 1/2 (hat(q) hat(p) + hat(p) hat(q))
+  $
+  更一般地，不直接量子化$q^m p^n$这些多项式，通过 Fourier 展开把一切函数分解成指数
+  $
+    f(q,p) = integral dd(alpha, beta) tilde(f)(alpha,beta) e^(i(alpha q + beta p))
+  $
+  然后定义
+  $
+    hat(f) = integral dd(alpha, beta) tilde(f)(alpha,beta) e^(i(alpha hat(q) + beta hat(p)))
+  $
+  这就是 Weyl quantization，通过 Weyl 算符完成*量子化*。这样的指数结构由于其不对易性，就完成了对称排序。
+
+  量子算符也可以对应回某个相空间函数
+  $
+    hat(A) <-> A_W (q,p)
+  $
+  其中$A_W (q,p)$是算符$hat(A)$在相空间的 Weyl symbol。最典型的就是密度算符
+  $
+    hat(rho) <-> W(q,p)
+  $
+  对应 Wigner function。对于纯态$psi(q)$
+  $
+    W(q,p) = 1/(2 pi hbar) integral dd(y) e^(i/hbar p y) psi^*(q - y/2) psi(q + y/2)
+  $
+  很像经典相空间概率分布，但它可能为负，所以称为准概率分布。
+
+  在从$hat(A)$到$A_W (q,p)$的映射中，算符的乘法变成了 Moyal star product
+  $
+    hat(A) hat(B) <-> A_W (q,p) star B_W (q,p)\
+    (hat(A) hat(B))_W = A_W star B_W
+  $
+  即
+  $
+    & hat(A), hat(B) &   -->^"operator product" & hat(A) hat(B) & \
+    & arrow.b "W"    &                          & arrow.b "W"   & \
+    & A_W, B_W       & -->^"Moyal star product" & A_W star B_W  &
+  $
+  star product 是 operator product 在相空间中的像。Weyl transform 把算符变成相空间函数，为了让非交换结构不丢失，普通的函数乘法要被替换成 Moyal star product。其中
+  $
+    A_W (q,p) star B_W (q,p) &= A_W (q,p) exp((i hbar)/2 (arrow.l(pdv(, q)) arrow.r(pdv(, p)) - arrow.l(pdv(, p)) arrow.r(pdv(, q)))) B_W (q,p)\
+    & = A B + (i hbar)/2 {A, B}_"Piosson" + O(hbar^2)
+  $
+  非交换性就是由这个 Moyal star product 体现出来的
+  $
+    {A, B}_"Moyal" = 1/(i hbar) (A star B - B star A) = {A, B}_"Piosson" + O(hbar^2)
+  $
+  这是一种deformation quantization
+  $
+    A star B = A B + O(hbar), (A star B - B star A)/(i hbar) = {A, B}_"Piosson" + O(hbar^2)
+  $
+  所以量子理论可以理解成经典相空间函数代数的非交换形变，这里$hbar$就是 deformation parameter
+  $
+    A star B -> A B, hbar -> 0
+  $
+  于是
+  $
+    {A, B}_"Moyal" -> {A, B}_"Piosson", hbar -> 0
+  $
+  而
+  $
+    {A, B}_"Moyal" = 1/(i hbar) (A star B - B star A) <-> 1/(i hbar) [hat(A), hat(B)]
+  $
+  这就是 Weyl–Wigner 对应关系。在经典极限$hbar -> 0$下，star product 退化为普通函数乘法，Moyal bracket 退化为 Poisson bracket，这就是所谓的 classical limit。
+
+  通过Moyal star product，量子力学的非交换结构被嵌入到相空间函数的代数中。Weyl–Wigner 对应关系提供了一个桥梁，使得经典和量子描述之间可以通过 deformation quantization 进行平滑过渡。这样对正则量子化的理解不仅仅是将经典变量替换为算符，而是通过非交换代数结构的引入，揭示了量子力学与经典力学之间深层次的联系。
 
 ]
