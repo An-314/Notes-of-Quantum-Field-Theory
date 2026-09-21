@@ -908,20 +908,21 @@ $
 
 === 准备与约定
 
-协变与逆变的坐标矢量
-- 逆变坐标四矢量
-  $
-    x^mu=(x^0,x^1,x^2,x^3)=(x^0,x^i)=(t,vb(x))
-  $
-- 协变坐标四矢量
-  $
-    x_mu=(x_0,x_1,x_2,x_3)=(x_0,x_i)=(t,-vb(x))
-  $
-- 坐标四矢量的内积
-  $
-    x^2 = x_mu x^mu = x^mu x_mu = x_0^2 - x_1^2 - x_2^2 - x_3^2 = t^2 - vb(x)^2
-  $
-除非特别声明，重复指标意味求和Einstein求和约定。要求和的两个相同指标必须是一个上标，一个下标。
+#definition(subname: [协变与逆变的坐标矢量])[
+  - 逆变坐标四矢量 contravariant vector
+    $
+      x^mu=(x^0,x^1,x^2,x^3)=(x^0,x^i)=(t,vb(x))
+    $
+  - 协变坐标四矢量 covariant vector
+    $
+      x_mu=(x_0,x_1,x_2,x_3)=(x_0,x_i)=(t,-vb(x))
+    $
+  - 坐标四矢量的内积
+    $
+      x^2 = x_mu x^mu = x^mu x_mu = x_0^2 - x_1^2 - x_2^2 - x_3^2 = t^2 - vb(x)^2
+    $
+  除非特别声明，重复指标意味求和Einstein求和约定。要求和的两个相同指标必须是一个上标，一个下标。
+]
 
 逆变四矢量与协变四矢量的相互转换
 $
@@ -931,11 +932,53 @@ $
 $
   g_(mu nu) = g^(mu nu) = diag(1, -1, -1, -1)
 $
-有
+#definition(subname: [Minkovski时空度规张量])[
+  Minkovski时空度规张量$g_(mu nu)$是一个对称矩阵，它定义了四维时空中坐标矢量的内积。它的形式为
+  $
+    g_(mu nu) = diag(1, -1, -1, -1)
+  $
+  其中$g_(00) = 1$表示时间分量的正号，而空间分量$g_(11) = g_(22) = g_(33) = -1$表示空间分量的负号。这种度规张量反映了狭义相对论中时间和空间的不同性质。
+]
+事实上
+$
+  g^(mu nu) g_(nu rho) = delta^mu_rho, g_(mu nu) g^(" "nu rho) = delta_mu^rho\
+  g^(-1) = g
+$
 $
   g^mu_(" "nu) = g^(mu mu') g_(mu' nu) = delta^mu_nu\
-  g_(mu^" "nu) = g_(mu mu') g^(" "mu' nu) = delta_mu^nu
+  g_mu^(" "nu) = g_(mu mu') g^(" "mu' nu) = delta_mu^nu
 $
+其中$g^mu_(" "nu)$是单位矩阵，$delta^mu_nu$是Kronecker delta。
+
+在因为狭义相对论里，不同观察者虽然不同意$Delta t, Delta vb(x)$，但他们同意$Delta s^2 = Delta t^2 - Delta vb(x)^2 = Delta x^mu Delta x_mu$，即时空间隔不变。这个不变性是狭义相对论的核心。
+
+一般的协变和逆变矢量定义如下
+- 逆变矢量
+  $
+    A^mu = (A^0, A^1, A^2, A^3) = (A^0, A^i) = (A^0, vb(A)) = g^(mu nu) A_nu
+  $
+- 协变矢量
+  $
+    V_mu = (V_0, V_1, V_2, V_3) = (V_0, V_i) = (V_0, -vb(V)) = g_(mu nu) V^nu
+  $
+- 矢量的内积
+  $
+    A dot V & = A^mu V_mu = A_mu V^mu = g_(mu nu) A^mu V^nu = g^(mu nu) A_mu V_nu \
+            & = A_0 V^0 - A_1 V^1 - A_2 V^2 - A_3 V^3 = A_0 V^0 - vb(A) dot vb(V)
+  $
+- 对坐标微商的逆变四矢量
+  $
+    partial^mu = pdv(, x_mu) = (partial^0, partial^1, partial^2, partial^3) = (partial^0, partial^i) = (partial^0, - grad_i) = g^(mu nu) partial_nu
+  $
+- 对坐标微商的协变四矢量
+  $
+    partial_mu = pdv(, x^mu) = (partial_0, partial_1, partial_2, partial_3) = (partial_0, partial_i) = (partial_0, grad_i) = g_(mu nu) partial^nu
+  $
+- D'Alembert算符
+  $
+    square &= partial^mu partial_mu = partial_mu partial^mu = g_(mu nu) partial^mu partial^nu = g^(mu nu) partial_mu partial_nu\
+    &= partial_0^2 - partial_1^2 - partial_2^2 - partial_3^2 = partial_t^2 - grad^2
+  $
 
 === 狭义相对论基本原理
 
@@ -945,52 +988,148 @@ $
   - 光速在所有惯性系中都不变
 ]
 对称性的角度：
-- 物理规律在非齐Lorentz变换下不变。这样被称为*相对论原理*。
+- 物理规律在非齐次Lorentz变换下不变。这样被称为*相对论原理*
   $
     x^mu -> x'^mu = Lambda^mu_(" "nu) x^nu + a^mu
   $
-变换参数$Lambda^mu_(" "nu)$是Lorentz变换矩阵，a^mu是平移参数。
+变换参数$Lambda^mu_(" "nu)$是Lorentz变换矩阵，$a^mu$是平移参数。
 - Lorentz变换矩阵必须保证时空间隔的不变性，这也意味着*光速不变*
   $
     g_(mu nu) dd(x'^mu) dd(x'^nu) = g_(mu nu) dd(x^mu) dd(x^nu)
   $
-  间隔的不变性给出对变换参数$Lambda^mu_(" "nu)$的约束
+
+间隔的不变性给出对变换参数$Lambda^mu_(" "nu)$的约束
+$
+  g_(mu nu) Lambda^mu_(" "rho) Lambda^nu_(" "sigma) = g_(rho sigma)\
+  Lambda^TT g Lambda = g
+$
+从而
+$
+  Lambda^(-1) = g Lambda^TT g
+$
+即
+$
+  g_(mu nu) Lambda^mu_(" "rho) = g_(rho sigma) (Lambda^(-1))^sigma_(" "nu)\
+  (Lambda^(-1))^mu_(" "nu) = g^(mu rho) Lambda^sigma_(" "rho) g_(sigma nu) = Lambda_nu^(" "mu)\
+$
+降指标得到
+$
+  (Lambda^(-1))_(rho nu) = Lambda_(nu rho)\
+$
+#note[
+  对于指标语言
   $
-    g_(mu nu) Lambda^mu_(" "rho) Lambda^nu_(" "sigma) = g_(rho sigma)
+    (Lambda^TT)_rho^(" "mu) = Lambda^mu_(" "rho)
   $
-  即
+  对于协变矢量
   $
-    g_(mu nu) Lambda^mu_(" "rho) = g_(rho sigma) (Lambda^(-1))^sigma_(" "nu)
+    A_mu = g_(mu nu) A^nu
   $
-  则有
+  有
   $
-    (Lambda^(-1))_(rho nu) = Lambda_(nu rho)
+    A'_mu &= g_(mu rho) A'^rho = g_(mu rho) Lambda^rho_(" "sigma) A^sigma = g_(mu rho) Lambda^rho_(" "sigma) g^(" "sigma nu) A_nu \
+    &= (Lambda^(-1))_(mu nu) A_nu
   $
+  所以，上下指标确实记录着不同的变换规律
+  $
+    A'^mu = Lambda^mu_(" "nu) A^nu, A'_mu = (Lambda^(-1))^(nu)_(" "mu) A_nu
+  $
+  从几何上说，协变矢量可以看成“输入一个矢量，输出一个数”的线性函数；它与矢量的配对应当不依赖坐标，所以两者的变换必须互相抵消。
+]
+带平移的逆变换于是为
+$
+  x^mu = (Lambda^(-1))^mu_(" "nu) (x'^nu - a^nu) = Lambda_nu^(" "mu) (x'^nu - a^nu)
+$
+从而
+$
+  x_mu = (Lambda^(-1))_mu^(" "nu) (x'_nu - a_nu) = Lambda^nu_(" "mu) (x'_nu - a_nu)
+$
+从而
+$
+  x_alpha = g_(alpha mu) Lambda_nu^(" "mu) (x'_nu - a_nu)\
+  x_alpha = Lambda^beta_(" "alpha) g_(beta nu) (x'_nu - a_nu)
+$
+这样得到
+$
+  Lambda^mu_(" "sigma) Lambda^nu_(" "rho) g_(mu nu) = g_(sigma rho)\
+$
+
 
 === Lorentz群
 
-用$T(Lambda,a)$表示参数$Lambda^mu_(" "nu), a^mu$的非齐次Lorentz变换
-$
-  T(Lambda,a): x^mu -> x'^mu = Lambda^mu_(" "nu) x^nu + a^mu
-$
+#definition(subname: [非齐次Lorentz变换])[
+  非齐次Lorentz变换是指在四维时空中，坐标矢量$x^mu$经过线性变换和位移后得到新的坐标矢量$x'^mu$的变换。它可以表示为：
+  $
+    T(Lambda,a): x^mu -> x'^mu = Lambda^mu_(" "nu) x^nu + a^mu
+  $
+  其中，$Lambda^mu_(" "nu)$是Lorentz变换矩阵，满足保持时空间隔不变的条件，而$a^mu$是平移向量。
+]
 可以证明其构成一个群。
+- 存在单位变换
+  $
+    T(I, 0): x^mu -> x'^mu = x^mu
+  $
+- 对于任意一个变换$T(Lambda, a)$，存在逆变换$T(Lambda^(-1), -Lambda^(-1) a)$（见HW1.1）
+  $
+    T(Lambda, a) T(Lambda^(-1), -Lambda^(-1) a) = T(I, 0)
+  $
+- 对两个标安环变换$T(Lambda,a)$和$T(overline(Lambda),overline(a))$，它们的复合变换为
+  $
+    T(Lambda, a) T(overline(Lambda), overline(a)) = T(Lambda overline(Lambda), Lambda overline(a) + a)
+  $
+从而构成群结构。
+#definition(subname: [非齐次Lorentz群])[
+  *非齐次Lorentz群*是指所有非齐次Lorentz变换的集合，记为$"ISO"(1, 3)$。它包括所有保持时空间隔不变的线性变换和位移。非齐次Lorentz群是一个10维Lie群，其中6个维度对应于Lorentz变换（旋转和平移），4个维度对应于平移。非齐次Lorentz群也被称作Poincaré群。
+  $
+    "ISO"(1, 3) = RR^(1,3) times.r "O"(1, 3)
+  $
+  #newpara()
+
+  *Lorentz群*是指所有保持时空间隔不变的线性变换的集合（$a = 0$），记为$"O"(1, 3)$。它是非齐次Lorentz群的一个子群，只包含旋转和平移，不包括位移。Lorentz群是一个6维Lie群，其中3个维度对应于空间旋转，3个维度对应于Lorentz boost（相对运动）。
+]
+
+#newpara()
+对
+$
+  Lambda^mu_(" "sigma) Lambda^nu_(" "rho) g_(mu nu) = g_(sigma rho)
+$
+取行列式
+$
+  (det Lambda)^2 det g = det g => det Lambda = plus.minus 1
+$
+以及取00分量
+$
+  (Lambda^0_(" "0))^2 - sum_(i=1)^3 (Lambda^0_(" "i))^2 = 1 => Lambda^0_(" "0) >= 1 or Lambda^0_(" "0) <= -1
+$
+- $det Lambda = plus.minus 1$区分四维取向是否保持
+- $Lambda^0_(" "0) >= 1 or Lambda^0_(" "0) <= -1$区分未来方向和过去方向是否互换
+例如未来指向的单位类时矢量
+$
+  e_0 = (1, 0, 0, 0)
+$
+变换后为
+$
+  e'_0 = Lambda e_0 = (Lambda^0_(" "0), Lambda^1_(" "0), Lambda^2_(" "0), Lambda^3_(" "0))
+$
+它仍然是单位类时矢量，但时间分量可以为正，也可以为负。
 
 非齐次Lorentz变换被$det Lambda = plus.minus 1$和$Lambda^0_(" "0)$分成四叶
-- 正时叶：$det Lambda = 1, Lambda^0(" "0) <= 1$
-- 正空间叶：$det Lambda = -1, Lambda^0(" "0) >= 1$
+- 正时叶：$det Lambda = 1, Lambda^0_(" "0) >= 1$
+  - 该叶形成子群$RR^(1,3) times.r "SO"^+(1, 3)$，其中$"SO"^+(1, 3)$称为*正时正规Lorentz群*，它是非齐次Lorentz群的连通分支
+- 正空间叶：$det Lambda = -1, Lambda^0_(" "0) >= 1$
   - 可以看成正时叶的空间反射
     $
       cal(P)^0_(" "0) = 1, cal(P)^i_(" "j) = - delta^i_j
     $
-- 负时叶：$det Lambda = 1, Lambda^0(" "0) <= -1$
+- 负时叶：$det Lambda = 1, Lambda^0_(" "0) <= -1$
   - 可以看成正时叶的时间反演
     $
       cal(T)^0_(" "0) = -1, cal(T)^i_(" "j) = delta^i_j
     $
-- 负空间叶：$det Lambda = -1, Lambda^0(" "0) <= -1$
+- 负空间叶：$det Lambda = -1, Lambda^0_(" "0) <= -1$
   - 可以看成正时叶的时间反演和空间反射
 
-=== 无穷小行为
+=== Poincaré代数
 
 在单位变换附近，变换参数可以写为
 $
@@ -998,21 +1137,29 @@ $
 $
 其中$omega^mu_(" "nu)$是无穷小的反对称矩阵，$epsilon^mu$是无穷小的平移参数。
 
-相应的第一叶的有限大的变换
-$
-  Lambda^mu_(" "nu) = exp(omega)^mu_(" "nu), a^mu = epsilon^mu
-$
-$omega^mu_(" "nu)$是Lorentz代数的生成元，$epsilon^mu$是平移的生成元。
-
 有限制
 $
   g_(sigma rho) = g_(mu nu) (g^mu_(" "sigma) + omega^mu_(" "sigma)) (g^nu_(" "rho) + omega^nu_(" "rho)) = g_(sigma rho) + omega_(sigma rho) + omega_(rho sigma) + O(omega^2)
 $
 从而有反对称性
 $
-  omega_(sigma rho) = - omega_(rho sigma)
+  omega_(sigma rho) = - omega_(rho sigma)\
+  w^TT g + g omega = 0
 $
 它把16个$omega^mu_(" "nu)$约束为6个独立的无穷小参数：
+$
+  omega^mu_(" "nu) = mat(
+    0, kappa_1, kappa_2, kappa_3;
+    kappa_1, 0, -theta_3, theta_2;
+    kappa_2, theta_3, 0, -theta_1;
+    kappa_3, -theta_2, theta_1, 0
+  )
+$
+于是Lorentz代数无穷小坐标变化为
+$
+  delta x^mu = omega^mu_(" "nu) x^nu\
+  delta t = vb(kappa) dot vb(x), delta vb(x) = vb(kappa) t + vb(theta) times vb(x)
+$
 - 三个代表坐标系之间的空间坐标架相对转动
   $
     omega^i_j tilde epsilon_(i j k) theta^k
@@ -1023,6 +1170,74 @@ $
     omega^0_i = arctan(v^i)
   $
   （实际上是$beta^i$）是快度，它们是Lorentz boost的无穷小参数
+
+尤其生成的第一叶的*有限大的变换*
+$
+  Lambda^mu_(" "nu) = exp(omega)^mu_(" "nu), a^mu = epsilon^mu
+$
+$omega^mu_(" "nu)$是Lorentz代数的生成元，$epsilon^mu$是平移的生成元。下面证明$e^omega$保持度规，定义一条矩阵路径
+$
+  Lambda(s) = exp(s omega)
+$
+考察
+$
+         M(s) & = Lambda^TT (s) g Lambda(s) \
+  dv(M(s), s) & = dv(Lambda^TT (s), s) g Lambda(s) + Lambda^TT (s) g dv(Lambda(s), s) \
+              & = Lambda^TT (s) omega^TT g Lambda(s) + Lambda^TT (s) g omega Lambda(s) \
+              & = 0
+$
+从而
+$
+  G(s) = Lambda^TT (s) g Lambda(s) = G(0) = g
+$
+这说明
+$
+  Lambda = exp(omega)
+$
+#newpara()
+对于$t-z$平面的Boost，考虑生成矩阵
+$
+  B = mat(
+    0, 1;
+    1, 0,
+  ), omega = chi B
+$
+有
+$
+  e^(chi B) = I cosh chi + B sinh chi = mat(
+    cosh chi, sinh chi;
+    sinh chi, cosh chi
+  )
+$
+对应
+$
+  beta = tanh chi, gamma = cosh chi, gamma beta = sinh chi
+$
+这就是标准的Lorentz boost矩阵。快度$chi$是纯Boost的无穷小参数。它们是Lorentz代数的生成元。对于同方向 boost
+$
+  B(chi_2) B(chi_1) = B(chi_1 + chi_2)
+$
+#newpara()
+事实上一个*Lorentz变换*是
+- *旋转*
+  $
+    R(theta) = exp(theta dot J)
+  $
+  其中$J$是旋转的生成元
+- *Boost*
+  $
+    B(kappa) = exp(kappa dot K)
+  $
+  其中$K$是Boost的生成元
+- *空间反射*
+  $
+    P = diag(1, -1, -1, -1)
+  $
+- *时间反演*
+  $
+    T = diag(-1, 1, 1, 1)
+  $
+的组合。
 
 === 态矢量的Lorentz变换
 
@@ -1038,7 +1253,11 @@ $
 $
   U(1 + omega, epsilon) = 1 + i/2 omega_(rho sigma) J^(rho sigma) + i epsilon^rho P_rho + O(omega^2, epsilon^2)
 $
-$U$的幺正性和$omega,rho$为实参数要求$J^(rho sigma)$是Hermite算符，$P_rho$是Hermite算符。它们是Lorentz群的生成元。
+$U$的幺正性和$omega,rho$为实参数要求$J^(rho sigma)$是Hermite算符，$P_rho$是Hermite算符，它们是Lorentz群的生成元
+$
+  (J^(rho sigma))^dagger = J^(rho sigma), (P_rho)^dagger = P_rho
+$
+结合$omega_(sigma rho) = - omega_(rho sigma)$，可以得到
 $
   J^(rho sigma) = - J^(sigma rho)
 $
@@ -1048,18 +1267,192 @@ $
 $
   U(e^omega, epsilon) = e^(i/2 omega_(rho sigma) J^(rho sigma) + i epsilon^rho P_rho)
 $
-Hermite算符$J^(rho sigma)$和$P_rho$在非齐次洛伦兹变换下的性质
+半直积结构给出Lorentz变换和平移一般不对易，严格地
 $
-  T^(-1) (Lambda, a) J^(rho sigma) T(Lambda, a) = Lambda^rho_(" "mu) Lambda^sigma_(" "nu) J^(mu nu)\
+  U(Lambda, a) = U(I, a) U(Lambda, 0) = e^(i epsilon_rho P^rho) e^(i/2 omega_(rho sigma) J^(rho sigma))
 $
+其中$omega_(rho sigma), epsilon_rho$可以有限大，$J^(rho sigma), P^rho$是生成元在态空间的表示。
+
+Hermite算符$J^(rho sigma)$和$P_rho$在非齐次Lorentz变换下的性质
+$
+  T^(-1) (Lambda, a) = T(Lambda^(-1), -Lambda^(-1) a)\
+  T(overline(Lambda), overline(a)) T(Lambda, a) = T(overline(Lambda) Lambda, overline(Lambda) a + overline(a))
+$
+$
+  U(Lambda, a) U(1+omega, epsilon) U^(-1) (Lambda, a) = U(Lambda (1 + omega) Lambda^(-1), Lambda epsilon - Lambda omega Lambda^(-1) a)
+$
+考虑$omega, epsilon$的一次
+$
+  U(Lambda, a) (1/2 omega_(rho sigma) J^(rho sigma) + epsilon_rho P^rho) U^(-1) (Lambda, a)\ = 1/2 (Lambda omega Lambda^(-1))_(mu nu) J^(mu nu) + (Lambda epsilon - Lambda omega Lambda^(-1) a)_mu P^mu
+$
+比较两边，注意反对称性
+$
+  J^(rho sigma) = - J^(sigma rho), (Lambda^(-1))^mu_(" "nu) = g^(mu rho) Lambda^sigma_(" "rho) g_(sigma nu)
+$
+有
+$
+  U(Lambda, a) J^(rho sigma) U^(-1) (Lambda, a) = Lambda^(" "rho)_(mu) Lambda^(" "sigma)_(nu) (J^(mu nu) + a^mu P^nu - a^nu P^mu)\
+  U(Lambda, a) P^rho U^(-1) (Lambda, a) = Lambda^(" "rho)_(mu) P^mu
+$
+- 对齐次Lorentz变换$a = 0$，有$J^(rho sigma)$是二阶张量，$P^rho$是四矢量
+  $
+            U P^rho U^(-1) & = Lambda^(" "rho)_(mu) P^m \
+    U J^(rho sigma) U^(-1) & = Lambda^(" "rho)_(mu) Lambda^(" "sigma)_(nu) J^(mu nu)
+  $
+- 对平移变换$Lambda^mu_(" "nu) = g^mu_(" "nu)$，有$P^rho$不变，$J^(rho sigma)$改变；动量不依赖时空原点，而角动量类的量依赖原点。
+  $
+            U P^rho U^(-1) & = P^rho \
+    U J^(rho sigma) U^(-1) & = J^(rho sigma) + a^rho P^sigma - a^sigma P^rho
+  $
+  写成三维形式就是
+  $
+    vb(J) -> vb(J) - vb(a) times vb(P), H -> H, vb(P) -> vb(P)
+  $
+  和经典中的
+  $
+    vb(r - a) times vb(p) = vb(r) times vb(p) - vb(a) times vb(p)
+  $
+  是一致的。
+
+#note(subname: [无穷小共轭产生对易子])[
+  $
+    G = 1/2 omega_(mu nu) J^(mu nu) + epsilon_rho P^rho
+  $
+  那么
+  $
+    U = I + i G + O(omega^2, epsilon^2), u^(-1) = I - i G + O(omega^2, epsilon^2)
+  $
+  对于任意算符$A$
+  $
+    U A U^(-1) = (I + i G) A (I - i G) + O(omega^2, epsilon^2) = A + i [G, A] + O(omega^2, epsilon^2)
+  $
+  这就是从“群的有限变换”走到“Lie代数的对易子”的标准方法。
+]
+#newpara()
+再把外层的$Lambda$变成无穷小变换
+$
+  Lambda^mu_nu = g^mu_nu + omega^mu_nu, a^mu = epsilon^mu
+$
+考察一阶项
+$
+  i[1/2 omega_(mu nu) J^(mu nu) + epsilon_rho P^rho, J^(rho sigma)] &= omega^(" "rho)_(mu) J^(mu sigma) + omega^(" "sigma)_(nu) J^(rho nu) + epsilon^rho P^sigma - epsilon^sigma P^rho\
+  1[1/2 omega_(mu nu) J^(mu nu) + epsilon_rho P^rho, P^rho] &= omega^(" "rho)_(mu) P^mu
+$
+比较等式两边$omega_(mu nu)$和$epsilon_rho$的系数，得到Poincaré代数的对易关系
+$
+  i [J^(mu nu), J^(rho sigma)] &= g^(nu rho) J^(mu sigma) - g^(mu rho) J^(nu sigma) - g^(sigma mu) J^(rho nu) + g^(sigma nu) J^(rho mu)\
+  i [P^mu, J^(rho sigma)] &= g^(mu rho) P^sigma - g^(mu sigma) P^rho\
+  i [P^mu, P^nu] &= 0
+$
+将$J$的六个分量和$P$的四个分量
+$
+  vb(J) & = {J^1, J^2, J^3}, = {-J_1, -J_2, -J_3} = {-J^(23), -J^(31), -J^(12)} \
+  vb(K) & = {K^1, K^2, K^3} = {-K_1, -K_2, -K_3} = {-J^(01), -J^(02), -J^(03)} \
+      H & = P^0 \
+  vb(P) & = {P^1, P^2, P^3}
+$
+其中
+- $vb(J)$是通常的角动量算符
+- $vb(K)$是推进Boost算符
+- $vb(P)$是通常的动量算符
+- $H$是通常的能量算符
+将这些定义代入四维代数，可以得到对易关系
+$
+  [J^i, J^j] = i epsilon^(i j k) J^k, [J^i, K^j] = i epsilon^(i j k) K^k, [K^i, K^j] = - i epsilon^(i j k) J^k
+$
+$
+  [J^i, P^j] = i epsilon^(i j k) P^k, [K^i, P^j] = - i delta^(i j) H
+$
+$
+  [J^i, H] = [P^i, H] = [H, H] = 0, [K^i, H] = + i P^i
+$
+从而
+$
+  [K^i, H^2 - vb(P)^2] = 0
+$
+这正是
+$
+  E^2 - p^2
+$
+在 boost 下不变的算符版本。
+
+我们现在寻找由生成元构成、却不随参考系和原点变化的量。角动量依赖原点，纯平移会使
+$
+  J^(rho sigma) -> J^(rho sigma) + a^rho P^sigma - a^sigma P^rho
+$
+所以不能直接把所有$J^(rho sigma)$分量当成粒子的内禀标签。一种构造思路是：再与动量收缩，并做全反对称化，使原点相关的$a P$项自动消失。经典力学就有
+$
+  vb(J)' =vb(J) - vb(a) times vb(P)
+$
+但
+$
+  vb(P) dot vb(J)' = vb(P) dot vb(J)
+$
+将总角动量分成整体运动与内部运动：
+$
+  vb(J) = vb(R) times vb(P) + vb(S)
+$
+其中$vb(R)$是质心位置，$vb(S)$是内禀角动量。于是
+$
+  vb(P) dot vb(J) = vb(P) dot vb(S)
+$
+这就给出*Pauli-Lubanski 算符*
+$
+  W^mu = 1/2 epsilon^(mu nu rho sigma) P_nu J_(rho sigma)
+$
+有
+$
+  W^0 = P_1 J_(2 3) + P_2 J_(3 1) + P_3 J_(1 2) = vb(P) dot vb(J)\
+$
+于经典对应，以及
+$
+  W^1 = - P_0 J_(2 3) + P_2 J_(0 3) - P_3 J_(0 2) = P^0 J^1 + P^2 K^3 - P^3 K^2\
+  W^2 = - P_0 J_(3 1) + P_3 J_(0 1) - P_1 J_(0 3) = P^0 J^2 + P^3 K^1 - P^1 K^3\
+  W^3 = - P_0 J_(1 2) + P_1 J_(0 2) - P_2 J_(0 1) = P^0 J^3 + P^1 K^2 - P^2 K^1
+$
+即
+$
+  vb(W) = P^0 vb(J) + vb(P) times vb(K)
+$
+因此
+$
+  i[W^mu, J^(rho sigma)] = g^(mu rho) W^sigma - g^(mu sigma) W^rho\
+$
+$
+  [P^mu, W^nu] = 0
+$
+即$W^mu$不依赖于时空原点的选择。以及
+$
+  P_mu W^mu = 0
+$
+在$P_mu W^mu = 0$意味着$W^mu$在Minkowski意义下与四动量正交。$W^mu$也按四矢量变换
+$
+  W^mu -> Lambda^mu_nu W^nu
+$
+单个没有内部自旋的经典质点的$W^mu = 0$，而有内部自旋的质点$W^mu != 0$。因此$W^mu$可以用来标记粒子的自旋。
+#newpara()
+
+Casimir算符，是与这个对称群的所有生成元都对易的算符，即进行任何这类对称变换，都不会改变 Casimir 的本征值。
+$
+  [C, P^mu] = [C, J^(rho sigma)] = 0
+$
+其中两个是
+$
+  P^mu P_mu, W^mu W_mu
+$
+即
+$
+  P^mu P_mu = H^2 - vb(P)^2 = M^2, W^mu W_mu = (W^0)^2 - vb(W)^2
+$
+因此，它们适合用来标记“不会因为换参考系而变成另一种”的物理属性。这里它们分别通向质量和自旋。
 
 == 单粒子态按非齐次Lorentz变换和内部对称性分类
 
 === 单粒子态
 
-非齐次洛伦兹变换（至少是其第一叶）和某些可能的内部对称性变换是量子力学态空间应该具有的对称性。
+非齐次Lorentz变换（至少是其第一叶）和某些可能的内部对称性变换是量子力学态空间应该具有的对称性。
 
-这些对称性将物理态按其在非齐次洛伦兹变换下的行为分类，此分类可以用来确定在非齐次洛伦兹变换和内部对称性变换下哪些态在是可以相互转化的，那些不能*将单粒子态定义为一组算符的本征态*。
+这些对称性将物理态按其在非齐次Lorentz变换下的行为分类，此分类可以用来确定在非齐次Lorentz变换和内部对称性变换下哪些态在是可以相互转化的，那些不能*将单粒子态定义为一组算符的本征态*。
 
 能量和动量算符之间是相互对易的。而且由于时空对称性与内部对称性之间应该是没有关系的，它导致能量和动量算符应该与内部对称性变换的生成元算符$Q_a$对易。
 
