@@ -903,3 +903,224 @@ $
   通过Moyal star product，量子力学的非交换结构被嵌入到相空间函数的代数中。Weyl–Wigner 对应关系提供了一个桥梁，使得经典和量子描述之间可以通过 deformation quantization 进行平滑过渡。这样对正则量子化的理解不仅仅是将经典变量替换为算符，而是通过非交换代数结构的引入，揭示了量子力学与经典力学之间深层次的联系。
 
 ]
+
+== 狭义相对论与非齐次Lorentz变换
+
+=== 准备与约定
+
+协变与逆变的坐标矢量
+- 逆变坐标四矢量
+  $
+    x^mu=(x^0,x^1,x^2,x^3)=(x^0,x^i)=(t,vb(x))
+  $
+- 协变坐标四矢量
+  $
+    x_mu=(x_0,x_1,x_2,x_3)=(x_0,x_i)=(t,-vb(x))
+  $
+- 坐标四矢量的内积
+  $
+    x^2 = x_mu x^mu = x^mu x_mu = x_0^2 - x_1^2 - x_2^2 - x_3^2 = t^2 - vb(x)^2
+  $
+除非特别声明，重复指标意味求和Einstein求和约定。要求和的两个相同指标必须是一个上标，一个下标。
+
+逆变四矢量与协变四矢量的相互转换
+$
+  x^mu = g^(mu nu) x_nu, x_mu = g_(mu nu) x^nu\
+$
+其中$g$是Minkovski时空度规张量
+$
+  g_(mu nu) = g^(mu nu) = diag(1, -1, -1, -1)
+$
+有
+$
+  g^mu_(" "nu) = g^(mu mu') g_(mu' nu) = delta^mu_nu\
+  g_(mu^" "nu) = g_(mu mu') g^(" "mu' nu) = delta_mu^nu
+$
+
+=== 狭义相对论基本原理
+
+#theorem(subname: [狭义相对论基本原理])[
+  狭义相对论基本原理指出：
+  - 所有惯性参考系都等价
+  - 光速在所有惯性系中都不变
+]
+对称性的角度：
+- 物理规律在非齐Lorentz变换下不变。这样被称为*相对论原理*。
+  $
+    x^mu -> x'^mu = Lambda^mu_(" "nu) x^nu + a^mu
+  $
+变换参数$Lambda^mu_(" "nu)$是Lorentz变换矩阵，a^mu是平移参数。
+- Lorentz变换矩阵必须保证时空间隔的不变性，这也意味着*光速不变*
+  $
+    g_(mu nu) dd(x'^mu) dd(x'^nu) = g_(mu nu) dd(x^mu) dd(x^nu)
+  $
+  间隔的不变性给出对变换参数$Lambda^mu_(" "nu)$的约束
+  $
+    g_(mu nu) Lambda^mu_(" "rho) Lambda^nu_(" "sigma) = g_(rho sigma)
+  $
+  即
+  $
+    g_(mu nu) Lambda^mu_(" "rho) = g_(rho sigma) (Lambda^(-1))^sigma_(" "nu)
+  $
+  则有
+  $
+    (Lambda^(-1))_(rho nu) = Lambda_(nu rho)
+  $
+
+=== Lorentz群
+
+用$T(Lambda,a)$表示参数$Lambda^mu_(" "nu), a^mu$的非齐次Lorentz变换
+$
+  T(Lambda,a): x^mu -> x'^mu = Lambda^mu_(" "nu) x^nu + a^mu
+$
+可以证明其构成一个群。
+
+非齐次Lorentz变换被$det Lambda = plus.minus 1$和$Lambda^0_(" "0)$分成四叶
+- 正时叶：$det Lambda = 1, Lambda^0(" "0) <= 1$
+- 正空间叶：$det Lambda = -1, Lambda^0(" "0) >= 1$
+  - 可以看成正时叶的空间反射
+    $
+      cal(P)^0_(" "0) = 1, cal(P)^i_(" "j) = - delta^i_j
+    $
+- 负时叶：$det Lambda = 1, Lambda^0(" "0) <= -1$
+  - 可以看成正时叶的时间反演
+    $
+      cal(T)^0_(" "0) = -1, cal(T)^i_(" "j) = delta^i_j
+    $
+- 负空间叶：$det Lambda = -1, Lambda^0(" "0) <= -1$
+  - 可以看成正时叶的时间反演和空间反射
+
+=== 无穷小行为
+
+在单位变换附近，变换参数可以写为
+$
+  Lambda^mu_(" "nu) = g^mu_(" "nu) + omega^mu_(" "nu), a^mu = epsilon^mu
+$
+其中$omega^mu_(" "nu)$是无穷小的反对称矩阵，$epsilon^mu$是无穷小的平移参数。
+
+相应的第一叶的有限大的变换
+$
+  Lambda^mu_(" "nu) = exp(omega)^mu_(" "nu), a^mu = epsilon^mu
+$
+$omega^mu_(" "nu)$是Lorentz代数的生成元，$epsilon^mu$是平移的生成元。
+
+有限制
+$
+  g_(sigma rho) = g_(mu nu) (g^mu_(" "sigma) + omega^mu_(" "sigma)) (g^nu_(" "rho) + omega^nu_(" "rho)) = g_(sigma rho) + omega_(sigma rho) + omega_(rho sigma) + O(omega^2)
+$
+从而有反对称性
+$
+  omega_(sigma rho) = - omega_(rho sigma)
+$
+它把16个$omega^mu_(" "nu)$约束为6个独立的无穷小参数：
+- 三个代表坐标系之间的空间坐标架相对转动
+  $
+    omega^i_j tilde epsilon_(i j k) theta^k
+  $
+  是Euler转角
+- 三个代表坐标系之间的相对运动
+  $
+    omega^0_i = arctan(v^i)
+  $
+  （实际上是$beta^i$）是快度，它们是Lorentz boost的无穷小参数
+
+=== 态矢量的Lorentz变换
+
+Hilbert空间中不同参考系观察者对同一个态矢量描述之间的变换
+$
+  Psi -> U(Lambda,a) Psi
+$
+其中
+$
+  U(Lambda,a) = U(T(Lambda,a))
+$
+是Lorentz群在态空间的幺正表示。它满足
+$
+  U(1 + omega, epsilon) = 1 + i/2 omega_(rho sigma) J^(rho sigma) + i epsilon^rho P_rho + O(omega^2, epsilon^2)
+$
+$U$的幺正性和$omega,rho$为实参数要求$J^(rho sigma)$是Hermite算符，$P_rho$是Hermite算符。它们是Lorentz群的生成元。
+$
+  J^(rho sigma) = - J^(sigma rho)
+$
+#newpara()
+
+非齐次Lorentz群的Lie代数由$J^(rho sigma), P_rho$生成
+$
+  U(e^omega, epsilon) = e^(i/2 omega_(rho sigma) J^(rho sigma) + i epsilon^rho P_rho)
+$
+Hermite算符$J^(rho sigma)$和$P_rho$在非齐次洛伦兹变换下的性质
+$
+  T^(-1) (Lambda, a) J^(rho sigma) T(Lambda, a) = Lambda^rho_(" "mu) Lambda^sigma_(" "nu) J^(mu nu)\
+$
+
+== 单粒子态按非齐次Lorentz变换和内部对称性分类
+
+=== 单粒子态
+
+非齐次洛伦兹变换（至少是其第一叶）和某些可能的内部对称性变换是量子力学态空间应该具有的对称性。
+
+这些对称性将物理态按其在非齐次洛伦兹变换下的行为分类，此分类可以用来确定在非齐次洛伦兹变换和内部对称性变换下哪些态在是可以相互转化的，那些不能*将单粒子态定义为一组算符的本征态*。
+
+能量和动量算符之间是相互对易的。而且由于时空对称性与内部对称性之间应该是没有关系的，它导致能量和动量算符应该与内部对称性变换的生成元算符$Q_a$对易。
+
+一般说生成元算符$Q_a$之间不一定相互对易，我们考虑它其中的一个相互对易的子部分$Q_overline(a)$它们和能量动量算符之间可以有共同本征态。我们将单粒子态定义为它们的本征态$Psi_(p,sigma)$
+$
+  P^mu Psi_(p, sigma) = p^mu Psi_(p, sigma)\
+  Q_overline(a) Psi_(p, sigma) = q_overline(a) Psi_(p, sigma)
+$
+其中$p^µ$和$q_overline(a)$是能量动量和内部对称性生成元的本征值，$sigma$是其他的量子数。我们称$p^µ$为四动量，$q_overline(a)$为内部对称性量子数。
+
+我们把$σ$取纯分立值的态定义为单粒子态。
+
+#note(subname: [为什么单粒子态要选为能动量算符的本征态？])[
+  - 能量本征态
+    - 因为能量算符控制体系的演化
+    - 单粒子态的能量本征值不随时间变化
+    - 本征态随时间演化的效应只是一个相角
+    - 这就是所谓的定态
+  - 为什么选动量本征态
+    - 能量动量随不同参考系相互转化！
+    - 动量标记的引入使得单粒子态成为有方向的态！
+]
+
+=== 时空平移
+
+纯时空平移变换$U(1, a)$是可以连续变形到单位变换的变换。它只能是幺正算符，不可能是反幺正算符。
+$
+  U(e^omega, epsilon) = e^(i/2 omega_(rho sigma) J^(rho sigma) + i epsilon^rho P_rho)
+$
+在纯时空平移下
+$
+  U(1, a) Psi_(p, sigma) = e^(i a^mu P_mu) Psi_(p, sigma) = e^(i a^mu p_mu) Psi_(p, sigma)
+$
+其中$e^(i a^mu P_mu)$是时空平移的幺正算符，$e^(i a^mu p_mu)$是其在动量表象下的表示。物理意义是平面波的相位随时空平移而改变。
+
+Casimir算符
+$
+  P^mu P_mu Psi_(p, sigma) = p^mu p_mu Psi_(p, sigma) = M^2 Psi_(p, sigma)
+$
+质量参数$M^2$在这里是作为Lorentz群的Casimir算符$P^2$的本征值。它是一个标量，和参考系无关。我们称$M^2$为单粒子态的质量平方，这是质壳条件中的$M$。
+
+=== 时空转动
+
+纯时空转动变换$U(Lambda, 0)$是可以连续变形到单位变换的变换。它只能是幺正算符，不可能是反幺正算符。
+
+定义由$Lambda$和$a^mu = 0$导致的纯时空转动变换算符为$U(Lambda) = U(Lambda, 0)$。它是幺正算符，满足
+$
+  u(Lambda, a) P^rho U^(-1) (Lambda, a) = Lambda^("  "rho)_(mu) P^mu
+$
+在纯时空转动变换下
+$
+  P^mu U(Lambda) Psi_(p, sigma) &= U(Lambda) (U^(-1) (Lambda) P^mu U(Lambda)) Psi_(p, sigma) = U(Lambda) (U(Lambda)^(-1) P^mu U(Lambda)) Psi_(p, sigma)\
+  &= U(Lambda) (Lambda^(-1mu)_(rho) P^rho) Psi_(p, sigma) = Lambda^(mu)_(" "rho) p^(rho) U(Lambda) Psi_(p, sigma)
+$
+
+
+单粒子态按动量进行分类
+$p^2 = g_(mu nu) p^mu p^nu$和$p^0$的符号(当$p^2≥0$时)在洛伦兹变换下是不变的，并且任何两个具有同样的p2值和p0符号(当p2 ≥0时)的动量一定可以通过某个洛伦兹变换相联系,作业9可用这两个非齐次洛伦兹变换的不变量的取值标记不同的动量类
+- $p^2 = M^2 > 0, p^0 > 0$：有质量的正能态
+- $p^2 = M^2 > 0, p^0 < 0$：有质量的负能态
+- $p^2 = 0, p^0 > 0$：无质量的正能态
+- $p^2 = 0, p^0 < 0$：无质量的负能态
+- $p^2 = - N^2 < 0$：虚质量态
+- $p^mu = 0$：真空态
