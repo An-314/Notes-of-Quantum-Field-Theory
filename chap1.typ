@@ -1505,7 +1505,7 @@ $
 $
 质量参数$M^2$在这里是作为Lorentz群的Casimir算符$P^2$的本征值。它是一个标量，和参考系无关。我们称$M^2$为单粒子态的质量平方，这是质壳条件中的$M$。
 
-=== 时空转动
+=== 时空转动与动量类
 
 纯时空转动变换$U(Lambda, 0)$是可以连续变形到单位变换的变换。它只能是幺正算符，不可能是反幺正算符。
 
@@ -1599,3 +1599,617 @@ $
   - 描述它的连续对称性是$"SO"(2,1)$
 - $p^mu = 0$：产生3个空间坐标和1个时间坐标之间的所有转动变换（包括空间反射变换）
   - 描述它的连续对称性是$"SO"(3,1)$即Lorentz群本身
+
+刚才说明*单粒子态按动量进行分类*
+$
+  P^mu U(Lambda) Psi_(p, sigma) = Lambda^(mu)_(" "rho) p^rho U(Lambda) Psi_(p, sigma)
+$
+$U(Λ) Psi_(p,sigma)$是动量为$Λ p$的态，此类态可用不同的下标$sigma'$来标记
+$
+  U(Lambda) Psi_(p, sigma) = sum_(sigma') C_(sigma' sigma) (Lambda, p) Psi_(Lambda p, sigma')
+$
+其中$C_(sigma' sigma) (Lambda, p)$是变换矩阵，下面研究它的结构。
+
+先研究$Psi_(p, sigma)$对$sigma$的依赖结构，对固定不求和的$sigma$
+$
+  braket(Psi_(k, sigma), Psi_(k', sigma)) delta_(sigma sigma') &= braket(U(L(p)) Psi_(k, sigma), U(L(p)) Psi_(k', sigma'))\
+  &= braket(sum_(sigma_1) C_(sigma_1 sigma) (L(p), k) Psi_(p, sigma_1), sum_(sigma'_1) C_(sigma'_1 sigma') (L(p), k') Psi_(p', sigma'_1))\
+$
+其中
+$
+  p = L(p) k, p' = L(p) k'
+$
+则有
+$
+  braket(Psi_(p, sigma), Psi_(p', sigma)) delta_(sigma sigma') &= sum_(sigma_1) C^*_(sigma_1 sigma) (L(p), k) C_(sigma_1 sigma') (L(p), k') braket(Psi_(p, sigma_1), Psi_(p', sigma_1))\
+$
+其中
+$
+  braket(Psi_(p, sigma_1), Psi_(p', sigma'_1)) = delta_(sigma_1 sigma'_1) delta^3 (vb(p) - vb(p'))\
+$
+但$delta^3 (vb(p) - vb(p'))$不是Lorentz不变的，在积分中会给出一个因子
+$
+  dd(vb(p)') = dd(vb(p)) jacobianmatrix(vb(p)'; vb(p), delim: "|") =^"z boost" gamma(1 + beta p_z/p^0) dd(vb(p)) = p'^0/p^0 dd(vb(p))\
+  delta^3 (vb(p) - vb(p')) = k^0/p^0 delta^3 (vb(k) - vb(k'))
+$
+从而
+$
+  braket(Psi_(p, sigma), Psi_(p', sigma)) delta_(sigma sigma') &= braket(Psi_(k, sigma), Psi_(k', sigma)) k^0/p^0 sum_sigma_1 C^*_(sigma_1 sigma) (L(p), k) C_(sigma_1 sigma') (L(p), k') \
+$
+上式成立是因为归一化条件，对比两侧的系数就给出$C$矩阵的幺正性
+$
+  C^dagger (L(p), k) C(L(p), k') = p^0/k^0 I
+$
+可以把$C$矩阵对角化为$lambda$
+$
+  C(L(p), k) = sqrt(p^0/k^0) S lambda S^(-1), lambda^dagger lambda = I
+$
+从而
+$
+  U(Lambda) Psi_(p, sigma) &= sum_(sigma') C_(sigma' sigma) (Lambda, p) Psi_(Lambda p, sigma')\
+  U(Lambda) sum_sigma_1 Psi_(p, sigma_1) S_(sigma_1 sigma) &= sum_(sigma') C_(sigma' sigma) (Lambda, p) sum_sigma_1 S_(sigma_1 sigma) Psi_(Lambda p, sigma') \
+  &= sum_sigma' (S^(-1) C(Lambda, p) S)_(sigma_1 sigma) S_(sigma' sigma_1) Psi_(Lambda p, sigma') \
+$
+对每个动量$vb(p)$，我们希望可以重新选择$sigma$的基底，吸收那个幺正矩阵
+$
+  Psi_(p, sigma) -> sum_(sigma_1) S_(sigma_1 sigma) Psi_(p, sigma_1)\
+  C(Lambda, p) -> S^(-1) C(Lambda, p) S
+$
+这样就可以把$C(Lambda, p)$矩阵对角化为$lambda$，并且在新的基上
+$
+      U(Lambda) Psi_(p, sigma) & = sum_(sigma') C_(sigma' sigma) (Lambda, p) Psi_(Lambda p, sigma') \
+  C_(sigma' sigma) (Lambda, p) & = sqrt(p^0/k^0) lambda_(sigma) delta_(sigma' sigma), abs(lambda_(sigma)) = 1 \
+$
+我们就约定用参考动量态定义一般动量态
+$
+  U(L(p)) Psi_(k, sigma) &= sum_sigma' C_(sigma' sigma) (L(p), k) Psi_(p, sigma') = lambda_sigma sqrt(p^0/k^0) Psi_(p, sigma) \
+$
+注意到$abs(lambda_sigma)=1$，我们可以重新选择相角
+$
+  Psi_(k, sigma) -> Psi_(k, sigma)/lambda_sigma
+$
+做完所有以上的约定，就有*用参考动量态定义一般动量态的约定*
+$
+  Psi_(p,sigma) = sqrt(k^0/p^0) U(L(p)) Psi_(k, sigma) = N(p) U(L(p)) Psi_(k, sigma) \
+$ <text.red>
+这是$C_(sigma' sigma) (L(p), k)$矩阵的结构。$N(p)$是一个归一化因子，它可以通过选择态的归一化来确定。
+
+
+在纯时空转动变换下
+$
+  U(Lambda) Psi_(p, sigma) = N(p) U(Lambda L(p)) Psi_(k, sigma) = N(p) U(L(Lambda p)) U(L^(-1)(Lambda p)Lambda L(p)) Psi_(k, sigma)
+$
+$L^(-1)(Lambda p)Lambda L(p)$作用在参考动量$k^mu$上不改变其值
+$
+  (L^(-1)(Lambda p)Lambda L(p))^mu_(" "nu) k^mu = (L^(-1) (Lambda p) Lambda L(p) k)^mu = k^mu
+$
+$L^(-1)(Lambda p)Lambda L(p)$使得参考动量$k$不变的Lorentz变换$W$，从而
+$
+  W(Lambda, p) = L^(-1) (Lambda p) Lambda L(p)
+$
+是使参考动量$k$保持不变的Lorentz变换。它是Little Group W的一个元素。于是
+$
+  U(W) Psi_(k, sigma) = sum_(sigma') D_(sigma' sigma) (W, k) Psi_(k, sigma')\
+$
+#newpara()
+因此Lorentz变换为
+$
+  U(Lambda) Psi_(p, sigma) &= N(p) U(L(Lambda p)) U(W(Lambda, p)) Psi_(k, sigma) = N(p) U(L(Lambda p)) sum_(sigma') D_(sigma' sigma) (W(Lambda, p)) Psi_(k, sigma')\
+  &= (N(p) / N(Lambda p)) sum_(sigma') D_(sigma' sigma) (W(Lambda, p), k) Psi_(Lambda p, sigma')
+$
+这意味着$C_(sigma' sigma) (Lambda, p)$矩阵的结构由Little Group W的表示$D_(sigma' sigma) (W(Lambda, p), k)$和$N(p)$的选择决定。$N(p)$是一个归一化因子，它可以通过选择态的归一化来确定。
+
+最终得到*单粒子态在时空转动和时空平移联合变换下的行为*：
+- 时空转动
+  $
+    U(Lambda, 0) Psi_(p, sigma) = sqrt((Lambda p)^0 / p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p), k) Psi_(Lambda p, sigma')
+  $
+- 时空平移
+  $
+    U(1, a) Psi_(p, sigma) = e^(i a_mu p^mu) Psi_(p, sigma)
+  $
+- 时空转动和时空平移联合变换
+  $
+    T(overline(Lambda), overline(a)) T(Lambda, a) = T(overline(Lambda) Lambda, overline(Lambda) a + overline(a))
+  $
+  $
+    U(Lambda, a) Psi_(p, sigma) &= U(1, a) U(Lambda, 0) Psi_(p, sigma) = e^(i a_mu p^mu) sqrt((Lambda p)^0 / p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p), k) Psi_(Lambda p, sigma')\
+    &= sqrt((Lambda p)^0 / p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p), k) e^(i a_mu p^mu) Psi_(Lambda p, sigma')
+  $<text.red>
+  动量标签变成了$Lambda p$，非动量标签一般会发生混合，相位$e^(e^(i a_mu p^mu))$是平移变换的效应，而平方根因子$sqrt((Lambda p)^0 / p^0)$是Lorentz变换的效应，它不是一种新的“自旋效应”。
+
+我们下面不讨论
+- 负能态：在物理上至今尚未发现实际与对应的正能态具有类似的性质
+- 虚质量态：至今尚未发现；重新选择真空使其消失，只有一维tachyon 和无穷维么正表示
+- 真空态：$Psi_0 = Psi_(p = 0)$要求唯一，只有一维恒等和角动量非零的无穷维spurion幺正表示。
+所以我们只讨论有质量和无质量的正能量态。
+
+角动量的$z$分量和能量及动量算符作用到能生成这样态的参考动量本征态$Psi_(k,sigma)$上相互对易
+$
+  [J^i, P^j] = i epsilon^(i j k) P^k, [J^i, H] = [P^i, H] = [H, H] = 0
+$
+我们就选取参考动量的本征态$Psi_(k,sigma)$为$J^3$的本征态
+$
+  J^3 Psi_(k, sigma) = sigma Psi_(k, sigma)
+$
+其中$sigma$是$J^3$的本征值。
+
+=== 正能单粒子态
+
+对于有质量和无质量的正能态
+$
+  p^0 = E >= 0\
+  p^2 = E^2 - vb(p)^2 = M^2 > 0
+$
+引入速度矢量
+$
+  vb(v) = vb(p) / E = vb(p) / p^0 = vb(p) / sqrt(vb(p)^2 + M^2) = pdv(E, vb(p))
+$
+目前没有坐标时间导数图像，看不出和坐标的关系。从而
+$
+  abs(vb(v))^2 = vb(v)^2 = vb(p)^2 / (vb(p)^2 + M^2) < 1\
+  vb(p)^2 = (M^2 vb(v)^2) / (1 - vb(v)^2)
+$
+在低速展开为
+$
+  vb(p) & = (M vb(v))/sqrt(1 - vb(v)^2) = M vb(v) + O(vb(v)^3) \
+      E & = sqrt(vb(p)^2 + M^2) = M/sqrt(1 - vb(v)^2) = M + 1/2 M vb(v)^2 + O(vb(v)^4)
+$
+这就对应了经典力学的动量和能量的低速极限；Casimir 参数$M$在低速极限下与Newton惯性质量匹配。
+
+从而若$M=0$，$abs(vb(v))=1$，这是光速极限。
+
+==== 有质量的正能单粒子态
+
+对于有质量的正能单粒子态，参考动量为
+$
+  k^mu = (M, 0, 0, 0)
+$
+我们后面会证明从参考动量$k^mu$到任意动量$p^mu$的Lorentz变换矩阵$L(p)$是
+$
+       L^i_k (p) & = delta^i_k + (gamma - 1) hat(p)_i hat(p)_k \
+  L^i_(" "0) (p) & = L^0_(" "i) (p) = hat(p)_i sqrt(gamma^2 - 1) = p^i/M \
+  L^0_(" "0) (p) & = gamma = sqrt((M^2 + vb(p)^2) / M^2) = 1/sqrt(1 - vb(v)^2)
+$ <text.red>
+其中
+$
+  hat(p)_i = p^i / abs(vb(p))\
+  sqrt(gamma^2 - 1) = abs(vb(p)) / M = abs(vb(v)) / sqrt(1 - vb(v)^2)
+$
+注意到
+$
+  L(p) = R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p))\
+$
+$R(vu(p))$是把$z$轴旋转到$vu(p)$方向的旋转，$B(abs(vb(p)))$是沿着$z$轴的Lorentz boost变换
+$
+  B(abs(vb(p))) = mat(
+    gamma, 0, 0, sqrt(gamma^2 - 1);
+    0, 1, 0, 0;
+    0, 0, 1, 0;
+    sqrt(gamma^2 - 1), 0, 0, gamma
+  )
+$
+#newpara()
+回到$L(p)$，有
+$
+  L(p) = R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p))\
+$
+选择一个三维旋转矩阵
+$
+  R_3 = (vb(a), vb(b), vu(p)), R_3 R_3^TT = I\
+  R_3 mat(0; 0; abs(vb(p))) = vu(p) abs(vb(p)) = vb(p)
+$
+从而
+$
+  L(p) & = R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p)) = mat(1, O; O, R_3) B mat(1, O; O, R_3^TT) \
+       & = mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), I + (gamma - 1) hat(p) hat(p)^T) \
+$
+最终矩阵只依赖$vu(p)$，不再依赖横向基$vb(a),vb(b)$；也就是说，虽然把$z$轴转到$vu(p)$的旋转并不唯一，但
+$
+  R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p)) = L(p)
+$
+得到的这个纯boost是唯一的，不同的横向轴选择并没有留下额外旋转。
+#newpara()
+前面的讨论我们有小群元素
+$
+  W(Lambda, p) = L^(-1) (Lambda p) Lambda L(p)\
+$
+现在我们考虑一下特殊情况下的计算。
+#newpara()
+对于任意*纯空间转动*$Lambda = cal(R)$我们先计算
+$
+  W(cal(R), p) = L^(-1) (cal(R) p) cal(R) L(p) = R(cal(R) vu(p)) B^(-1) (abs(vb(p))) R^(-1) (cal(R) vu(p)) cal(R) R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p))
+$
+其中
+$
+  R^(-1) (cal(R) vu(p)) cal(R) R(vu(p)) = R(theta)
+$
+将$z$轴转到$vu(p)$，再转到$cal(R) vu(p)$，再转回$z$轴，这就是一个绕$z$轴的旋转；并且与$B(abs(vb(p)))$对易
+$
+  R^(-1) (cal(R) vu(p)) cal(R) R(vu(p)) = R(theta) = mat(
+    1, 0, 0, 0;
+    0, cos(theta), sin(theta), 0;
+    0, -sin(theta), cos(theta), 0;
+    0, 0, 0, 1
+  )
+$
+从而
+$
+  W(cal(R), p) = R(cal(R) vu(p)) B^(-1) (abs(vb(p))) R(theta) B(abs(vb(p))) R^(-1) (vu(p)) = R(cal(R) vu(p)) R(theta) R^(-1) (vu(p)) = cal(R)
+$
+#newpara()
+对于任意*共线boost*，即沿着$vu(p)$方向的boost变换$Lambda = cal(B)$，我们有
+$
+  B_gamma = mat(
+    gamma, 0, 0, sqrt(gamma^2 - 1);
+    0, 1, 0, 0;
+    0, 0, 1, 0;
+    sqrt(gamma^2 - 1), 0, 0, gamma
+  ), B_gamma^(-1) = mat(
+    gamma, 0, 0, -sqrt(gamma^2 - 1);
+    0, 1, 0, 0;
+    0, 0, 1, 0;
+    -sqrt(gamma^2 - 1), 0, 0, gamma
+  )
+$
+沿$z$轴的$p$和$cal(B) p$，若$gamma_0, gamma_1, gamma_2$分别是三个沿着$z$轴的boost变换的Lorentz因子，且$gamma_1$连接$gamma_0,gamma_2$，则
+$
+  p = B_(gamma_0) k, cal(B) p = B_(gamma_1) k, cal(B) p = B_(gamma_2) k = B_(gamma_1) B_(gamma_0) k
+$
+有
+$
+  mat(
+    gamma_1, 0, 0, sqrt(gamma_1^2 - 1);
+    0, 1, 0, 0;
+    0, 0, 1, 0;
+    sqrt(gamma_1^2 - 1), 0, 0, gamma_1
+  ) mat(M gamma_0; 0 ; 0; M sqrt(gamma_0^2 - 1)) = mat(M gamma_2; 0 ; 0; M sqrt(gamma_2^2 - 1))
+$
+从而
+$
+  gamma_2 = gamma_1 gamma_0 + sqrt(gamma_1^2 - 1) sqrt(gamma_0^2 - 1)\
+  sqrt(gamma_2^2 - 1) = sqrt(gamma_1^2 - 1) gamma_0 + gamma_1 sqrt(gamma_0^2 - 1)
+$
+则有
+$
+  cal(B)_(gamma_1) B_(gamma_0) = B_(gamma_2)
+$
+沿动量方向（取$z$方向）的boost变换小群
+$
+  L(p)_(vb(p) parallel vu(z)) = cal(B)_(gamma_0)\
+  L(cal(B) p)_(vb(cal(B) p) parallel vu(z)) = cal(B)_(gamma_2)\
+  Lambda = cal(B)_(gamma_1)
+$
+则有对于共线的boost
+$
+  W(cal(B), p) = L^(-1) (cal(B)_(gamma_2) p) cal(B)_(gamma_1) L(cal(B)_(gamma_0) p) = B^(-1)_(gamma_2) B_(gamma_1) B_(gamma_0) = I
+$
+这意味着同一个方向的boost变换诱导出来的小群元素$W$是单位元。
+
+对于*更一般的boost*
+$
+  p = L(p) k, cal(B) = L(p'), cal(B) = p'' = L(p') L(p) k
+$
+有
+$
+  mat(
+    gamma', sqrt(gamma'^2 - 1) hat(p')^TT;
+    sqrt(gamma'^2 - 1) hat(p'), I + (gamma' - 1) hat(p') hat(p')^T
+  ) mat(p^0; vu(p) p^0) = mat(p''^0; vu(p'') p''^0)
+$
+则
+$
+          p''^0 & = gamma' p^0 + sqrt(gamma'^2 - 1) hat(p')^T vu(p) p^0 \
+  vu(p'') p''^0 & = sqrt(gamma'^2 - 1) hat(p') p^0 + (I + (gamma' - 1) hat(p') hat(p')^T) vu(p) p^0
+$
+一般作为纯boost的$L$
+$
+  L(p') L(p) = L(p'') R(p', p)
+$
+其中$R(p', p)$是一个绕$z$轴的旋转，在$p',p$共线时，$R(p', p) = I$。从而
+$
+  W(cal(B), p) = L^(-1) (cal(B) p) cal(B) L(p) = R(p', p)
+$
+这是前面同一方向的boost变换的推广。我们可以由此给出
+$
+  L(p') L(p) = L(p'') R(p', p)
+$
+得到
+$
+    & mat(
+        gamma' gamma + sqrt(gamma'^2 - 1) sqrt(gamma^2 - 1) hat(p')^TT hat(p), gamma' sqrt(gamma^2 - 1) hat(p)^TT + sqrt(gamma'^2 - 1) hat(p')^TT + (gamma-1) sqrt(gamma'^2 - 1) (hat(p')^TT hat(p)) hat(p')^TT;
+        gamma' sqrt(gamma^2 - 1) hat(p) + sqrt(gamma'^2 - 1) hat(p') + (gamma-1) sqrt(gamma'^2 - 1) (hat(p')^TT hat(p)) hat(p'), sqrt(gamma'^2 - 1) sqrt(gamma^2 - 1) hat(p') hat(p)^TT + (I + (gamma' - 1) hat(p') hat(p')^TT) (I + (gamma - 1) hat(p) hat(p)^TT)
+      ) \
+  = & mat(
+        gamma', sqrt(gamma'^2 - 1) hat(p')^TT;
+        sqrt(gamma'^2 - 1) hat(p'), I + (gamma' - 1) hat(p') hat(p')^TT
+      ) mat(
+        gamma, sqrt(gamma^2 - 1) hat(p)^TT;
+        sqrt(gamma^2 - 1) hat(p), I + (gamma - 1) hat(p) hat(p)^TT
+      ) \
+    & = mat(
+        gamma'', sqrt(gamma''^2 - 1) hat(p'')^TT;
+        sqrt(gamma''^2 - 1) hat(p''), I + (gamma'' - 1) hat(p'') hat(p'')^TT
+      ) mat(
+        1, 0;
+        0, R_3(p', p)
+      )
+$
+其中$R_3(p', p)$是$R(p', p)$的空间部分，从而得到
+$
+  R_3(p', p) = (I - (1 - 1/gamma'') hat(p)'' hat(p)''^TT) (sqrt(gamma'^2 - 1) sqrt(gamma^2 - 1) hat(p') hat(p)^TT + (I + (gamma' - 1) hat(p') hat(p')^TT) (I + (gamma - 1) hat(p) hat(p)^TT))
+$
+#newpara()
+
+进一步地，我们还可以说明$L(p)$是沿$vb(p)$的推进；记$B_vb(v)$为沿着速度方向的boost变换，则$L(p) = B_(vb(p)/p^0)$。首先考虑任意动量
+$
+  q => q' = L(q) q
+$
+有
+$
+  q'^i &= L^i_(" "k) (p) q^k + L^i_(" "0) (p) q^0 = (delta^i_k + (gamma - 1) hat(p)^i hat(p)_k) q^k + hat(p)_i/M q^0 = q^i + (gamma - 1) hat(p)^i hat(p)_k q^k + hat(p)_i/M q^0 \
+  q'^k hat(p) &= q^k hat(p)_k + (gamma - 1) hat(p)_k q^k + abs(vb(p)) / M q^0\
+  q'^i - q'^k hat(p)_k hat(p)^i &= q^i - (gamma - 1) hat(p)^i hat(p)_k q^k + p^i/M q^0 - q^k hat(p)_k hat(p)^i - (gamma - 1) hat(p)_k q^k hat(p)^i - abs(vb(p)) / M q^0 hat(p)^i \
+  &= q^i - q^k hat(p)_k hat(p)^i
+$
+这意味着垂直于$vb(p)$的分量保持不变，只剩下沿着$vb(p)$的分量发生了变化，因而是沿着$vb(p)$的boost变换。并且
+$
+  q'^0 = L^0_(" "k) (p) q^k + L^0_(" "0) (p) q^0 = hat(p)_k sqrt(gamma^2 - 1) q^k + gamma q^0 = abs(vb(p)) / M q^k hat(p)_k + gamma q^0
+$
+从而
+$
+  mat(q'^0; q'_parallel) = mat(gamma, abs(vb(p)) / M; abs(vb(p)) / M, gamma) mat(q^0; q_parallel), vb(q)'_perp = vb(q)_perp
+$
+这意味着
+$
+  L(p) = B_(vb(p)/p^0)
+$
+特别地，取$q=p$有
+$
+  p'^i & = p^i + (gamma - 1) hat(p)^i hat(p)_k p^k + abs(vb(p)) / M p^0 = (2p^0)/M p^i \
+  p'^0 & = L^0_(" "k) (p) p^k + L^0_(" "0) (p) p^0 = p^i/M p^i + p^0/M p^0 = (vb(p)^2 + (p^0)^2)/M = 2p^0/M p^0- M
+$
+得到
+$
+  p' = 2 p^0/M p - k
+$
+#newpara()
+下面把沿$z$的 boost 写成矩阵指数
+$
+  B(abs(vb(p))) = mat(
+    cosh(eta), 0, 0, sinh(eta);
+    0, 1, 0, 0;
+    0, 0, 1, 0;
+    sinh(eta), 0, 0, cosh(eta)
+  ) = exp(0, 0, 0, "arccosh" gamma; 0, 0, 0, 0; 0, 0, 0, 0; "arccosh" gamma, 0, 0, 0) = e^omega
+$
+其中纯推进变换的
+$
+        omega_3^0 & = omega_(0 3) = - omega_(3 0) = omega_0^3 = "arccosh" gamma = chi \
+  omega_rho^sigma & = 0, (rho, sigma) != (0, 3), (3, 0)
+$
+#newpara()
+然后我们还可以证明对于任意的boost变换$cal(B)$，小群元素$W(cal(B), p)$是一个纯转动（前面其实也给出了证明），即
+$
+  W(cal(B),p) = L^(-1) (cal(B) p) cal(B) L(p)
+$
+特别地
+$
+  W(cal(B),p) k = k
+$
+知道$W(cal(B),p)$是一个纯转动，下面我们证明它是一个把动量$vb(p)$旋转到$cal(B)(p - k/alpha)$的旋转，两者方向相同，但空间矢量之间还有一个比例因子$alpha$。注意到
+$
+  cal(B) p' = 2 p^0/M cal(B) p - cal(B) k
+$
+且
+$
+  W(cal(B), p) p &= L^(-1) (cal(B) p) cal(B) L(p) p = L^(-1) (cal(B) p) cal(B) p = (2p^0)/M L^(-1) (cal(B) p) cal(B) p - L^(-1) (cal(B) p) cal(B) k\
+  & = (2p^0)/M k - L^(-1) (cal(B) p) cal(B) k
+$
+记
+$
+  cal(B) p = p'', cal(B) k = q, q' = L^(-1) (p'') q
+$
+则
+$
+  q' = mat(gamma, -sqrt(gamma^2 - 1) hat(p'')^TT; -sqrt(gamma^2 - 1) hat(p''), I + (gamma - 1) hat(p'') hat(p'')^TT) mat(q^0; vb(q))
+$
+其中
+$
+  gamma = sqrt(vb(p)^2 + M^2)/M, sqrt(gamma^2 - 1) = abs(vb(p))/M
+$
+从而
+$
+  q'^i & = q^i + p''^i ((p''^0/M - 1) (vb(p)'' - vb(q))/(vb(p)''^2) - q^0/M) \
+  q'^0 & = - (vb(p) dot vb(q))/M + (p''^0 q^0)/M = (p''^mu q_mu)/M = (p^mu k_mu)/M = p^0
+$
+其中
+$
+  (W(cal(B), p) p)^i & = - (cal(B) k)^i + alpha (cal(B) p)^i = alpha(cal(B) p - k/alpha)^i \
+  (W(cal(B), p) p)^0 & = p^0 \
+               alpha & = (1 - p''^0/M) (vb(p)'' dot vb(q))/(vb(p)''^2) + q^0/M = (q^0 + p^0)/(p''^0 + M)
+$
+$alpha$依赖$cal(B),p$，且$alpha_(cal(B) = I) = 1$。并且
+$
+  (W(cal(B), p) p)^i
+$<->
+的空间部分模平方是$vb(p)^2$，这是由$(W(cal(B),p)p)^0 = p^0$决定的。且$p - k/alpha$的空间方向还是$vb(p)$，只是能量有改动。
+
+#theorem(subname: [])[
+  对于任意的boost变换$cal(B)$，小群元素$W(cal(B), p)$是一个把动量$vb(p)$旋转到$cal(B)(p - k/alpha)$的旋转，两者方向相同，但空间矢量之间还有一个比例因子$alpha$。注意到
+  $
+    cal(B) p = 2 p^0/M cal(B) p - cal(B) k
+  $
+  且
+  $
+    W(cal(B), p) p & = alpha (cal(B) p - k/alpha) = L^(-1) (cal(B) p) cal(B) L(p) p \
+  $
+]
+#newpara()
+
+更一般地，可以证明任意的$Lambda$都可以一般唯一分解为一个纯转动$cal(R)'$再加一个纯boost$cal(B)$，即
+$
+  Lambda = cal(R)' cal(B)
+$
+从而
+$
+  W(Lambda, p) &= L^(-1) (Lambda p) Lambda L(p) = L^(-1) (cal(R)' cal(B) p) cal(R)' L(cal(B) p) L^(-1) (cal(B) p) cal(B) L(p) \
+  &= W(cal(R)', cal(B) p) W(cal(B), p) = cal(R)
+$
+其中
+$
+  cal(R) = e^Theta = cal(R)' W(cal(B), p)
+$
+$cal(R)$正是将$vb(p)$旋转到$Lambda(p - k/alpha) = cal(R)' cal(B)(p - k/alpha)$的空间旋转，其中
+$
+  W(Lambda, p) p & = cal(R)' W(cal(B), p) p = alpha cal(R)' cal(B)(p - k/alpha) \
+                 & = alpha Lambda(p - k/alpha)
+                   alpha = (p^0 + (Lambda k)^0)/((Lambda p)^0 + M)
+$
+转轴和转角由
+$
+  R'_3 R_3(p', p)
+$
+决定，其中$R'_3$是$cal(R)'$的空间部分。
+
+*至此我们已经研究清楚了具体的$W(Lambda, p)$。*下面我们研究这个旋转进入某一份自旋表示后，怎样成为真正作用于$sigma$标签的矩阵$D^((j))(W)$。
+
+我们刚才知道了
+$
+  W(Lambda, p) = L^(-1) (Lambda p) Lambda L(p) = cal(R)' W(cal(B), p) = cal(R)
+$
+保证参考动量
+$
+  k^mu = (M, 0, 0, 0)
+$
+不变。
+
+对于纯三维空间转动
+$
+  (R_3)_(i k) = (e^Theta)_(i k)
+$
+其中
+$
+  R_3 R_3^TT = I ==> Theta_(i k) = - Theta_(k i)
+$
+是将$p$旋转到$Lambda(p - k/alpha) = cal(R)' cal(B)(p - k/alpha)$的旋转矩阵。$"SO"(3)$的结论给出，其幺正的表示矩阵$D(R_3)$可以分为一系列不可与表示$D^((j))_(sigma' sigma) (R_3)$的直和，其中标记$j$不可约表示的维数为$2j + 1$，$j$是表示的*自旋*，可取值$j = 0, 1/2, 1, 3/2, ...$。
+
+不可约表示
+$
+  U(W) Psi_(k, sigma) = U(e^Theta) Psi_(k, sigma) = sum_(sigma') D^((j))_(sigma' sigma) (W) Psi_(k, sigma')\
+$
+其中
+$
+  D_(sigma' sigma) (W) delta(k' - k) = braket(Psi_(k', sigma'), U(e^Theta) Psi_(k, sigma))
+$
+把前面Lorentz群元处理用在三维空间上
+$
+  D^((j))_(sigma' sigma) (e^Theta) = (e^(i/2 Theta_(i k) J^((j))_(i k))_(sigma' sigma) - (J^((j))_12)_(sigma' sigma) = (J^((j),3))_(sigma' sigma) = sigma delta_(sigma' sigma)
+$
+而
+$
+  - (J^((j))_23 plus.minus i J^((j))_31)_(sigma' sigma) = (J^((j))_1 plus.minus i J^((j))_2)_(sigma' sigma) = delta_(sigma', sigma plus.minus 1) sqrt((j minus.plus sigma)(j plus.minus sigma + 1))
+$
+事实上是升降算符，其中$sigma = j, j - 1, ..., -j$，$J^((j))_i$是自旋$j$的角动量算符。
+
+这意味着：*三维空间有的正能单粒子态可以分为各种自旋$j$的不可约表示*，每个自旋$j$的不可约表示有$2j + 1$个$sigma$标签。在纯时空转动变换下
+$
+  U(Lambda) Psi_(p, sigma) = sqrt((Lambda p)^0 / p^0) sum_(sigma') D^((j))_(sigma' sigma) (W(Lambda, p)) Psi_(Lambda p, sigma')
+$
+
+#note(subname: [$"SO"(3)$群的不可约表示])[
+  $"SO"(3)$群的角动量算符$J^i$满足
+  $
+           vb(J)^2 & = (J^1)^2 + (J^2)^2 + (J^3)^2 \
+        [J^i, J^j] & = i epsilon^(i j k) J^k \
+    [vb(J)^2, J^i] & = 0
+  $
+  将$vb(J)^2, J^3$的共同本征态$Psi_(lambda, sigma)$作为自旋$j$的不可约表示的基底
+  $
+    vb(J)^2 Psi_(lambda, sigma) & = lambda Psi_(lambda, sigma) \
+        J^3 Psi_(lambda, sigma) & = sigma Psi_(lambda, sigma)
+  $
+  引入升降算符$J_plus.minus = J^1 plus.minus i J^2$，则
+  $
+    J^3 J_plus.minus Psi_(lambda, sigma) & = (J_plus.minus J^3 plus.minus J_plus.minus) Psi_(lambda, sigma) = (sigma plus.minus 1) J_plus.minus Psi_(lambda, sigma) \
+    vb(J)^2 J_plus.minus Psi_(lambda, sigma) & = J_(plus.minus) vb(J)^2 Psi_(lambda, sigma) = lambda J_plus.minus Psi_(lambda, sigma)
+  $
+  设
+  $
+    J_plus.minus Psi_(lambda, sigma) = C_(plus.minus) (lambda, sigma) Psi_(lambda, sigma plus.minus 1)
+  $
+  有
+  $
+    abs(C_(plus.minus) (lambda, sigma))^2 &= braket(C_(plus.minus) (lambda, sigma) Psi_(lambda, sigma plus.minus 1), C_(plus.minus) (lambda, sigma) Psi_(lambda, sigma plus.minus 1))\
+    & = braket(J_(plus.minus) Psi_(lambda, sigma), J_(plus.minus) Psi_(lambda, sigma)) = braket(Psi_(lambda, sigma), J_(minus.plus) J_(plus.minus) Psi_(lambda, sigma))\
+    & = braket(Psi_(lambda, sigma), (vb(J)^2 - (J^3)^2 minus.plus J^3) Psi_(lambda, sigma)) = lambda - sigma (sigma plus.minus 1)
+  $
+  这里了设$J^i$是Hermitian算符，$C_(plus.minus) (lambda, sigma)$是实数
+  $
+    C_(plus.minus) (lambda, sigma) = sqrt(lambda - sigma (sigma plus.minus 1))
+  $
+  进一步利用
+  $
+    vb(J)^2 - (J^3)^2 = 1/2 (J^dagger_- J_- + J^dagger_+ J_+)
+  $
+  有
+  $
+    lambda - sigma^2 &= (lambda - sigma^2) braket(Psi_(lambda, sigma), Psi_(lambda, sigma)) = braket(Psi_(lambda, sigma), (vb(J)^2 - (J^3)^2) Psi_(lambda, sigma))\
+    &= 1/2 (braket(Psi_(lambda, sigma), (J^dagger_- J_- + J^dagger_+ J_+) Psi_(lambda, sigma)) >= 0
+  $
+  这意味着$sigma$有上下限，设上限是$j$，下限是$j'$，则
+  $
+    J_+ Psi_(lambda, j) = 0, J_- Psi_(lambda, j') = 0
+  $
+  $
+    0 = J_- J_+ Psi_(lambda, j) = (vb(J)^2 - (J^3)^2 plus.minus J^3) Psi_(lambda, j) = (lambda - j^2 - j) Psi_(lambda, j)\
+    0 = J_+ J_- Psi_(lambda, j') = (vb(J)^2 - (J^3)^2 minus.plus J^3) Psi_(lambda, j') = (lambda - j'^2 + j') Psi_(lambda, j')
+  $
+  从而
+  $
+    lambda = j (j + 1) = j' (j' - 1) => j' = -j
+  $
+  从而$sigma = j, j - 1, ..., -j$，只要求
+  $
+    j - (-j) in ZZ
+  $
+  所以$j$可以是整数或半整数。对二维空间$j,sigma$不再量子化，可以是任意实数。从而
+  $
+    vb(J)^2 Psi_(j(j+1), sigma) & = j (j + 1) Psi_(j(j+1), sigma) \
+        J^3 Psi_(j(j+1), sigma) & = sigma Psi_(j(j+1), sigma)
+  $
+  从而
+  $
+    (J_plus.minus)^j_(sigma' sigma) &= braket(Psi_(j(j+1), sigma'), J_plus.minus, Psi_(j(j+1), sigma)) = C_plus.minus (j(j+1), sigma) delta_(sigma', sigma plus.minus 1) \
+    &= sqrt(j (j + 1) - sigma (sigma plus.minus 1)) delta_(sigma', sigma plus.minus 1) = sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) delta_(sigma', sigma plus.minus 1)\
+    (J^3)^j_(sigma' sigma) &= braket(Psi_(j(j+1), sigma'), J^3, Psi_(j(j+1), sigma)) = sigma delta_(sigma', sigma)
+  $
+]
+#newpara()
+所以有质量的正能单粒子态的Casimir算符
+$
+  W^mu &= 1/2 epsilon^(mu nu rho sigma) P_nu J_(rho sigma)=1/2 epsilon^(mu nu rho sigma) (J_(rho sigma) P_nu - i g_(nu rho) P_sigma + i g_(nu sigma) P_rho) = 1/2 epsilon^(mu nu rho sigma) J_(rho sigma) P_nu
+$
+注意到
+$
+  Psi_(p,sigma) = N(p) U(L(p)) Psi_(k, sigma)
+$
+并且
+$
+  P^mu P_mu Psi_(p,sigma) = M^2 Psi_(p,sigma)
+$
+有
+$
+  W^mu W_mu Psi_(p,sigma) = N(p) U(L(p)) W^mu W_mu Psi_(k, sigma)
+$
+而
+$
+  W^mu W_mu Psi_(k, sigma) &= W^mu M/2 epsilon_mu^(" "0 rho sigma) J_(rho sigma) Psi_(k, sigma) = W^l M/2 epsilon_l^(" "0 j i) J_(j i) Psi_(k, sigma)\
+  &= M^2/4 epsilon^(l 0 j' i') epsilon_l^(" "0 j i) J_(j' i') J_(j i) Psi_(k, sigma) = - M^2/2 J^(j i) J_(j i) Psi_(k, sigma) = - M^2 vb(J)^2 Psi_(k, sigma)\
+  &= - M^2 j (j + 1) Psi_(k, sigma)
+$
+从而
+$
+  W^mu W_mu Psi_(p,sigma) = - M^2 j (j + 1) Psi_(p, sigma)
+$
+对有质量正能单粒子态，$j$在Lorentz不变下不变，$sigma$不是。只能用$j$来标记粒子态。Lorentz可以把$sigma$从一个取值变成任意取值。$j$是粒子的自旋。
