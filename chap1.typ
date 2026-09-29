@@ -2877,6 +2877,85 @@ $
 $
   U(Lambda) Psi_(p,sigma) = sqrt((Lambda p)^0/p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p)) Psi_(Lambda p, sigma') = sqrt((Lambda p)^0/p^0) e^(i theta sigma) Psi_(Lambda p, sigma)
 $
-一份固定的螺旋度不可约表示，在每一个固定动量处是一维的，同时含有$+sigma, -sigma$是进一步的组合表示。
+一份固定的螺旋度不可约表示，在每一个固定动量处是一维的。
+
+#theorem(subname: [无质量正能单粒子态的螺旋度不可约表示])[
+  对无质量的正能单粒子态，螺旋度$sigma$是沿运动方向的角动量投影，螺旋度不可约表示是由固定螺旋度$sigma$的态组成的。
+  $
+    U(Lambda) Psi_(p,sigma) = sqrt((Lambda p)^0/p^0) e^(i theta sigma) Psi_(Lambda p, sigma)
+  $
+]
+
+#newpara()
+
+对于Poincare的两个Casimir算符
+$
+  P^mu P_mu Psi_(p,sigma) = 0
+$
+这是因为其无质量，而
+$
+  W^mu W_mu Psi_(p,sigma) = N(p) U(L(P)) W^mu W_mu psi_(k,sigma)
+$
+其中
+$
+  W^mu = 1/2 epsilon^(mu nu rho sigma) P_nu J_(rho sigma)
+$
+我们可以计算
+$
+  W^mu W_mu psi_(k,sigma) & = W^mu kappa/2 (epsilon_mu^(" "0 rho sigma) - epsilon_mu^(" "3 rho sigma)) J_(rho sigma) psi_(k,sigma) \
+  & = kappa^2/4 (epsilon^(mu 0 rho' sigma') - epsilon^(mu 3 rho' sigma')) (epsilon_(mu)^(" "0 rho sigma) - epsilon_(mu)^(" "3 rho sigma)) J_(rho' sigma') J_(rho sigma) psi_(k,sigma) \
+  & = kappa^2/4 (epsilon^(mu 0 rho' sigma') epsilon_(mu)^(" "0 rho sigma) + epsilon^(mu 3 rho' sigma') epsilon_(mu)^(" "3 rho sigma) - epsilon^(mu 0 rho' sigma') epsilon_(mu)^(" "3 rho sigma) - epsilon^(mu 3 rho' sigma') epsilon_(mu)^(" "0 rho sigma)) J_(rho' sigma') J_(rho sigma) psi_(k,sigma)\
+  & = kappa^2/4 (- epsilon^(k 0 rho' sigma') epsilon^(k 0 rho sigma) + epsilon^(0 3 rho' sigma') epsilon^(0 3 rho sigma) - epsilon^(k 3 rho' sigma') epsilon^(k 3 rho sigma) + epsilon^(k 0 rho' sigma') epsilon^(k 3 rho sigma) + epsilon^(k 3 rho' sigma') epsilon^(k 0 rho sigma)) J_(rho' sigma') J_(rho sigma) psi_(k,sigma)\
+  & = kappa^2/4 (-2 J_(i j) J_(i j) + 2 J_( a b) J_( a b) - 4 J_(0 a) J_(0 a) + 4 J_(23) J_(02) + 4 J_(13) J_(01) + 4 J_(02) J_(23) + 4 J_(01) J_(13)) psi_(k,sigma) = 0\
+  & = - kappa^2 (J^(a 3) J^(a 3) + J^(0 a) J^(0 a) + J^(2 3) J^(0 2) + J^(1 3) J^(0 1) + J^(0 2) J^(2 3) + J^(0 1) J^(1 3)) psi_(k,sigma)\
+  & = - kappa^2 ((J^(1 3) + J^(0 2))^2 + (J^(2 3) - J^(0 1))^2) psi_(k,sigma) = - kappa^2 ((J^2 + K^1)^2 + (- J^1 + K^2)^2) psi_(k,sigma) \
+  & = - kappa^2 (A^2 + B^2) psi_(k,sigma) = - kappa^2 (a^2 + b^2) psi_(k,sigma) = 0
+$
+其中第四个等号分离时间、空间求和指标，$A,B$直接控制第二个Poincare Casimir算符$W^mu W_mu$的本征值。由于$A,B$在无质量粒子态上本征值为零，因此$W^mu W_mu$在无质量粒子态上本征值为零。
+
+在参考动量处，由 Pauli–Lubanski 定义直接得到
+$
+  W^0 & = kappa J^3 \
+  W^1 & = kappa (J^1 - K^2) = - kappa B \
+  W^2 & = kappa (J^2 + K^1) = kappa A \
+  W^3 & = kappa J^3
+$
+这里等式理解为在参考动量子空间上的作用。所以
+$
+  W^mu W_mu = - kappa^2 (A^2 + B^2)
+$
+时间分量和纵向分量完全抵消，剩下的是两个横向小群生成元的平方。
+
+在$A=B=0$的分支，Pauli–Lubanski矢量只剩沿参考零动量的部分
+$
+  P_mu W^mu = 0 => W^3 Psi_k = W^0 Psi_k
+$
+从而
+$
+  W^3 Psi_k = kappa J^3 Psi_k = kappa sigma Psi_k
+$
+$W^mu$与$P^mu$都按四矢量变换。因此对
+$
+  Psi_(p,sigma) = N(p) U(L(p)) Psi_(k,sigma)
+$
+有
+$
+  W^mu Psi_(p,sigma) & = N(p) U(L(p)) W^mu Psi_(k,sigma) \
+                     & = sigma L^mu_(" "nu) p^nu Psi_(p,sigma) \
+                     & = sigma p^mu Psi_(p,sigma)
+$
+特别地
+$
+  W^0 Psi_(p,sigma) = sigma p^0 Psi_(p,sigma)
+$
+并且有
+$
+  W^0 = vb(P) dot vb(J) , p^0 = abs(vb(p))
+$
+从而
+$
+  (vb(P) dot vb(J))/abs(vb(P)) Psi_(p,sigma) = sigma Psi_(p,sigma)
+$
+
 
 // 为什么和有质量的结构完全不同？origin of mass？
