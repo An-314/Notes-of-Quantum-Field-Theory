@@ -1836,7 +1836,7 @@ $
   R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p)) = L(p)
 $
 得到的这个纯boost是唯一的，不同的横向轴选择并没有留下额外旋转。
-#theorem(subname: [$L(P)$的约定])[
+#theorem(subname: [有质量的正能单粒子态的Lorentz变换$L(P)$的约定])[
   $L(p)$是从参考动量$k^mu$到任意动量$p^mu$的Lorentz变换矩阵，它是一个纯boost变换，沿着$vb(p)$方向，不附加额外空间旋转。
   $
     L(p) = R(vu(p)) B(abs(vb(p))) R^(-1) (vu(p)) &= mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), I + (gamma - 1) hat(p) hat(p)^T)\
@@ -2339,7 +2339,7 @@ $
 $
   L(p) = R(vu(p)) B(abs(vb(p))/(kappa))
 $
-其中$R(vu(p))$是把$z$轴旋转到$vu(p)$方向的纯转动)变换，$B(u)$是沿着$z$轴的Lorentz boost变换
+其中$R(vu(p))$是把$z$轴旋转到$vu(p)$方向的纯转动变换，$B(u)$是沿着$z$轴的Lorentz boost变换
 $
   U(R(vu(p))) = e^(i phi J_3) e^(i theta J_2)
 $
@@ -2351,21 +2351,176 @@ $
 $
   B(u) = mat((u^2+1)/(2u), 0, 0, (u^2-1)/(2u); 0, 1, 0, 0; 0, 0, 1, 0; (u^2-1)/(2u), 0, 0, (u^2+1)/(2u))
 $
+即先把$(kappa, 0, 0, kappa)$boost到$(abs(vb(p)), 0, 0, abs(vb(p)))$，再把它旋转到$vb(p)$方向。
 
-
-$W$由产生2个空间坐标之间的转动变换及那些不能化成纯2个空间坐标之间转动但保持$k^mu = (κ, 0, 0, κ)$不变的变换构成。其幺正的表示矩阵$D(W)$是对角的
+后面我们会证明
+$
+  W(cal(R), p) = I
+$
+旋转不会产生 Wigner rotation。$W$由产生2个空间坐标之间的转动变换及那些不能化成纯2个空间坐标之间转动但保持$k^mu = (κ, 0, 0, κ)$不变的变换构成。我们之后会证明其幺正的表示矩阵$D(W)$是对角的
 $
   D_(sigma' sigma) (W) = e^(i theta(Lambda, p) sigma) delta_(sigma' sigma)
 $
 $θ$是2个空间坐标之间的转动角(与$Λ$的关系见后)；$sigma$是角动量的第三分量的本征值。因参考动量$vb(k)$沿$z$轴方向，$sigma$给出的是角动量算符在运动方向上投影的本征值，称*螺旋度*，它只能取值整数或半整数。
 
-对螺旋度为$sigma$无质量的正能单粒子态，在纯时空转动变换下
+进一步可以得到，对螺旋度为$sigma$无质量的正能单粒子态，在纯时空转动变换下
 $
   U(Lambda) Psi_(p, sigma) = sqrt((Lambda p)^0 / p^0) e^(i theta(Lambda, p) sigma) Psi_(Lambda p, sigma)
 $
 
 #newpara()
-我们说保证参考动量$k^mu$不变的Lorentz变换构成了一个小群$"ISO"(2)$。引入类时四矢量$t^mu = (1, 0, 0, 0)$，考虑能使它保持不变的变换。先将$W$作用$t$上得到的仍是一类时四矢量$W t$，它还满足
+
+我们现在考虑无质量标准 boost 的矩阵形式
+$
+  B(u) = mat((u^2+1)/(2u), 0, 0, (u^2-1)/(2u); 0, 1, 0, 0; 0, 0, 1, 0; (u^2-1)/(2u), 0, 0, (u^2+1)/(2u)) & =^(u=e^chi) mat(cosh(chi), 0, 0, sinh(chi); 0, 1, 0, 0; 0, 0, 1, 0; sinh(chi), 0, 0, cosh(chi))\
+  &=^(gamma = 1/2 (u + 1/u)) mat(gamma, 0, 0, sqrt(gamma^2 - 1); 0, 1, 0, 0; 0, 0, 1, 0; sqrt(gamma^2 - 1), 0, 0, gamma)
+$
+是沿$z$的boost变换，其中
+$
+  u = gamma + sqrt(gamma^2 - 1), 1/u = gamma - sqrt(gamma^2 - 1)
+$
+在经过变换后
+$
+  k'^0 = kappa((u^2 + 1)/(2u) + (u^2 - 1)/(2u)) = kappa u, k'^3 = kappa((u^2 - 1)/(2u) + (u^2 + 1)/(2u)) = kappa u
+$
+#newpara()
+现在考虑空间旋转部分
+$
+  R_3 = (vb(a), vb(b), vu(p)), R_3^TT R_3 = R_3 R_3^TT = I, abs(vb(a)) = abs(vb(b)) = 1
+$
+则有
+$
+  vb(a) perp vu(p), vb(b) perp vu(p), vb(a) perp vb(b)
+$
+和有质量情况完全一样，构成新的空间基
+$
+  R_3 mat(0; 0; abs(vb(p))) = vu(p) abs(vb(p)) = vb(p)
+$
+现在计算$L(p)$
+$
+  L(p) & = R(vu(p)) B(abs(vb(p))/kappa) = mat(1, O^TT; O, R_3) B(abs(vb(p))/kappa) \
+       & =mat(gamma, mat(0, 0, sqrt(gamma^2 - 1)); R_3 mat(0; 0; sqrt(gamma^2 - 1)), R_3 diag(1, 1, gamma)) \
+       & =mat(gamma, mat(0, 0, sqrt(gamma^2 - 1)); R_3 mat(0; 0; sqrt(gamma^2 - 1)), R_3 diag(1, 1, gamma)) \
+       & = mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), R_3 + (gamma - 1) R_3 diag(1, 1, gamma)) \
+       & = mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), (vb(a), vb(b), gamma vu(p))) \
+$
+且有
+$
+  L^(-1) & = B^(-1) (abs(vb(p))/kappa) R^(-1) (vu(p)) \
+         & = mat(gamma, -sqrt(gamma^2 - 1) hat(p)^TT; -sqrt(gamma^2 - 1) hat(p), diag(1, 1, gamma^(-1)) R_3^TT) \
+$
+从而
+$
+  L^(-1) (p) L(p) &= mat(gamma, -sqrt(gamma^2 - 1) hat(p)^TT; -sqrt(gamma^2 - 1) hat(p), diag(1, 1, gamma^(-1)) R_3^TT) mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), (vb(a), vb(b), gamma vu(p))) \
+  &= mat(1, O^TT; O, R_3^TT (vb(a), vb(b), vu(p))) = I
+$
+这就意味
+$
+  L^(-1) (p) = L(-p)
+$
+是Lorentz变换的逆变换。$L(p)$是把参考动量$k^mu = (kappa, 0, 0, kappa)$变换到任意动量$p^mu = (abs(vb(p)), vb(p))$的Lorentz变换。对一般现$q$，现在我们计算$L(p)q$
+$
+  q' &= L(p) q = mat(gamma, mat(0, 0, sqrt(gamma^2 - 1)); sqrt(gamma^2 - 1) hat(p), R_3 + (gamma - 1)mat(0, 0, vu(p))) mat(q^0; vb(q)) \
+  &= mat(gamma q^0 + sqrt(gamma^2 - 1) q^3; sqrt(gamma^2 - 1) hat(p) q^0 + R_3 vb(q) + (gamma - 1) mat(0, 0, vu(p)) vb(q))\
+  &= mat(gamma q^0 + sqrt(gamma^2 - 1) q^3; (sqrt(gamma^2 - 1) q^0 + (gamma-1) q^3 ) hat(p)+ R_3 vb(q)) \
+  &= mat(gamma q^0 + sqrt(gamma^2 - 1) q^3; (sqrt(gamma^2 - 1) q^0 + gamma q^3 ) hat(p)+ q^1 vb(a) + q^2 vb(b)) \
+  &= (sqrt(gamma^2 - 1) q^0/p^0 + gamma q^3/p^0) p + mat(1/u (q^0-q^3); q^1 vb(a) + q^2 vb(b))
+$
+特别地，$q=k$有$q^0 = q^3 = kappa$，$q^1 = q^2 = 0$，则
+$
+  k' & = L(p) k = kappa/p^0 (sqrt(gamma^2 - 1) + gamma) p \
+     & = kappa/p^0 ((u^2-1)/(2u) + (u^2+1)/(2u)) p = kappa/p^0 u p = p
+$
+#theorem(subname: [无质量的正能单粒子态的Lorentz变换$L(P)$的约定])[
+  对无质量的正能单粒子态，标准boost变换$L(p)$是把参考动量$k^mu = (kappa, 0, 0, kappa)$变换到任意动量$p^mu = (abs(vb(p)), vb(p))$的Lorentz变换。对一般现$q$，有
+  $
+    L(p) = R(vu(p)) B(abs(vb(p))/kappa)\
+  $
+  确保$L(p) k = p$。
+]
+#newpara()
+从而
+$
+  Lambda q' = (sqrt(gamma^2 - 1) q^0/p^0 + gamma q^3/p^0) Lambda P + Lambda mat(1/u (q^0-q^3); q^1 vb(a) + q^2 vb(b))
+$
+则有
+$
+  Lambda k' = Lambda p = p''
+$
+得到
+$
+  W(Lambda, p) q &= L^(-1) (Lambda p) Lambda L(p) q = L^(-1) (p'') Lambda q' \
+  &= (sqrt(gamma^2 - 1) q^0 + gamma q^3) k/p^0 + L^(-1) (p'') Lambda mat(1/u (q^0-q^3); q^1 vb(a) + q^2 vb(b)) \
+  &= (sqrt(gamma^2 - 1) q^0 + gamma q^3) k/p^0 + L^(-1) (p'') q''_perp, q_perp = Lambda mat(1/u (q^0-q^3); q^1 vb(a) + q^2 vb(b))
+$
+有
+$
+  L^(-1) (p'') q''_perp = mat(gamma'', - sqrt(gamma''^2 - 1) hat(p'')^TT; 0, vb(a)''^TT; 0, vb(b)''^TT; - sqrt(gamma''^2 - 1), gamma'' vu(p)''^TT) mat(q''_perp^0; q''_perp^1; q''_perp^2; q''_perp^3) = mat(gamma'' q''_perp^0 - sqrt(gamma''^2 - 1) vu(p)^TT vb(q)''_perp; vb(a)''^TT vb(q)''_perp; vb(b)''^TT vb(q)''_perp; - sqrt(gamma''^2 - 1) q''_perp^0 + gamma'' hat(p)''^TT vb(q)''_perp)
+$
+进一步如果Lorentz变换$Lambda$是纯转动$cal(R)$，则
+$
+  Lambda = cal(R), gamma'' = gamma, vb(p)'' = R_3 vb(p), vb(a)'' = R_3 vb(a), vb(b)'' = R_3 vb(b)
+$
+有
+$
+  q''_perp &= R_3 mat(1/u (q^0-q^3); q^1 R_3 vb(a) + q^2 R_3 vb(b))\
+  L^(-1) (p'') q''_perp &= mat(gamma q_perp^0 - sqrt(gamma^2 - 1) vu(p)^TT R_3 vb(q)_perp; vb(a)^TT R_3 vb(q)_perp; vb(b)^TT R_3 vb(q)_perp; - sqrt(gamma^2 - 1) q_perp^0 + gamma hat(p)^TT R_3 vb(q)_perp) = mat(gamma/u (q^0-q^3); q^1; q^2; - sqrt(gamma^2 - 1)/u (q^0-q^3))
+$
+从而
+$
+  W(cal(R), p) q = (sqrt(gamma^2 - 1) q^0 + gamma q^3) k/kappa + mat(gamma/u (q^0-q^3); q^1; q^2; - sqrt(gamma^2 - 1)/u (q^0-q^3)) = q
+$
+从而得到
+$
+  W(cal(R), p) = I
+$
+
+#theorem(subname: [无质量正能单粒子态的空间旋转Lorentz变换诱导的小群元素])[
+  对无质量的正能单粒子态，空间旋转Lorentz变换$cal(R)$诱导的小群元素$W(cal(R), p)$是恒等变换。
+  $
+    W(cal(R), p) = I
+  $
+]
+#newpara()
+如果$Lambda$是于$vb(p)$方向一致的boost变换$cal(B)$，则
+$
+  p'' = cal(B) p = mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), I + (gamma - 1) hat(p) hat(p)^TT) mat(1; vu(p)) p^0 = (gamma + sqrt(gamma^2 - 1)) mat(1; vu(p)) p^0 = u p
+$
+其中
+$
+  u'' = p''^0/kappa = (p^0 u)/kappa = u^2\
+  gamma^2 = 1/2 (u^2 + 1/u^2) = 2 gamma^2 - 1\
+  sqrt(gamma''^2 - 1) = 1/2 (u^2 - 1/u^2) = 2 gamma sqrt(gamma^2 - 1)\
+  vb(a)'' = vb(a), vb(b)'' = vb(b)
+$
+并且
+$
+  q''_perp &= cal(B) q_perp = mat(gamma, sqrt(gamma^2 - 1) hat(p)^TT; sqrt(gamma^2 - 1) hat(p), I + (gamma - 1) hat(p) hat(p)^TT) mat(1/u (q^0-q^3); q^1 vb(a) + q^2 vb(b))\
+  &= mat(gamma/u (q^0-q^3) + sqrt(gamma^2 - 1)/u (q^0-q^3); sqrt(gamma^2 - 1)/u (q^0-q^3) hat(p) + q^1 vb(a) + q^2 vb(b)) = mat(u (q^0-q^3); sqrt(gamma^2 - 1)/u (q^0-q^3) hat(p) + q^1 vb(a) + q^2 vb(b))
+$
+则有
+$
+  L^(-1) (p'') q''_perp = mat(gamma'' q''_perp^0 - sqrt(gamma''^2 - 1) vu(p)^TT vb(q)''_perp; vb(a)^TT vb(q)''_perp; vb(b)^TT vb(q)''_perp; - sqrt(gamma''^2 - 1) q''_perp^0 + gamma'' hat(p)''^TT vb(q)''_perp)\
+$
+则有
+$
+  W(cal(B), p) q &= (sqrt(gamma^2 - 1) q^0 + gamma q^3) k/kappa + L^(-1) (p'') q''_perp \
+  &= (sqrt(gamma^2 - 1) q^0 + gamma q^3) k/kappa + mat(((2gamma^2-1)gamma/u - 2 gamma sqrt(gamma^2 - 1) sqrt(gamma^2 - 1)/u) (q^0-q^3); q^1; q^2; (- 2 gamma sqrt(gamma^2 - 1) gamma/u + (2gamma^2-1) sqrt(gamma^2 - 1)/u) (q^0-q^3))\
+  &= mat(1/u(sqrt(gamma^2 - 1) q^0 + gamma q^3 + gamma(q^0 - q^3)); q^1; q^2; 1/u(- sqrt(gamma^2 - 1) q^0 - gamma q^3 + sqrt(gamma^2 - 1)(q^0 - q^3))) = q
+$
+从而也有
+$
+  W(cal(B)_parallel, p) = I
+$
+#theorem(subname: [无质量正能单粒子态的沿运动方向的boost Lorentz变换诱导的小群元素])[
+  对无质量的正能单粒子态，沿运动方向的boost Lorentz变换$cal(B)_parallel$诱导的小群元素$W(cal(B)_parallel, p)$是恒等变换。
+  $
+    W(cal(B)_parallel, p) = I
+  $
+]
+#newpara()
+
+对于更一般的情况，我们说保证参考动量$k^mu$不变的Lorentz变换构成了一个小群$"ISO"(2)$。引入类时四矢量$t^mu = (1, 0, 0, 0)$，考虑能使它保持不变的变换。先将$W$作用$t$上得到的仍是一类时四矢量$W t$，它还满足
 $
   (W t)^mu (W t)_mu & = t^mu (W^(-1) W t)_mu = t^mu t_mu = 1 \
       (W t)^mu k_mu & = t^mu (W^(-1) k)_mu = t^mu k_mu = kappa
@@ -2386,23 +2541,342 @@ $W$作用到$t$上和如下Lorentz变换$S$作用到$t$上等价
 $
   S^mu_(" "nu) (alpha, beta) = mat(1 + zeta, alpha, beta, - zeta; alpha, 1, 0, -alpha; beta, 0, 1, -beta; zeta, alpha, beta, 1 - zeta)
 $
-
-
-我们现在寻找和$W$作用在$t$上等价的Lorentz变换：$S^(-1) W$保持类时四矢量$t^mu = (1, 0, 0, 0)$不变，$S$保持参考动量$k^mu = (kappa, 0, 0, kappa)$不变，于是$S^(-1) W$保持$t^mu$和$k^mu$不变，从而$S^(-1) W$只能是绕第三轴的纯转动
+从而$S^(-1) W$保持类时四矢量$t^mu = (1, 0, 0, 0)$不变，$S$保持参考动量$k^mu = (kappa, 0, 0, kappa)$不变，于是$S^(-1) W$保持$t^mu$和$k^mu$不变，从而$S^(-1) W$只能是绕第三轴的纯转动
 $
   S^(-1) (alpha, beta) W(theta, alpha, beta) = R(theta)
 $
 其中$R(theta)$是绕$z$轴的纯转动，$S(alpha, beta)$是保持参考动量$k^mu = (kappa, 0, 0, kappa)$不变的Lorentz变换。于是
 $
-  S^mu_(" "nu) = mat(1 + zeta, alpha, beta, - zeta; alpha, 1, 0, -alpha; beta, 0, 1, -beta; zeta, alpha, beta, 1 - zeta), R^mu_(" "nu) (theta)= mat(1, 0, 0, 0; 0, cos(theta), sin(theta), 0; 0, -sin(theta), cos(theta), 0; 0, 0, 0, 1)
+  R^mu_(" "nu) (theta)= mat(1, 0, 0, 0; 0, cos(theta), sin(theta), 0; 0, -sin(theta), cos(theta), 0; 0, 0, 0, 1)
 $
 我们取
 $
   W(theta, alpha, beta) = S(alpha, beta) R(theta)
 $
 
+我们考虑$"ISO"(2)$群的不可约表示。
+
+事实上$S$保持Minkowski间距
+$
+  mat(t'; x'; y'; z')^TT = mat(1 + zeta, alpha, beta, - zeta; alpha, 1, 0, -alpha; beta, 0, 1, -beta; zeta, alpha, beta, 1 - zeta) mat(t; x; y; z) = mat(t + alpha x + beta y - zeta (t + z); x + alpha (t - z); y + beta (t - z); z + alpha x + beta y + zeta (t + z))
+$
+引入
+$
+  l = t - z, v = t + z, vb(r) = (x, y), vb(c) = (alpha, beta)
+$
+则有
+$
+  l' = l, vb(r)' = vb(r) + l vb(c), v' = v + 2 vb(c) dot vb(r) + l abs(vb(c))^2
+$
+从而
+$
+  t'^2 - x'^2 - y'^2 - z'^2 &= l' v' - abs(vb(r)')^2 = l (v + 2 vb(c) dot vb(r) + l abs(vb(c))^2) - abs(vb(r) + l vb(c))^2 = l v - abs(vb(r))^2\
+  &= t^2 - x^2 - y^2 - z^2
+$
+从而
+$
+  S^TT g S = g
+$
+以及
+$
+  S^(-1) (alpha,beta) = S(-alpha, -beta)
+$
+
+对于群$"ISO"(2)$，有这样的乘法法则
+$
+  S(overline(alpha), overline(beta)) S(alpha, beta) = S(overline(alpha) + alpha, overline(beta) + beta)
+$
+$
+  R(overline(theta)) R(theta) = R(overline(theta) + theta)
+$
+
+$
+  R(theta) S(alpha, beta) R^(-1) (theta) & = S(alpha cos(theta) + beta sin(theta), - alpha sin(theta) + beta cos(theta)) \
+                      mat(alpha'; beta') & = mat(cos theta, sin theta; -sin theta, cos theta) mat(alpha; beta)
+$
+即旋转会将参数$alpha,beta$当成二维矢量来旋转。于是$"ISO"(2)$群的元素可以表示为
+$
+  W(overline(theta), overline(vb(c))) W(theta, vb(c)) = W(overline(theta) + theta, overline(vb(c)) + r(overline(theta)) vb(c))
+$
+这就是
+$
+  "ISO"(2) = RR^2 times.r "SO"(2)
+$
+
+我们可以知道$W$是由二维矢量平移一个矢量$(alpha, beta)$，再绕$z$轴旋转一个角度$theta$构成的。于是$"ISO"(2)$群的不可约表示可以由二维矢量平移的不可约表示和绕$z$轴旋转的不可约表示来描述。
+
+对于一般的$W(Lambda, p)$，我们可以从$Lambda,p$提取出$theta, alpha, beta$：
+$
+  W(Lambda, p) q &= S(alpha, beta) R(theta) q = mat(1 + zeta, alpha, beta, - zeta; alpha, 1, 0, -alpha; beta, 0, 1, -beta; zeta, alpha, beta, 1 - zeta) mat(1, 0, 0, 0; 0, cos(theta), sin(theta), 0; 0, -sin(theta), cos(theta), 0; 0, 0, 0, 1) mat(q^0; q^1; q^2; q^3) \
+  &= mat((1 + zeta) q^0 - zeta q^3 + q^1 (alpha cos theta - beta sin theta) + q^2 (alpha sin theta + beta cos theta); q^1 cos theta + q^2 sin theta + alpha (q^0 - q^3); - q^1 sin theta + q^2 cos theta + beta (q^0 - q^3); zeta q^0 + (1 - zeta) q^3 + q^1 (alpha cos theta - beta sin theta) + q^2 (alpha sin theta + beta cos theta))
+$
+在目标动量处选择横向单位基$vb(a)'', vb(b)''$，则有
+$
+  q^1 cos theta + q^2 sin theta + alpha (q^0 - q^3) = vb(a)''^TT vb(q)''_perp = vb(a)''^TT Lambda vb(q)_perp = a''^i (Lambda_(i 0) (q^0 - q^3)/u + Lambda_(i j) (q^1 a^j + q^2 b^j))\
+  - q^1 sin theta + q^2 cos theta + beta (q^0 - q^3) = vb(b)''^TT vb(q)''_perp = vb(b)''^TT Lambda vb(q)_perp = b''^i (Lambda_(i 0) (q^0 - q^3)/u + Lambda_(i j) (q^1 a^j + q^2 b^j))
+$
+从而
+$
+  cos theta = a''^i Lambda_(i j) a^j = b''^i Lambda_(i j) b^j, sin theta = b''^i Lambda_(i j) a^j = - a''^i Lambda_(i j) b^j\
+  alpha = a''^i Lambda_(i 0)/u, beta = b''^i Lambda_(i 0)/u
+$
+其中$theta$是与$vb(p)$垂直的矢量$vb(a),vb(b)$在经过Lorentz变换$Lambda$后形成的矢量$Lambda_(i j) a^j vu(e)^i, Lambda_(i j) b^j vu(e)^i$和与$Lambda vb(p)$垂直的$vb(a)'',vb(b)''$之间的夹角
+$
+  e_a = (0, vb(a)), e_a dot p = 0, e_a^2 = -1\
+  X = Lambda e_a, X^2 = -1, X dot Lambda p = 0\
+$
+从而
+$
+  X^0 = vu(p)'' dot vb(X), vb(X)_T = vb(X) - X^0 vu(p)''
+$
+从而
+$
+  vb(X)_T = cos theta vb(a)'' - sin theta vb(b)'', vb(X)_T^2 = -1
+$
+$alpha, beta$是与$vb(p)$垂直的矢量$vb(a),vb(b)$在经过Lorentz变换$Lambda$后形成的矢量$Lambda_(i 0) a^i, Lambda_(i 0) b^i$在与$Lambda vb(p)$垂直的矢量$vb(a)'',vb(b)''$上的投影。
+
+这样就可以回到我们先前对特殊情况的推导
+- $Lambda$是*纯空间转动*
+  $
+    vb(a)'' = R_3 vb(a), vb(b)'' = R_3 vb(b), Lambda_(i j) = R_(i j), Lambda_(i 0) = 0
+  $
+  这里我们把末端横向量基随$cal(R)$进行了搬动，则
+  $
+    theta = alpha = beta = 0
+  $
+  从而
+  $
+    W(cal(R), p) = I
+  $
+- $Lambda$是*沿$vb(p)$的boost*
+  $
+    vb(a)'' = vb(a), vb(b)'' = vb(b), Lambda_(i j) = delta_(i j) +(gamma - 1) hat(p)^i hat(p)^j, Lambda_(i 0) = sqrt(gamma^2 - 1) hat(p)^i
+  $
+  则
+  $
+    theta = alpha = beta = 0
+  $
+  从而
+  $
+    W(cal(B)_parallel, p) = I
+  $
+- $Lambda$是*一般沿$vu(p)'$的boost*
+  $
+    cos theta & = vb(a)'' dot vb(a) + (gamma' - 1) vb(a)'' dot vu(p)' vb(a) dot vu(p) \
+              & = vb(b)'' dot vb(b) + (gamma' - 1) vb(b)'' dot vu(p)' vb(b) dot vu(p) \
+    sin theta & = vb(a)'' dot vb(b) + (gamma' - 1) vb(a)'' dot vu(p)' vb(b) dot vu(p) \
+              & = - vb(b)'' dot vb(a) - (gamma' - 1) vb(b)'' dot vu(p)' vb(a) dot vu(p)
+  $
+  由
+  $
+    alpha = sqrt(gamma'^2 - 1) vb(a)'' dot vu(p)', beta = sqrt(gamma'^2 - 1) vb(b)'' dot vu(p)'\
+    gamma' = 1/2 (abs(vb(p)')/kappa + kappa/abs(vb(p)'))
+  $
+  最终方向满足
+  $
+    vb(p)'' parallel vb(p) + vu(p)' (sqrt(gamma'^2 - 1) + (gamma' - 1) vu(p)' dot vu(p))\
+  $
+- 最一般的*Lorentz变换*$Lambda = cal(R)' cal(B)$，则
+  $
+    W(Lambda, p) & = L^(-1) (Lambda p) Lambda L(p) = L^(-1) (cal(R') cal(B) p) cal(R') cal(B) L(p) \
+                 & = L^(-1) (cal(R') cal(B) p) cal(R') L(cal(B) p) L^(-1) (cal(B) p) cal(B) L(p) \
+                 & = W(cal(R'), cal(B) p) W(cal(B), p) = W(cal(B), p)
+  $
+
+#theorem(subname: [无质量正能单粒子态的Lorentz变换诱导的小群元素])[
+  对无质量的正能单粒子态，Lorentz变换$Lambda$诱导的小群元素$W(Lambda, p)$是由二维矢量平移一个矢量$(alpha, beta)$，再绕$z$轴旋转一个角度$theta$构成的。
+  $
+    W(Lambda, p) = W(cal(B), p)
+  $
+  其中
+  $
+    Lambda = cal(R)' cal(B)\
+    W(theta, alpha, beta) = S(alpha, beta) R(theta)
+  $
+  而$Lambda$与$theta, alpha, beta$的关系为
+  $
+    cos theta = a''^i Lambda_(i j) a^j = b''^i Lambda_(i j) b^j, sin theta = b''^i Lambda_(i j) a^j = - a''^i Lambda_(i j) b^j\
+    alpha = a''^i Lambda_(i 0)/u, beta = b''^i Lambda_(i 0)/u
+  $
+]
+
+#note(subname: [球极投影])[
+  我们前面讨论过$S$矩阵
+  $
+    S^mu_(" "nu) =^(zeta = (alpha^2 + beta^2)/2) mat(1 + zeta, alpha, beta, - zeta; alpha, 1, 0, -alpha; beta, 0, 1, -beta; zeta, alpha, beta, 1 - zeta)\
+    x'^mu = S^mu_(" "nu) x^nu = mat((1 + zeta) t - zeta z + alpha x + beta y; t alpha + x - alpha z; t beta + y - beta z; t zeta + z (1 - zeta) + alpha x + beta y)
+  $
+  注意到有
+  $
+    l' = t' - z' = t - z = l
+  $
+  以及
+  $
+    x' + i y' = (alpha + i beta) (t - z) + (x + i y)\
+    vb(r)' = vb(r) + l vb(c), vb(c) = (alpha, beta)
+  $
+  因此
+  $
+    (x' + i y')/(t' - z') = (x + i y)/(t - z) + (alpha + i beta)
+  $
+  定义复坐标
+  $
+    xi = (x + i y)/(t - z) => xi' = (x' + i y')/(t' - z') = xi + (alpha + i beta)
+  $
+  所以在复平面$xi$上，$S(alpha, beta)$是一个平移变换，平移矢量为$alpha + i beta$。
+
+  限制在非零未来光锥
+  $
+    t^2 = x^2 + y^2 + z^2, t > 0\
+    X = x/t, Y = y/t, Z = z/t
+  $
+  从而光锥上的传播方向可以由单位球面上的点表示
+  $
+    xi = (X + i Y)/(1 - Z)
+  $
+  这正是从北极$(0,0,1)$做球极投影得到的复平面坐标：从北极经点面$P$作直线，交赤道平面为$P'$
+  $
+    P' = (X/(1-Z), Y/(1-Z), 0) = (Re(xi), Im(xi), 0)
+  $
+  北极自己对应$xi = oo$，其逆变换为
+  $
+    P = ((xi + overline(xi))/(xi overline(xi) + 1), (xi - overline(xi))/(i (xi overline(xi) + 1)), (xi overline(xi) - 1)/(xi overline(xi) + 1))
+  $
+  其中有
+  $
+    abs(xi)^2 = (X^2 + Y^2)/(1 - Z)^2 = (1 + Z)/(1 - Z) => Z = (abs(xi)^2 - 1)/(abs(xi)^2 + 1)\
+    X + i Y = xi(1- Z) = 2 xi/(abs(xi)^2 + 1)
+  $
+  #newpara()
+  事实上Lorentz变换在光锥上的作用是
+  $
+           S: & xi |-> xi + (alpha + i beta) \
+    R(theta): & xi |-> e^(i theta) xi \
+    B_z (v) : & xi |-> v xi
+  $
+]
+
+#figure(
+  image("pic/2026-09-29-12-27-31.png", width: 80%),
+  numbering: none,
+)
+
+最后我们从小群矩阵推导其生成元和代数。
+
+考虑
+$
+  W(theta, alpha, beta)^mu_(" "nu) = g^mu_(" "nu) + omega^mu_(" "nu) + O(theta^2, alpha^2, beta^2)
+$
+其中
+$
+  omega^mu_(" "nu) = mat(0, alpha, beta, 0; alpha, 0, theta, - alpha; beta, - theta, 0, - beta; 0, alpha, beta, 0)
+$
+则
+$
+  U(I + omega) = I + i/2 omega_(mu nu) J^(mu nu) + O(theta^2, alpha^2, beta^2)\
+  omega_(01) = alpha, omega_(02) = beta, omega_(13) = alpha, omega_(23) = beta, omega_(12) =- theta
+$
+因此在Lorentz群的生成元中
+$
+  1/2 omega_(mu nu) J^(mu nu) = alpha (J^(01) + J^(13)) + beta (J^(02) + J^(23)) - theta J^(12) = alpha A + beta B + theta J^3
+$
+从而有
+$
+  U(W(theta, alpha, beta)) = I + i alpha A + i beta B + i theta J^3 + O(theta^2, alpha^2, beta^2)
+$
+其中
+$
+  A = J^2 + K^1, B = - J^1 + K^2
+$
+其中$A,B$都是Hermite算符。利用共轭变换
+$
+  R(theta) S(alpha, beta) R^(-1) (theta) = S(alpha cos(theta) + beta sin(theta), - alpha sin(theta) + beta cos(theta))
+$
+展开到一阶
+$
+  U(R) (I + i alpha A + i beta B) U^(-1) (R) \
+  = I + i (alpha cos theta + beta sin theta) A + i (- alpha sin theta + beta cos theta) B
+$
+从而
+$
+  U(R) A U^(-1) (R) = cos theta A - sin theta B\
+  U(R) B U^(-1) (R) = sin theta A + cos theta B
+$
+而
+$
+  U(R) = I + i theta J^3 + O(theta^2)
+$
+便有对易关系
+$
+  [J^3, A] = i B, [J^3, B] = - i A, [A,B] = 0
+$
+其中$[A, B] = 0$是Poincare代数中直接给出的对易关系。进而
+$
+  [J^3, A^2 + B^2] = 0
+$
+这就有点像平移生成元
+$
+  [J^3, P_x] = i P_y, [J^3, P_y] = - i P_x, [P_x, P_y] = 0
+$
 #newpara()
-有一些性质
-$$
+以及动量算符
+$
+  [P^i, A] = i delta_(i l) (P^3 - H) - i delta_(i 3) P^1\
+  [P^i, B] = i delta_(i 2) (P^3 - H) - i delta_(i 3) P^2
+$
+Hamilton算符$H = P^0$，于是
+$
+  [H, A] = - i P^1, [H, B] = - i P^2
+$
+而且对于参考动量态
+$
+  P^1 = P^2 = 0, P^3 = H = kappa
+$
+在参考动量态$vb(P),A,B$相互对易，取其共同本征态
+$
+  A Psi_(k,a,b) = a Psi_(k,a,b), B Psi_(k,a,b) = b Psi_(k,a,b), P^mu Psi_(k,a,b) = k^mu Psi_(k,a,b)
+$
+对其作旋转变换
+$
+  Psi_(k,a,b)^theta = U^(-1) (R(theta)) Psi_(k,a,b)
+$
+于是
+$
+  A Psi_(k,a,b)^theta & = U^(-1) (R(theta)) U(R(theta)) A U^(-1) (R(theta)) Psi_(k,a,b) \
+                      & = U^(-1) (R(theta)) (cos theta A - sin theta B) Psi_(k,a,b) \
+                      & = (a cos theta - b sin theta) Psi_(k,a,b)^theta \
+$
+同理
+$
+  B Psi_(k,a,b)^theta = (a sin theta + b cos theta) Psi_(k,a,b)^theta
+$
+这相当于一个二维矢量的旋转变换。*但在物理上没有看到无质量粒子具有$theta$描述的连续自由度，这要求$a=b=0$。*
+$
+  A Psi_(k,0,0) = B Psi_(k,0,0) = 0
+$
+进一步可以选择这些态为$J^3$的本征态
+$
+  J^3 Psi_(k,sigma) = sigma Psi_(k,sigma), A Psi_(k,sigma) = B Psi_(k,sigma) = 0, P^mu Psi_(k,sigma) = k^mu Psi_(k,sigma)
+$
+现在动量$vb(k)$沿$z$方向，$sigma$是角动量沿运动方向的投影，称之为*螺旋度*。
+
+对有限大的$theta,alpha,beta$
+$
+  U(S(alpha, beta)) = e^(i alpha A + i beta B) = I\
+  U(R(theta)) = e^(i theta J^3)
+$
+从而
+$
+  U(W(theta, alpha, beta)) Psi_(k,sigma) = e^(i theta sigma) Psi_(k,sigma)
+$
+得到表示
+$
+  D_(sigma' sigma) (W) = e^(i theta sigma) delta_(sigma' sigma)
+$
+从而在连通Poincare变换中，固定$sigma$的不可约表示会混合到另一个螺旋度
+$
+  U(Lambda) Psi_(p,sigma) = sqrt((Lambda p)^0/p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p)) Psi_(Lambda p, sigma') = sqrt((Lambda p)^0/p^0) e^(i theta sigma) Psi_(Lambda p, sigma)
+$
+一份固定的螺旋度不可约表示，在每一个固定动量处是一维的，同时含有$+sigma, -sigma$是进一步的组合表示。
 
 // 为什么和有质量的结构完全不同？origin of mass？
