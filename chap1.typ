@@ -2959,3 +2959,116 @@ $
 
 
 // 为什么和有质量的结构完全不同？origin of mass？
+
+
+$"SL"(2,CC)\/Z_2$
+
+对四矢量$V^mu$的$"SL"(2,CC)\/Z_2$变换
+$
+  V^mu sigma_mu = mat(V^0 + V^3, V^1 - i V^2; V^1 + i V^2, V^0 - V^3) = v
+$
+并且注意到
+$
+  v = v^dagger -> lambda v lambda^dagger
+$
+这是Hermitian矩阵，其中$lambda$是$"SL"(2,CC)\/Z_2$的元素。
+注意到其行列式
+$
+  det v = (V^0)^2 - (V^1)^2 - (V^2)^2 - (V^3)^2 = V_mu V^mu
+$
+$
+  det lambda = 1
+$
+所以$lambda$是行列式为1的矩阵。
+
+对$V^mu$的齐次Lorentz变换
+$
+                                V^mu & -> Lambda^mu_(" "nu) V^nu \
+  lambda V^mu sigma_mu lambda^dagger & = Lambda^mu_(" "nu)(lambda) V^nu sigma_mu
+$
+
+
+有
+$
+  Lambda(lambda overline(lambda)) = Lambda(lambda) Lambda(overline(lambda))
+$
+$
+  Lambda(- lambda) = Lambda(lambda)
+$
+
+
+有质量的正能单粒子态与无质量的正能单粒子态的差别
+
+有质量的正能单粒子态有$2j + 1$个态，无质量的正能单粒子态最多有$2$个态考虑空间反射。也就是说，对自旋为$0$和$1/2$的态，有无质量的单粒子态的数目是一样的；对自旋$≥1$的态，有无质量的单粒子态的数目是不一样的。从有质量的零质量极限看自旋$≥1$的无质量态，极限存在需理论使多余的自由度观测不到：理论要求存在*规范对称性*。反过来，对自旋$≥1$态的理论，若零质量极限存在，理论规范对称性的破坏必须与质量相关，而与其它类型的相互作用无关。这就是质量起源和规范对称性破缺。
+
+=== 空间反射
+
+对空间反射算符$P$，有
+$
+  P = U(cal(P),0)
+$
+其中
+$
+  cal(P)^mu_(" "nu) = mat(1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1)
+$
+不可以连续变形到单位变换的变换，需要判断它是否幺正或反幺正
+$
+  P U(Lambda, a) P^(-1) = U(cal(P) Lambda cal(P), cal(P) a)
+$
+
+
+取$P$是幺正算符
+$
+  P vb(J) P^(-1) & = vb(J) \
+  P vb(K) P^(-1) & = - vb(K) \
+  P vb(P) P^(-1) & = - vb(P) \
+      P H P^(-1) & = H
+$
+#newpara()
+
+==== 有质量正能单粒子态空间反射
+
+参考动量$k^mu = (M,0,0,0)$的单粒子态$Psi_(k,sigma)$，其能动量和$J^3$本征值标志态
+$
+      H Psi_(k,sigma) & = M Psi_(k,sigma) \
+  vb(P) Psi_(k,sigma) & = 0 \
+    J^3 Psi_(k,sigma) & = sigma Psi_(k,sigma) \
+$
+空间反射态$P Psi_(k,sigma)$满足
+$
+      H (P Psi_(k,sigma)) & = M (P Psi_(k,sigma)) \
+  vb(P) (P Psi_(k,sigma)) & = 0 \
+    J^3 (P Psi_(k,sigma)) & = sigma (P Psi_(k,sigma)) \
+$
+空间反射态$P Psi_(k,sigma)$的能动量和角动量的$z$分量的本征值与原来态的本征值完全一样。空间反射态$P Psi_(k,sigma)$与原来的态$Psi_(k,sigma)$只能相差一个相角
+$
+  P Psi_(k,sigma) = eta_sigma Psi_(k,sigma)
+$
+注意到
+$
+  (J^1 plus.minus J^2) Psi_(k, sigma) = sqrt(j(j+1) - sigma(sigma plus.minus 1)) Psi_(k, sigma plus.minus 1)
+$
+
+==== 无质量正能单粒子态空间反射
+
+参考动量$k^mu=(kappa,0,0,kappa)$在空间反射变换下变为
+$
+  cal(P) k^mu = (kappa,0,0,-kappa)
+$
+考虑以$y$轴为轴转$-180 deg$的转动变换$R_2$，它同样使$k$变为$cal(P) k$。但$R_2$变换使$J^3$变号
+$
+  U(R_2) J^3 U^(-1)(R_2) & = - J^3 \
+             U(R_2) k^mu & = cal(P) k^mu, U(R_2) = e^(-i pi J^2)
+$
+
+=== 时间反演
+
+对时间反演算符$T$，有
+$
+  cal(T)^mu_(" "nu) = mat(-1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1)
+$
+$
+  T = U(cal(T),0)
+$
+#newpara()
+是反幺正算符
