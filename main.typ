@@ -9,9 +9,13 @@
   contents: true,
   font-size: 12pt,
   par-leading: 0.8em,
-  content-depth: 3,
+  content-depth: 4,
   matheq-depth: 3,
   lang: "zh",
 )
 
 #include "chap1.typ"
+
+#pagebreak()
+
+#include "chap2.typ"

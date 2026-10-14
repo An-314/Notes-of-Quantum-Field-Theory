@@ -1,5 +1,5 @@
 #import "@preview/scripst:1.1.2": *
-
+#show figure: set block(breakable: true)
 
 #newpara()
 
@@ -2325,7 +2325,7 @@ $
 $
 其中$vb(J)$是Pioncaré群的角动量算符，$Theta vu(b)$是将$vb(p)$旋转到$Lambda(p - k/alpha)$的旋转角和旋转轴。
 
-=== 无质量的正能单粒子态
+==== 无质量的正能单粒子态
 
 对无质量的正能单粒子态，参考动量为
 $
@@ -2810,7 +2810,7 @@ $
 $
   [J^3, A] = i B, [J^3, B] = - i A, [A,B] = 0
 $
-其中$[A, B] = 0$是Poincare代数中直接给出的对易关系。进而
+其中$[A, B] = 0$是Poincaré代数中直接给出的对易关系。进而
 $
   [J^3, A^2 + B^2] = 0
 $
@@ -2873,7 +2873,7 @@ $
 $
   D_(sigma' sigma) (W) = e^(i theta sigma) delta_(sigma' sigma)
 $
-从而在连通Poincare变换中，固定$sigma$的不可约表示会混合到另一个螺旋度
+从而在连通Poincaré变换中，固定$sigma$的不可约表示会混合到另一个螺旋度
 $
   U(Lambda) Psi_(p,sigma) = sqrt((Lambda p)^0/p^0) sum_(sigma') D_(sigma' sigma) (W(Lambda, p)) Psi_(Lambda p, sigma') = sqrt((Lambda p)^0/p^0) e^(i theta sigma) Psi_(Lambda p, sigma)
 $
@@ -2888,7 +2888,7 @@ $
 
 #newpara()
 
-对于Poincare的两个Casimir算符
+对于Poincaré的两个Casimir算符
 $
   P^mu P_mu Psi_(p,sigma) = 0
 $
@@ -2911,7 +2911,7 @@ $
   & = - kappa^2 ((J^(1 3) + J^(0 2))^2 + (J^(2 3) - J^(0 1))^2) psi_(k,sigma) = - kappa^2 ((J^2 + K^1)^2 + (- J^1 + K^2)^2) psi_(k,sigma) \
   & = - kappa^2 (A^2 + B^2) psi_(k,sigma) = - kappa^2 (a^2 + b^2) psi_(k,sigma) = 0
 $
-其中第四个等号分离时间、空间求和指标，$A,B$直接控制第二个Poincare Casimir算符$W^mu W_mu$的本征值。由于$A,B$在无质量粒子态上本征值为零，因此$W^mu W_mu$在无质量粒子态上本征值为零。
+其中第四个等号分离时间、空间求和指标，$A,B$直接控制第二个Poincaré Casimir算符$W^mu W_mu$的本征值。由于$A,B$在无质量粒子态上本征值为零，因此$W^mu W_mu$在无质量粒子态上本征值为零。
 
 在参考动量处，由 Pauli–Lubanski 定义直接得到
 $
@@ -2957,49 +2957,406 @@ $
   (vb(P) dot vb(J))/abs(vb(P)) Psi_(p,sigma) = sigma Psi_(p,sigma)
 $
 
+=== 非齐次 Lorentz 变换的拓扑性质 $RR^4 times RR^3 times S_3\/ZZ_2$
 
-// 为什么和有质量的结构完全不同？origin of mass？
+我们后面会说明$cal(P)_+^arrow.t = "ISO"^+(1,3)$和$RR^4 times RR^3 times S_3\/ZZ_2$在拓扑上同胚
+$
+  "ISO"^+(1,3) = RR^(1,3) times.r "SO"^+(3,1) tilde.eq RR^4 times RR^3 times S_3\/ZZ_2
+$
+- 有4个连续自由度像平移空间
+- 有3个自由度像 boost
+- 有3个旋转自由度组成 $S^3\/ZZ_2$
 
+为此，我们先证明非齐次 Lorentz 变换 $"SO"^+(3,1)$ 和 $"SL"(2,CC)\/ZZ_2$ 的等价性。
 
-$"SL"(2,CC)\/Z_2$
+Lorentz 变换有 6 个自由度，这是因为
+$
+  Lambda^TT g Lambda = g
+$
+给出10个约束条件，而$Lambda$是一个$4 times 4$矩阵，有16个自由度。
 
-对四矢量$V^mu$的$"SL"(2,CC)\/Z_2$变换
+Lorentz 变换作用于四维矢量$V^mu$，但是四维矢量可以重新写成一个 $2 times 2$ Hermitian 矩阵。对四矢量$V^mu$的$"SL"(2,CC)$*左手*变换
 $
   V^mu sigma_mu = mat(V^0 + V^3, V^1 - i V^2; V^1 + i V^2, V^0 - V^3) = v
 $
+其中$sigma$是Pauli矩阵
+$
+  sigma^mu = (I, sigma_x, sigma_y, sigma_z)\
+  sigma_x = mat(0, 1; 1, 0), sigma_y = mat(0, -i; i, 0), sigma_z = mat(1, 0; 0, -1)
+$
 并且注意到
 $
-  v = v^dagger -> lambda v lambda^dagger
+  v = v^dagger
 $
-这是Hermitian矩阵，其中$lambda$是$"SL"(2,CC)\/Z_2$的元素。
-注意到其行列式
+这是Hermitian矩阵，且注意到其行列式
 $
   det v = (V^0)^2 - (V^1)^2 - (V^2)^2 - (V^3)^2 = V_mu V^mu
 $
+Lorentz 不变量$V^2$成为了矩阵的不变量$det v$。四维 Minkowski 范数，恰好等于一个二阶 Hermitian 矩阵的行列式。
+
+#note[
+  $"SL"(n, FF)$在$FF$上定义为行列式为1的$n times n$矩阵的群，称为特殊线性群。
+]
+#newpara()
+现在考虑$"SL"(2,CC)$如何产生 Lorentz 变换，考虑
+$
+  v -> lambda v lambda^dagger
+$
+其中$lambda in "SL"(2,CC)$，就有
 $
   det lambda = 1
 $
-所以$lambda$是行列式为1的矩阵。
-
-对$V^mu$的齐次Lorentz变换
+可以保持
+$
+  det v' = det v
+$
+即 Lorentz 不变量保持不变。于是我们可以定义一个 Lorentz 变换
 $
                                 V^mu & -> Lambda^mu_(" "nu) V^nu \
   lambda V^mu sigma_mu lambda^dagger & = Lambda^mu_(" "nu)(lambda) V^nu sigma_mu
 $
+#newpara()
 
-
-有
+考虑到
+$
+  (lambda overline(lambda)) V^mu sigma_mu (lambda overline(lambda))^dagger &= lambda (overline(lambda) V^mu sigma_mu overline(lambda)^dagger) lambda^dagger = lambda Lambda^mu_(" "nu)(overline(lambda)) V^nu sigma_mu lambda^dagger\
+  & = Lambda^mu_(" "rho)(lambda) Lambda^rho_(" "nu)(overline(lambda)) V^nu sigma_mu
+$
+就有
 $
   Lambda(lambda overline(lambda)) = Lambda(lambda) Lambda(overline(lambda))
 $
+以及
 $
   Lambda(- lambda) = Lambda(lambda)
 $
+这就是$ZZ_2$对称性的来源。从而
+$
+  "SO"(3,1)^+ tilde.eq "SL"(2,CC)\/{plus.minus I} = "SL"(2,CC)\/ZZ_2
+$
+#newpara()
+同样地，也有对四矢量$V^mu$的$"SL"(2,CC)$*右手*变换
+$
+  V^mu overline(sigma)_mu = mat(V^0 - V^3, - V^1 + i V^2; - V^1 - i V^2, V^0 + V^3) = overline(v) = overline(v)^dagger
+$
+也有
+$
+  det v V_mu V^mu
+$
+Lorentz变换由
+$
+  V^mu &-> overline(Lambda)^mu_(" "nu) V^nu\
+  overline(lambda) V^mu overline(sigma)_mu overline(lambda)^dagger &= overline(Lambda)^mu_(" "nu)(overline(lambda)) V^nu overline(sigma)_mu
+$
+给出，其中
+$
+  overline(Lambda) = cal(P) Lambda cal(P)^(-1)
+$
 
+#newpara()
 
-有质量的正能单粒子态与无质量的正能单粒子态的差别
+考虑$"SL"(2,CC)$的拓扑性质，对于任意$lambda in "SL"(2,CC)$只需要满足
+$
+  det lambda = 1
+$
+#note(subname: [极分解定理])[
+  极分解定理（polar decomposition）：任何可逆复方阵$A$，都能唯一写成$A = U H$，其中$U$是酉矩阵，$H$是正定 Hermitian 矩阵。
+  $
+    U U^dagger = I, H = H^dagger > 0
+  $
+  这类似于复数的极形式：
+  $
+    z = r e^(i theta)
+  $
+  一个复数可以分解成“正的模长”乘以“单位相位”；极分解则是它的矩阵推广。
+]
+可以做极分解
+$
+  lambda = u e^h\
+$
+满足关系
+$
+  u u^dagger = I, det u = 1
+$
+$
+  h = h^dagger, tr h = 0
+$
+$
+  tr (u v u^dagger) = tr v = 2 V^0
+$
+我们下面说明
+$
+  lambda in "SL"(2,CC) tilde.eq RR_3 times S_3
+$
+#newpara()
+$u$对应$"SU"(2)$的旋转部分
+$
+  det u = 1 => u in "SU"(2) tilde.eq S_3
+$
+则有
+$
+  u = mat(d + i e, f + i g; - f + i g, d - i e), d^2 + e^2 + f^2 + g^2 = 1
+$
+这是一个三维球面$S_3$。而$h$对应三维实空间$RR_3$的boost部分
+$
+  tr h = 0 => h = mat(a, b + i c; b - i c, - a), a,b,c in RR
+$
+其中$a,b,c in RR$，从而$h$对应三维实空间$RR_3$。于是一个一般的Lorentz变换可以写成
+$
+  lambda = u e^h, u in "SU"(2), h\
+  "SO"(3,1)^+ tilde.eq "SL"(2,CC)\/ZZ_2 tilde.eq RR_3 times S_3\/ZZ_2
+$
+而对于非齐次Lorentz变换即Poincaré变换，加入四维平移，Poincaré群与恒等元连通的部分为
+$
+  cal(P)_+^arrow.t = "translation" times.r "SO"(3,1)^+ tilde.eq RR_4 times RR_3 times S_3\/ZZ_2
+$
+我们说这是双连通的
+- $RR^4,RR^3$是单连通的
+- $S_3\/ZZ_2$是双连通的：$u -> -u$分成两类
 
-有质量的正能单粒子态有$2j + 1$个态，无质量的正能单粒子态最多有$2$个态考虑空间反射。也就是说，对自旋为$0$和$1/2$的态，有无质量的单粒子态的数目是一样的；对自旋$≥1$的态，有无质量的单粒子态的数目是不一样的。从有质量的零质量极限看自旋$≥1$的无质量态，极限存在需理论使多余的自由度观测不到：理论要求存在*规范对称性*。反过来，对自旋$≥1$态的理论，若零质量极限存在，理论规范对称性的破坏必须与质量相关，而与其它类型的相互作用无关。这就是质量起源和规范对称性破缺。
+  例如
+  $
+    lambda(theta) = mat(e^(i theta/2), 0; 0, e^(-i theta/2))
+  $
+  对应绕第三轴转$theta$的转动
+  $
+    - lambda(theta) & = lambda(theta + 2 pi) \
+      lambda(theta) & = lambda(theta + 4 pi)
+  $
+
+  #note(subname: [单连通])[
+    连通指空间内任意两个点都能通过一条连续路径相连。*单连通（simply connected）*还要求：任何闭合路径都能够在这个空间内部，连续收缩成一个点。一个典型例子是平面$RR^2$
+    #figure(
+      image("pic/1-1.svg", width: 80%),
+      numbering: none,
+    )
+    左边的闭合路径可以不断缩小，最终变成一个点。右边如果删去了中央小圆盘，那么绕这个洞一圈的路径，就不能在不穿过洞的前提下缩成一点。注意，这里讨论的是路径能否变形，而不是长度、面积或变换矩阵是否连续。
+
+    对任意闭合路径
+    $
+      gamma: [0,1] -> RR^n, gamma(0)=gamma(1)=x_0
+    $
+    可以写出收缩
+    $
+      H(s,t) = (1-s)gamma(t) + s x_0
+    $
+    从而闭合路径可以连续收缩到一点。
+
+    注意到
+    $
+      "SU"(2) tilde.equiv_"top" S_3\
+      "SO"(3) tilde.eq S_3\/{plus.minus I}
+    $
+    从而
+    $
+      "SO"(3) tilde.equiv_"top" S^3\/ZZ_2
+    $
+    这个空间又称为三维实射影空间：$RR PP^3$。
+
+    但在商空间$S^3\/ZZ_2$中，我们规定$u = (a,b,c,d), -u=( -a,-b,-c,-d)$表示同一个点
+    $
+      u tilde - u
+    $
+    假设一条路径从恒等元$I$出发，在$"SO"(3)$ 中绕一圈后回到 $I$。将它提升（lift）到覆盖空间$"SU"(2)$中，且指定起点为$I$，则路径的终点为$I, -I$。这是因为二者对应同一个$"SO"(3)$元素
+    - 终点为 $I$：属于可以连续收缩的路径类
+    - 终点为 $-I$：属于不能连续收缩的路径类
+    因为如果它在$"SO"(3)$中能连续收缩成一点，那么收缩过程可以提升到$"SU"(2)$中，并保持路径起点为$I$。这个连续过程中，提升路径的终点只能在${I,-I}$中取值。由于这两个点是离散的，终点不能在连续形变中从$-I$跳成$I$。所以这种收缩不可能存在。
+
+    上面的$lambda(theta)$是$"SU"(2)$中的一条连续路径，对应绕第三轴的空间旋转。考虑绕$z$轴旋转：
+    $
+      gamma(theta)=R_z (theta)
+    $
+    当$theta in [0, 2pi]$，起点和终点都是$I_3$，因此这是$"SO"(3)$中的一条闭合路径。起点和终点都是$I_3$，因此这是$"SO"(3)$中的一条闭合路径。但它提升到$"SU"(2)$后：
+    $
+      I ->^(theta:0->2pi) - I
+    $
+    提升路径并不闭合，所以原路径不可收缩。再绕一次才
+    $
+      I ->^(2pi) - I ->^(2pi) I
+    $
+    这一次，它在$"SU"(2)$中成为闭合路径。
+
+    由于$"SU"(2) tilde.equiv S^3$单连通，它可以在$"SU"(2)$中连续收缩成一点；将整个收缩投影到$"SO"(3)$，就得到$4pi$旋转路径在$"SO"(3)$中的收缩。
+  ]
+  双连通的意思是任意走同一路径的两遍的双圈可以连续收缩到一点。
+
+  普通群表示要求
+  $
+    U(g_2) U(g_1) = U(g_2 g_1)
+  $
+  但量子力学中的物理态是 Hilbert 空间中的射影态
+  $
+    ket(psi) tilde e^(i phi) ket(psi)
+  $
+  因此，两个算符如果只差一个整体相位，对量子射线的作用就相同。Wigner 定理允许对称性在 Hilbert 空间上形成射影表示：
+  $
+    U(g_2) U(g_1) = e^(i omega(g_2, g_1)) U(g_2 g_1)
+  $
+  其中$e^{i omega}$是一个与态无关的相位。先做$Lambda$再做$overline(Lambda)$，与做联合变换$overline(Lambda) Lambda$只差一个相位。
+  - 一个圈
+    $
+      1 => Lambda => overline(Lambda) Lambda => 1\
+      U^(-1) (overline(Lambda) Lambda) U(overline(Lambda)) U(Lambda)
+    $
+  - 两个圈可以被连续收缩到一点
+    $
+      (U^(-1) (overline(Lambda) Lambda) U(overline(Lambda)) U(Lambda))^2 = 1
+    $
+    则有
+    $
+      U(overline(Lambda)) U(Lambda) = plus.minus U(overline(Lambda) Lambda)
+    $
+  第三轴转$4pi$角的Lorentz转动等于单位元。对角动量第三分量本征值为$sigma$的态
+  $
+    e^(4 pi i sigma) = 1
+  $
+  从而$sigma$必须是整数和半整数。
+
+#theorem(subname: [Poincaré群的拓扑性质])[
+  连通的Poincaré群$cal(P)_+^arrow.t = "ISO"^+(1,3)$在拓扑上同胚于
+  $
+    RR^4 times RR^3 times S_3\/ZZ_2
+  $
+  其中$RR^4$是平移空间，$RR^3$是boost空间，$S_3\/ZZ_2$是旋转空间。由于$S_3\/ZZ_2$是双连通的，量子态可以形成射影表示，允许自旋为整数和半整数。
+]
+#newpara()
+
+最后我们总结*有质量的正能单粒子态与无质量的正能单粒子态的差别*。
+
+前面我们主要研究的是数学问题：
+$
+  "Poincaré 群" -> "little group" -> "不可约表示" -> "质量、自旋或螺旋度"
+$
+回到物理，我们关注为什么有质量和无质量的粒子拥有不同数量的物理自由度？当粒子的质量趋于零时，多出来的自由度去了哪里？这件事又为什么与规范对称性（gauge symmetry）、Higgs 机制和相互作用的幺正性有关？
+
+有质量与无质量粒子为什么状态数不同？
+- 有质量的正能单粒子态有$2j + 1$个态
+- 无质量正能单粒子态在通常的有限螺旋度分类中，考虑空间反射后，最多有两个对应的螺旋度态
+  - 无质量粒子并不因为 Poincaré 对称性就一定具有两个态。一份固定螺旋度$lambda$的不可约表示，在每个动量处只有一个螺旋度态。如果理论还具有空间反射对称性，则非零$lambda$通常需要同时具有$-lambda$。上表讨论的就是这类成对的有限螺旋度表示。
+- 也就是说，对自旋为$0$和$1/2$的态，有无质量的单粒子态的数目是一样的
+- 对自旋$≥1$的态，有无质量的单粒子态的数目是不一样的
+
+从有质量变成无质量，多余的自由度去了哪里？
+- 从有质量的零质量极限看自旋$≥1$的无质量态，极限存在需理论使多余的自由度观测不到：理论要求存在*规范对称性*。
+- 反过来，对自旋$≥1$态的理论，若零质量极限存在，理论规范对称性的破坏必须与质量相关，而与其它类型的相互作用无关。
+- 这就是质量起源和规范对称性破缺。
+在无质量规范场的物理描述中，一些配置成为规范冗余；但在完整零质量极限中，这些自由度也可能重新组织为独立的标量或其他低螺旋度场，因此不能无条件说它们消失。因为要求无质量高自旋粒子既具有正确的物理偏振，又能使用局域 Lorentz 协变场描述，并拥有一致的相互作用，便自然引入规范等价关系。这些等价关系进一步约束散射幅度和允许的相互作用结构。由此进入规范场论。
+#note[
+  *从有质量粒子的零质量极限去看无质量态，多余的自由度是否会随着质量变小而逐渐变得无法观测？*
+
+  我们先用自旋1做具体计算，因为它既能解释粒子状态数的变化，也能直接联系 Maxwell 场和规范对称性——从 Proca 场到 Maxwell 场。
+
+  有质量自旋1：Proca 场有三个物理自由度。考虑一个实矢量场$A_mu (x)$
+  $
+    F_(mu nu) = partial_mu A_nu - partial_nu A_mu
+  $
+  它的有质量Lagrangian是
+  $
+    cal(L)_"Proca" = - 1/4 F_(mu nu) F^(mu nu) + 1/2 m^2 A_mu A^mu
+  $
+  通过 Euler–Lagrange 方程，得到
+  $
+    partial_mu F^(mu nu) + m^2 A^nu = 0
+  $
+  将$F^(mu nu)$的表达式代入，得到
+  $
+    partial_mu F^(mu nu) = square A^nu - partial^nu (partial_mu A^mu)\
+    square A^nu - partial^nu (partial_mu A^mu) + m^2 A^nu = 0
+  $
+  而且对$nu$求导，得到
+  $
+    m^2 partial_nu A^nu = 0
+  $
+  对于$m != 0$，有
+  $
+    partial_nu A^nu = 0
+  $
+  这不是我们额外指定的 gauge condition，而是有质量场运动方程自身要求的约束。代回运动方程：
+  $
+    square A^nu + m^2 A^nu = 0
+  $
+  矢量场有四个分量，而且有一个约束$partial_nu A^nu = 0$，因此有三个自由度。
+
+  取粒子沿$z$方向运动：
+  $
+    p^mu = (E,0,0,p), E = sqrt(p^2 + m^2)
+  $
+  则
+  $
+    A^mu (x) = epsilon^mu (p) e^(- i p dot x)
+  $
+  约束为
+  $
+    p_mu epsilon^mu (p) = 0
+  $
+  选择满足约束的三个偏振基
+  $
+    epsilon^mu_1 (p) = (0,1,0,0), epsilon^mu_2 (p) = (0,0,1,0), epsilon^mu_L (p) = (p/E, 0, 0, E/p)
+  $
+  用圆偏振基组合前两个横向态：
+  $
+    epsilon^mu_plus.minus = 1/sqrt(2) (epsilon^mu_1 plus.minus i epsilon^mu_2)
+  $
+  就得到三个螺旋度态：$lambda = +1, -1, 0$。这就是有质量自旋1的三个自由度。
+
+  现在考虑$m=0$的情形。把Lagrangian中的质量项去掉，得到 Maxwell 场的 Lagrangian
+  $
+    cal(L)_"Maxwell" = - 1/4 F_(mu nu) F^(mu nu)
+  $
+  此时运动方程变成
+  $
+    partial_mu F^(mu nu) = 0
+  $
+  关键变化是：当我们再次取散度时，得到的仅仅是$0=0$，而没有$partial_nu A^nu = 0$的约束。与此同时Lagrangian具有规范不变性
+  $
+    A_mu (x) -> A_mu (x) + partial_mu chi(x)
+  $
+  所以$F_(mu nu)$，Lagrangian和运动方程都不变。这就是*规范冗余*（gauge redundancy）。在适当边界条件下，可以施加 Lorenz gauge：
+  $
+    partial_mu A^mu = 0
+  $
+  它把四个分量中的一个组合约束住；但仍有满足
+  $
+    square chi = 0
+  $
+  的剩余规范变换，可以消去另一个非物理自由度。因此因此
+  $
+    4 - 1 - 1 = 2
+  $
+  最终只剩两个横向偏振：
+  $
+    lambda = +1, -1
+  $
+  这里的自由度计数是对自由平面波模的简写；严格的约束Hamilton分析也给出相同的两个传播自由度。
+
+  物理图像是真正传播的是横向电磁场
+  - 有质量自旋1：两个横向偏振加一个纵向偏振，合计三个自由度
+  - 无质量电磁波：在真空中，物理电磁波的独立传播偏振只有两个横向方向
+  所以自由度减少的根本原因，是无质量理论拥有了规范冗余，某些四势配置不再代表不同的物理态。
+
+  无质量参考动量的小群为$"ISO"(2)$，包含$S(alpha,beta)$，现在取两个横向偏振四矢量：
+  $
+    epsilon^mu_1 = (0,1,0,0), epsilon^mu_2 = (0,0,1,0)
+  $
+  让 null rotation 作用
+  $
+    S(alpha,beta) epsilon^mu_1 = epsilon^mu_1 + alpha/kappa k^mu\
+    S(alpha,beta) epsilon^mu_2 = epsilon^mu_2 + beta/kappa k^mu
+  $
+  我们说明这恰好是规范变换：如果偏振矢量代表的是相同的物理粒子态，那么相差$c k^mu$的两个偏振配置，必须在物理上等价
+  $
+    A^mu (x) = epsilon^mu e^(- i k dot x) -> A^mu (x) + c k^mu e^(- i k dot x)
+  $
+  而
+  $
+    c k^mu e^(- i k dot x) = partial^mu (i c/kappa e^(- i k dot x))
+  $
+  则
+  $
+    A^mu (x) -> A^mu (x) + partial^mu chi(x), chi(x) = i c/kappa e^(- i k dot x)
+  $
+  是一个规范变换。也就是说，null rotation的作用就是规范变换。由于$S(alpha,beta)$是小群的一部分，Poincaré对称性要求物理态在小群作用下不变，因此物理态必须在规范变换下不变。这就是为什么无质量自旋1的自由度减少的原因。
+]
 
 === 空间反射
 
@@ -3009,13 +3366,88 @@ $
 $
 其中
 $
-  cal(P)^mu_(" "nu) = mat(1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1)
+  cal(P)^mu_("  "nu) = mat(1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1)
 $
-不可以连续变形到单位变换的变换，需要判断它是否幺正或反幺正
+它的时空作用是
 $
-  P U(Lambda, a) P^(-1) = U(cal(P) Lambda cal(P), cal(P) a)
+  (t, vb(x)) ->^(cal(P)) (t, - vb(x))
+$
+空间反射不属于我们前面讨论的连通 Lorentz 群 $"SO"^+(1,3)$
+$
+  cal(P) in.not "SO"^+(1,3)
+$
+但
+$
+  cal(P)^TT g cal(P) = g ==> cal(P) in "O"(1,3)
+$
+空间反射不是 Lorentz 群以外的某种全新几何操作，而是完整 Lorentz 群中一个不与恒等元连通的离散变换。
+
+在$"SL"(2,CC)$中有
+$
+  v = V^mu sigma_mu = mat(V^0 + V^3, V^1 - i V^2; V^1 + i V^2, V^0 - V^3)
+$
+做空间反射
+$
+  V^mu -> cal(P) V^mu = (V^0, - V^1, - V^2, - V^3)
+$
+于是定义
+$
+  overline(sigma)_mu = cal(P)^(nu) sigma_nu = (I, - sigma_x, - sigma_y, - sigma_z)
+$
+使
+$
+  cal(P) V^mu sigma_mu = V^mu overline(sigma)_mu = overline(v)
+$
+这就是上面提到的右手变换，两种嵌入都都能通过
+$
+  v |-> lambda v lambda^dagger, lambda in "SL"(2,CC)
+$
+来生成Lorentz变换。如果原来的嵌入给出$Lambda(lambda)$那么在反射后的嵌入中，相应的 Lorentz 矩阵满足
+$
+  overline(Lambda)(lambda) = cal(P) Lambda(lambda) cal(P)^(-1)
 $
 
+它与左右手 Weyl 旋量有关
+- $"SL"(2,CC)$描述与恒等元连通的 Lorentz 变换
+- 空间反射$cal(P)$本身不属于$"SL"(2,CC)$所覆盖的连通分支
+- 空间反射会交换两种互为共轭的旋量变换结构
+在量子场论里，这最终对应
+$
+  (1/2 , 0) <->^(cal(P)) (0, 1/2)
+$
+即左手与右手 Weyl 旋量表示的交换。
+
+// 需要判断它是否幺正或反幺正
+有Lorentz变换$Lambda$和四维平移$a$，可以得到反射作用于整个 Poincaré 变换有
+$
+  P U(Lambda, a) P^(-1) = U(cal(P) Lambda cal(P)^(-1), cal(P) a)
+$
+这说明反射并不只作用于一个粒子状态，还改变连续变换的参数：
+- 空间平移方向反转；
+- 时间平移方向不变；
+- boost 方向反转；
+- 空间旋转角动量的变换性质不同于普通空间矢量。
+
+
+取
+$
+  Lambda^mu_(" "nu) = g^mu_(" "nu) + omega^mu_(" "nu), a^mu = epsilon^mu
+$
+准到$omega, epsilon$一阶，有
+$
+     U(1 + omega, epsilon) & = 1 + i/2 omega_(rho sigma) J^(rho sigma) + i epsilon_rho P^rho \
+  P i J^(rho sigma) P^(-1) & = i cal(P)^(rho)_( " "mu) cal(P)^sigma_(" "nu) J^(mu nu) \
+          P i P^rho P^(-1) & = i cal(P)_mu^(" "rho) P^mu
+$
+空间反射并不是与恒等元连通的变换，所以不能仅靠连续性排除反幺正。空间反射不改变时间平移，因此
+$
+  P i H P^(-1) = i H
+$
+但若物理粒子的能量为正，如果$P$为反幺正，则
+$
+  P H P^(-1) = - H
+$
+这意味着反射会将正能粒子变成负能粒子。在具有能量下界、且存在正能激发的理论中，这与能谱性质不相容。所以我们认为*$P$是幺正算符*。
 
 取$P$是幺正算符
 $
@@ -3024,11 +3456,22 @@ $
   P vb(P) P^(-1) & = - vb(P) \
       P H P^(-1) & = H
 $
-#newpara()
+其中$vb(P),vb(r),vb(K)=H vb(x) - t vb(P)$都是极矢量，$vb(J),vb(S)$是赝矢量。
+
+#theorem(subname: [空间反射的幺正性以及对动量和角动量的作用])[
+  空间反射算符$P$是幺正算符，且
+  $
+    P vb(J) P^(-1) = vb(J), P vb(K) P^(-1) = - vb(K), P vb(P) P^(-1) = - vb(P), P H P^(-1) = H
+  $
+]
 
 ==== 有质量正能单粒子态空间反射
 
-参考动量$k^mu = (M,0,0,0)$的单粒子态$Psi_(k,sigma)$，其能动量和$J^3$本征值标志态
+参考动量$k^mu = (M,0,0,0)$，其空间反射变换为
+$
+  cal(P) k^mu = (M,0,0,0) = k^mu
+$
+$k^mu$的单粒子态$Psi_(k,sigma)$，其能动量和$J^3$本征值标志态
 $
       H Psi_(k,sigma) & = M Psi_(k,sigma) \
   vb(P) Psi_(k,sigma) & = 0 \
@@ -3036,18 +3479,62 @@ $
 $
 空间反射态$P Psi_(k,sigma)$满足
 $
-      H (P Psi_(k,sigma)) & = M (P Psi_(k,sigma)) \
-  vb(P) (P Psi_(k,sigma)) & = 0 \
-    J^3 (P Psi_(k,sigma)) & = sigma (P Psi_(k,sigma)) \
+      H P Psi_(k,sigma) & = M P Psi_(k,sigma) \
+  vb(P) P Psi_(k,sigma) & = 0 \
+    J^3 P Psi_(k,sigma) & = sigma P Psi_(k,sigma) \
 $
-空间反射态$P Psi_(k,sigma)$的能动量和角动量的$z$分量的本征值与原来态的本征值完全一样。空间反射态$P Psi_(k,sigma)$与原来的态$Psi_(k,sigma)$只能相差一个相角
+空间反射态$P Psi_(k,sigma)$的能动量和角动量的$z$分量的本征值与原来态的本征值完全一样。在已经固定粒子种类、自旋$j$及其他内部标签，且这一组本征值没有额外简并的情况下，空间反射态$P Psi_(k,sigma)$与原来的态$Psi_(k,sigma)$只能相差一个相角
 $
   P Psi_(k,sigma) = eta_sigma Psi_(k,sigma)
 $
+如果存在多个完全相同的量子数、而宇称会混合它们，则应先在那个简并空间中进一步对角化宇称算符。
+
 注意到
 $
-  (J^1 plus.minus J^2) Psi_(k, sigma) = sqrt(j(j+1) - sigma(sigma plus.minus 1)) Psi_(k, sigma plus.minus 1)
+  (J^1 plus.minus i J^2) Psi_(k, sigma) = sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) Psi_(k, sigma plus.minus 1)
 $
+且
+$
+  cal(P) L(p) cal(P)^(-1) = L(cal(P) p)
+$
+则有
+$
+  &sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) eta_sigma Psi_(k, sigma plus.minus 1) = (J^1 plus.minus i J^2) P Psi_(k, sigma) = P(J^1 plus.minus i J^2) Psi_(k, sigma)\
+  =& sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) P Psi_(k, sigma plus.minus 1) = sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) eta_(sigma plus.minus 1) Psi_(k, sigma plus.minus 1)
+$
+从而
+$
+  eta_sigma = eta_(sigma plus.minus 1)
+$
+这意味着$eta_sigma$与$sigma$无关
+$
+  P Psi_(k,sigma) = eta Psi_(k,sigma)
+$
+这就得到
+$
+  P Psi_(k,sigma) & = sqrt(M/p^0) P U(L(p)) Psi_(k,sigma) = sqrt(M/p^0) U(cal(P) L(p) cal(P)^(-1)) P Psi_(k,sigma) \
+                  & = eta sqrt(M/p^0) U(L(cal(P) p)) Psi_(k,sigma) = eta Psi_(cal(P) p, sigma)
+$
+
+#figure(
+  stack(dir: ltr)[
+    #image("pic/1-2.svg", width: 50%)
+  ][#image("pic/1-3.svg", width: 50%)],
+  caption: [宇称变换],
+)
+这时如果改用螺旋度来描述：
+$
+  h = (vb(J) dot vb(P))/abs(vb(P)) ==> cal(P) h cal(P)^(-1) = - h
+$
+宇称反转螺旋度，即使粒子有质量也是如此。
+
+#theorem(subname: [有质量正能单粒子态空间反射])[
+  有质量正能单粒子态$Psi_(p,sigma)$在空间反射下的变换为
+  $
+    P Psi_(p,sigma) = eta Psi_(cal(P) p, sigma)
+  $
+  其中$eta$是与$sigma$无关的相角，称为粒子的*内禀宇称*（intrinsic parity）。
+]
 
 ==== 无质量正能单粒子态空间反射
 
@@ -3055,20 +3542,582 @@ $
 $
   cal(P) k^mu = (kappa,0,0,-kappa)
 $
-考虑以$y$轴为轴转$-180 deg$的转动变换$R_2$，它同样使$k$变为$cal(P) k$。但$R_2$变换使$J^3$变号
+我们不能像有质量的情况那样，直接拿到参考动量的单粒子态$Psi_(k,sigma)$，因为它们的能动量本征值不一样。我们考虑再做一次旋转，把反射后的动量转回原来的参考动量。
+
+考虑以$y$轴为轴转$-180 degree$的转动变换$R_2$，它同样使$k$变为$cal(P) k$，但$R_2$变换使得$J^3$变号
 $
+                R_2 k^mu & = cal(P) k^mu \
   U(R_2) J^3 U^(-1)(R_2) & = - J^3 \
-             U(R_2) k^mu & = cal(P) k^mu, U(R_2) = e^(-i pi J^2)
 $
+其中
+$
+  U(R_2) = e^(i pi J^2), R_2 = mat(1, 0, 0, 0; 0, -1, 0, 0; 0, 0, 1, 0; 0, 0, 0, -1)
+$
+由
+$
+  P vb(J) P^(-1) = vb(J), P vb(K) P^(-1) = - vb(K), P vb(P) P^(-1) = - vb(P), P H P^(-1) = H
+$
+对$Psi_(k,sigma)$的空间反射和$R_2$联合变换态
+$
+  U(R_2^(-1)) P Psi_(k,sigma)
+$
+的能动量和角动量$z$分量的本征值满足
+$
+      H U(R_2^(-1)) P Psi_(k,sigma) & = kappa U(R_2^(-1)) P Psi_(k,sigma) \
+  vb(P) U(R_2^(-1)) P Psi_(k,sigma) & = kappa U(R_2^(-1)) P Psi_(k,sigma) \
+    J^3 U(R_2^(-1)) P Psi_(k,sigma) & = - sigma U(R_2^(-1)) P Psi_(k,sigma)
+$
+该联合变换$U(R_2^(-1)) P Psi_(k,sigma)$与参考动量的单粒子态$Psi_(k,-sigma)$具有相同的能动量本征值，以及相反的角动量$z$分量本征值。于是
+$
+  U(R_2^(-1)) P Psi_(k,sigma) = eta_sigma Psi_(k,-sigma)
+$
+应用到
+$
+  Psi_(p,sigma) = sqrt(kappa/p^0) U(L(p)) Psi_(k,sigma), L(p) = R(vu(p)) B(abs(vb(p))/kappa)
+$
+有
+$
+  P Psi_(p,sigma) &= sqrt(kappa/p^0) P U(R(vu(p)) B(abs(vb(p))/kappa) Psi_(k,sigma) = sqrt(kappa/p^0) U(cal(P) R(vu(p)) B(abs(vb(p))/kappa) cal(P)^(-1) R_2) U(R_2^(-1)) P Psi_(k,sigma) \
+  & = eta_sigma sqrt(kappa/p^0) U(R(vu(p)) R_2 B(abs(vb(p))/kappa)) Psi_(k,-sigma)
+$
+其中用到了矩阵$cal(P)^(-1) R_2$与沿$z$轴的boost$B(abs(vb(p))/kappa)$对易，$cal(P)$和$R(vu(p))$对易。下面我们考虑$U(R(vu(p)) R_2)$与$U(R(-vu(p)))$的关系
+$
+  U(R(vu(p))) & = e^(- i phi J_3) e^(- i theta J_2) \
+  U(R(-vu(p))) & = e^(- i (phi plus.minus pi) J^3) e^(- i (pi minus theta) J^2), cases(phi + pi\, 0<= phi < pi, phi - pi\, pi <= phi < 2 pi)
+$
+从而
+$
+  U^(-1) (R(-vu(p))) U(R(vu(p)) R_2) &= e^(i (pi - theta) J^2) e^(i (phi plus.minus pi) J^3) e^(- i phi J^3) e^(- i theta J^2) e^(i pi J^2) \
+  &= e^(i (pi - theta) J^2) e^(plus.minus i pi J^3) e^(- i theta J^2) e^(i (pi - theta) J^2) = e^(plus.minus i pi J^3)
+$
+$
+  e^(plus.minus i pi J^3) J^2 e^(plus.minus i pi J^3) = - J^2
+$
+从而
+$
+  U(R(vu(p)) R_2) = U(R(-vu(p))) e^(plus.minus i pi J^3)
+$
+其中$vu(p) = (sin theta cos phi, sin theta sin phi, cos theta)$，正号对应$0<= phi < pi$，负号对应$pi <= phi < 2 pi$。$e^(plus.minus i pi J^3)$是绕$z$轴旋转$pi$角的旋转算符，和$B(vb(p)/kappa)$对易
+$
+  P Psi_(p,sigma) = eta_sigma e^(minus.plus i pi sigma) Psi_(cal(P) p,-sigma)
+$
+把所有结果合并，得到无质量单粒子的宇称变换规律。额外相位是$eta_sigma$和选基相位$e^(plus.minus i pi sigma)$的乘积。注意到$eta_sigma$与$sigma$无关，而$e^(plus.minus i pi sigma)$与$sigma$有关。
+
+#theorem(subname: [无质量正能单粒子态空间反射])[
+  无质量正能单粒子态$Psi_(p,sigma)$在空间反射下的变换为
+  $
+    P Psi_(p,sigma) = eta_sigma e^(minus.plus i pi sigma) Psi_(cal(P) p,-sigma)
+  $
+  其中$eta_sigma$和$e^(plus.minus i pi sigma)$是与$sigma$相关的相位。
+]
 
 === 时间反演
 
 对时间反演算符$T$，有
 $
-  cal(T)^mu_(" "nu) = mat(-1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1)
+  cal(T)^mu_("  "nu) = mat(-1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1)
 $
 $
   T = U(cal(T),0)
 $
+同样有群的共轭关系
+$
+  T U(Lambda, a) T^(-1) = U(cal(T) Lambda cal(T)^(-1), cal(T) a)
+$
+上式中进一步取
+$
+  Lambda^mu_(" "nu) = g^mu_(" "nu) + omega^mu_(" "nu), a^mu = epsilon^mu
+$
+准到$omega, epsilon$一阶，有
+$
+  T i J^(rho sigma) T^(-1) & = i cal(T)^(rho)_( " "mu) cal(T)^sigma_(" "nu) J^(mu nu) \
+          T i P^rho T^(-1) & = i cal(T)_mu^(" "rho) P^mu
+$
+零分量是
+$
+  T i H T^(-1) = - i H
+$
+如果$T$是幺正算符，则
+$
+  T H T^(-1) = - H
+$
+这意味着如果假设体系具有时间反演对称性，对应能量为$E$每一个正能态$ket(E)$，都存在一个负能态$ket(-E)$。这与我们前面讨论的能量下界和正能激发的物理要求不相容。因此*$T$为反幺正算符*。这与我们在量子力学中对时间反演的理解是一致的。
+
+十个生成元的变化为
+$
+  T vb(J) T^(-1) = - vb(J), T vb(K) T^(-1) = vb(K), T vb(P) T^(-1) = - vb(P), T H T^(-1) = H
+$
+
+#theorem(subname: [时间反演的反幺正性以及对动量和角动量的作用])[
+  时间反演算符$T$是反幺正算符，且
+  $
+    T vb(J) T^(-1) = - vb(J), T vb(K) T^(-1) = vb(K), T vb(P) T^(-1) = - vb(P), T H T^(-1) = H
+  $
+]
+
+==== 有质量正能单粒子态时间反演
+
+参考动量$k^mu = (M,0,0,0)$，其时间反演变换为
+$
+  cal(T) k^mu = (-M,0,0,0)
+$
+参考动量$k^mu$的单粒子态$Psi_(k,sigma)$，用其能动量和$J^3$的本征值标记态
+$
+      H Psi_(k,sigma) & = M Psi_(k,sigma) \
+  vb(P) Psi_(k,sigma) & = 0 \
+    J^3 Psi_(k,sigma) & = sigma Psi_(k,sigma)
+$
+时间反演态$T Psi_(k,sigma)$满足
+$
+      H T Psi_(k,sigma) & = M T Psi_(k,sigma) \
+  vb(P) T Psi_(k,sigma) & = 0 \
+    J^3 T Psi_(k,sigma) & = - sigma T Psi_(k,sigma)
+$
+$T Psi_(k,sigma)$的能动量本征值和原态的能动量本征值相同，但角动量$z$分量本征值相反。在已经固定粒子种类、自旋$j$及其他内部标签，且这一组本征值没有额外简并的情况下，时间反演态$T Psi_(k,sigma)$与原来的态$Psi_(k,-sigma)$只能相差一个相角
+$
+  T Psi_(k,sigma) = zeta_sigma Psi_(k,-sigma)
+$
+同样地
+$
+  (J^1 plus.minus i J^2) Psi_(k,sigma) & = sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) Psi_(k,sigma plus.minus 1) \
+               cal(T) L(p) cal(T)^(-1) & = L(cal(T) p)
+$
+从而
+$
+  &zeta_sigma sqrt((j minus.plus)(j plus.minus sigma + 1)) Psi_(k,-(sigma plus.minus 1)) = (J^1 plus.minus i J^2) T Psi_(k,sigma) =- T(J^1 plus.minus i J^2) Psi_(k,sigma)\
+  = & - T sqrt((j minus.plus sigma)(j plus.minus sigma + 1)) Psi_(k,sigma plus.minus 1) = - zeta_(sigma plus.minus 1) sqrt((j minus.plus sigma)(j plus.minus sigma + 1))Psi_(k,-(sigma plus.minus 1))
+$
+和上面一样，得到
+$
+  zeta_sigma = - zeta_(sigma plus.minus 1)
+$
+从而
+$
+  zeta_sigma = (-1)^(j - sigma) zeta_j
+$
+其中$zeta$是与$sigma$无关的相角，$(-1)^j$是保证指数的因子即使在$sigma$为半整数时也能得到正确的符号。最终有
+$
+  T Psi_(k,sigma) = (-1)^(j - sigma) zeta Psi_(k,-sigma)
+$
+现在可以重新选基
+$
+  Psi'_(k,sigma) = zeta^(1/2) Psi_(k,sigma)
+$
+从而
+$
+  T Psi'_(k,sigma) &= zeta^(* 1/2) T Psi_(k,sigma) = (-1)^(j - sigma) zeta^(* 1/2) zeta Psi_(k,-sigma) = (-1)^(j - sigma) zeta^(1/2) Psi_(k,-sigma) \
+  &= (-1)^(j - sigma) Psi'_(k,-sigma)
+$
+此后省略撇号，我们就得到
+$
+  T Psi_(k,sigma) & = (-1)^(j - sigma) Psi_(k,-sigma) \
+  T Psi_(p,sigma) & = sqrt(M/p^0) T U(L(p)) Psi_(k,sigma) = sqrt(M/p^0) U(cal(T) L(p) cal(T)^(-1)) T Psi_(k,sigma) \
+                  & = (-1)^(j - sigma) sqrt(M/p^0) U(L(cal(P) p)) Psi_(k,-sigma) = (-1)^(j - sigma) Psi_(cal(P) p,-sigma)
+$
+
+#theorem(subname: [有质量正能单粒子态时间反演])[
+  有质量正能单粒子态$Psi_(p,sigma)$在时间反演下的变换为
+  $
+    T Psi_(p,sigma) = (-1)^(j - sigma) Psi_(cal(P) p,-sigma)
+  $
+  这里进行了重新选基。
+]
+
 #newpara()
-是反幺正算符
+
+再次施加$T$
+$
+  T^2 Psi_(k,sigma) = (-1)^(j - sigma) T Psi_(k,-sigma) = (-1)^(j - sigma) (-1)^(j + sigma) Psi_(k,sigma) = (-1)^(2 j) Psi_(k,sigma)
+$
+从而单份自旋$j$空间上
+$
+  T^2 = (-1)^(2 j) 1
+$
+
+==== 无质量正能单粒子态时间反演
+
+参考动量$k^mu=(kappa,0,0,kappa)$参考态满足
+$
+      H Psi_(k,sigma) & = kappa Psi_(k,sigma) \
+  vb(P) Psi_(k,sigma) & = - kappa Psi_(k,sigma) \
+    J^3 Psi_(k,sigma) & = sigma Psi_(k,sigma)
+$
+施加时间反演后
+$
+      H T Psi_(k,sigma) & = kappa T Psi_(k,sigma) \
+  vb(P) T Psi_(k,sigma) & = - kappa T Psi_(k,sigma) \
+    J^3 T Psi_(k,sigma) & = - sigma T Psi_(k,sigma)
+$
+在时间反演变换下变为
+$
+  (cal(P) k)^mu = (kappa,0,0,-kappa)
+$
+这里前面的额外负号，正是来自量子时间反演的反幺正性。
+
+同样地，$R_2$旋转变换使得$J^3$变号，$R_2, T$的联合变换$U(R_2^(-1)) T Psi_(k,sigma)$具有与参考态$Psi_(k,sigma)$相同的能动量本征值和角动量$z$分量本征值。于是
+$
+      H U(R_2^(-1)) T Psi_(k,sigma) & = kappa U(R_2^(-1)) T Psi_(k,sigma) \
+  vb(P) U(R_2^(-1)) T Psi_(k,sigma) & = - kappa U(R_2^(-1)) T Psi_(k,sigma) \
+    J^3 U(R_2^(-1)) T Psi_(k,sigma) & = sigma U(R_2^(-1)) T Psi_(k,sigma)
+$
+从而$U(R_2^(-1)) T Psi_(k,sigma)$与参考态$Psi_(k,sigma)$只差一个相角
+$
+  U(R_2^(-1)) T Psi_(k,sigma) = zeta_sigma Psi_(k,sigma)
+$
+从而
+$
+  T Psi_(k,sigma) &= sqrt(kappa/p^0) T U(R(vu(p)) B(abs(vb(p))/kappa) Psi_(k,sigma) = sqrt(kappa/p^0) U(cal(T) R(vu(p)) B(abs(vb(p))/kappa) cal(T)^(-1) R_2) U(R_2^(-1)) T Psi_(k,sigma) \
+  &= zeta_sigma sqrt(kappa/p^0) U(R(vu(p)) R_2 B(abs(vb(p))/kappa)) Psi_(k,sigma) = zeta_sigma e^(plus.minus i pi sigma) Psi_(cal(P) p,sigma)
+$
+同空间反射一样，$U(R(vu(p)) R_2)$与$U(R(-vu(p)))$的关系为
+$
+  U(R(vu(p)) R_2) = e^(i phi) U(R(-vu(p)))
+$
+得到
+$
+  T Psi_(k,sigma) = zeta_sigma e^(plus.minus i pi sigma) e^(i phi) Psi_(cal(P) p,sigma)
+$
+其中$vu(p) = (sin theta cos phi, sin theta sin phi, cos theta)$，正号对应$0<= phi < pi$，负号对应$pi <= phi < 2 pi$。最终有
+#theorem(subname: [无质量正能单粒子态时间反演])[
+  无质量正能单粒子态$Psi_(p,sigma)$在时间反演下的变换为
+  $
+    T Psi_(p,sigma) = zeta_sigma e^(plus.minus i pi sigma) e^(i phi) Psi_(cal(P) p,sigma)
+  $
+  其中$zeta_sigma$和$e^(plus.minus i pi sigma)$是与$sigma$相关的相位，$e^(i phi)$是与动量方向相关的相位。
+]
+
+#figure(
+  table(
+    columns: 3,
+    table.header([比较项目], [空间反射 $P$], [时间反演 $T$]),
+    [几何变换], [$(t, vb(x)) -> (t, -vb(x))$], [$(t, vb(x)) -> (-t, vb(x))$],
+    [几何矩阵], [$cal(P) = diag(1, -1, -1, -1)$], [$cal(T) = diag(-1, 1, 1, 1)$],
+    [算符性质], [幺正], [反幺正],
+    [虚数单位], [$P i P^(-1) = i$], [$T i T^(-1) = -i$],
+    [能量 $H$], [$H -> H$], [$H -> H$],
+    [动量 $vb(P)$], [$vb(P) -> -vb(P)$], [$vb(P) -> -vb(P)$],
+    [角动量 $vb(J)$], [$vb(J) -> vb(J)$], [$vb(J) -> -vb(J)$],
+    [Boost 生成元 $vb(K)$], [$vb(K) -> -vb(K)$], [$vb(K) -> vb(K)$],
+    [螺旋度 $h = vb(J) dot vb(P) / norm(vb(P))$], [$h -> -h$], [$h -> h$],
+    [正能态的四动量本征值], [$(E, p) -> (E, -p)$], [$(E, p) -> (E, -p)$],
+  ),
+  caption: [空间反射与时间反演的基本性质],
+)
+特别注意：几何时间反演直接作用于四矢量得到 $cal(T) p = (-E, p)$，但反幺正时间反演作用于量子态后，其物理四动量本征值是 $(E, -p) = cal(P) p$。
+
+#figure(
+  table(
+    columns: 3,
+    table.header([粒子类别], [空间反射 $P$], [时间反演 $T$]),
+    [有质量正能粒子 $M > 0$],
+    [$P Psi_(p, sigma) = eta Psi_(cal(P) p, sigma)$],
+    [$T Psi_(p, sigma) = (-1)^(j - sigma) Psi_(cal(P) p, -sigma)$],
+
+    [自旋投影], [静止参考态的 $sigma$ 不变], [$sigma -> -sigma$],
+    [无质量正能粒子 $M = 0$],
+    [$P Psi_(p, sigma) = eta_sigma e^(plus.minus i pi sigma) Psi_(cal(P) p, -sigma)$],
+    [$T Psi_(p, sigma) = zeta_sigma e^(plus.minus i pi sigma) Psi_(cal(P) p, sigma)$],
+
+    [螺旋度], [$sigma -> -sigma$], [$sigma -> sigma$],
+    [额外结论],
+    [有质量态可定义内禀宇称 $eta = plus.minus 1$；无质量非零螺旋度若要求宇称对称，须有相反螺旋度的对应态],
+    [对单份标准自旋 $j$ 表示，$T^2 = (-1)^(2 j) 1$],
+
+    [相位说明],
+    [*$eta$、$eta_sigma$* 为宇称相位；无质量态的指数符号取决于角度分段约定],
+    [有质量态已通过选基消去公共相位；$zeta_sigma$ 及无质量态的指数相位与反演实现、选基有关],
+  ),
+  caption: [空间反射与时间反演对单粒子态的作用  ],
+)
+核心区别：空间反射只反转动量，不反转角动量；时间反演同时反转动量和角动量。因此两者虽然对正能态的动量作用相同，但对螺旋度的作用恰好相反。
+
+=== $"U"(1)$内部对称性变换
+
+前面已经通过 Poincaré 对称性，确定了粒子的质量、自旋或螺旋度，以及它们在时空变换下的行为。现在要进一步回答：如果两个粒子的质量、自旋完全相同，为什么它们仍然可能是不同的粒子？又应该使用什么量子数区分它们？
+
+答案就是：除了时空对称性，粒子还可能携带由内部对称性决定的量子数，例如电荷。
+
+只讨论内部对称性为若干个相互独立的$"U"(1)$对称性构成的情况
+$
+  "U"(1) = {z in CC| abs(z) = 1}
+$
+与前面连续旋转的讨论一样，量子态上的连续$"U"(1)$对称变换由一参数幺正算符表示：
+$
+  U(theta) = e^(i theta Q), theta in RR
+$
+其中$Q$是Hermite生成元
+$
+  Q^dagger = Q
+$
+如果有$n$独立的$"U"(1)$因子，内部对称群是
+$
+  cal(G)_"int" = "U"(1)_1 times ... times "U"(1)_n
+$
+其变换可以用$n$个参数$theta_1, ..., theta_n$表示
+$
+  U(T(theta)) & = e^(i theta^a Q_a)
+$
+其中每个$"U"(1)$群的生成元互相对易
+$
+  [Q_a, Q_a'] = 0
+$
+#newpara()
+单粒子态可以同时具有确定动量和内部荷
+$
+  P^mu Psi_(p,sigma) & = p^mu Psi_(p,sigma) \
+   Q_a Psi_(p,sigma) & = q_a Psi_(p,sigma)
+$
+由于对易性，可以用$q$在适当的表示空间中选择共同本征基。由于内部荷和能量对易
+$
+  [H, Q_a] = 0
+$
+这给出了守恒的内部荷。
+
+内部$"U"(1)$变换只产生一个相位
+$
+  U(T(theta)) Psi_(p,sigma) = e^(i theta^a q_a) Psi_(p,sigma)
+$
+不像有质量单粒子态空间旋转那样混合$sigma$。例如电子和正电子的质量、自旋相同，但电荷相反。所以内部量子数的作用，就是进一步区分 Poincaré 分类尚不能区分的粒子类型。
+
+#note(subname: [复标量场的 $"U"(1)$ 对称性与 Noether 荷])[
+  考虑自由复标量场：
+  $
+    cal(L) = partial_mu phi^* partial^mu phi - m^2 phi^* phi
+  $
+  考虑变换
+  $
+    phi(x) -> e^(i theta) phi(x), phi^*(x) -> e^(- i theta) phi^*(x)
+  $
+  从而
+  $
+    cal(L) -> cal(L)' = cal(L)
+  $
+  这是全局不变的$"U"(1)$对称性。无穷小$theta$有
+  $
+    delta phi = i theta phi, delta phi^* = - i theta phi^*
+  $
+  Noether 定理给出守恒流
+  $
+    j^mu = i (phi^* partial^mu phi - phi partial^mu phi^*)
+  $
+  满足
+  $
+    partial_mu j^mu = 0
+  $
+  因此空间积分
+  $
+    Q = integral dd(x, 3) j^0
+  $
+  在合适边界条件下守恒
+  $
+    dv(Q, t) = 0
+  $
+  量子化后，$Q$ 成为 Hilbert 空间上的Hermite算符，其本征值用来标记带不同内部荷的粒子态。
+]
+
+#note(subname: [非Abel内部对称性意味着出现相互作用吗？])[
+  不意味着。这是群的代数结构与动力学之间的区别。
+
+  考虑两个质量相同的自由复标量场：
+  $
+    Phi = mat(phi_1; phi_2)
+  $
+  其Lagrangean为
+  $
+    cal(L) = partial_mu Phi^dagger partial^mu Phi - m^2 Phi^dagger Phi
+  $
+  这里没有三次、四次相互作用项。但对于任意常数矩阵
+  $
+    V in "SU"(2)
+  $
+  作内部变换
+  $
+    Phi |-> V Phi
+  $
+  由于
+  $
+    V^dagger V = 1
+  $
+  Lagrangean不变。于是我们有一个非Abel内部对称性$"SU"(2)$，但没有相互作用。这意味着非Abel内部对称性并不必然存在粒子相互作用。
+
+  我们经常将非Abel对称性与相互作用联系起来是因为当这个非Abel群被提升为局域规范对称性，并且引入具有非零规范耦合$g$的动力学规范场时，场强包含
+  $
+    F^a_(mu nu) = partial_mu A^a_nu - partial_nu A^a_mu + g f^(a b c) A^b_mu A^c_nu
+  $
+  最后一项来自非Abel群的结构常数$f^(a b c)$，这就产生了规范场的自相互作用。相反，Abelian$"U"(1)$规范理论虽然没有这种最低阶非Abel规范Boson自耦合，但完全可以有与带电物质的相互作用。QED 就是例子。
+]
+
+#note(subname: [有相互作用时，前面哪些粒子分类结论仍然成立？])[
+  只要完整的相互作用理论仍然具有 Poincaré 对称性，十个总生成元仍满足庞加莱代数：
+  $
+    [P^nu, P^mu] = 0\
+    [J^(rho sigma), P^mu] = i (g^(mu rho) P^sigma - g^(mu sigma) P^rho)\
+    [J^(rho sigma), J^(mu nu)] = i (g^(rho mu) J^(sigma nu) - g^(rho nu) J^(sigma mu) - g^(sigma mu) J^(rho nu) + g^(sigma nu) J^(rho mu))
+  $
+  因此仍可以构造Casimir算符$P^2, W^2$，并且仍然可以用它们的本征值来标记粒子种类。只要相互作用不破坏Poincaré对称性，粒子仍可通过不可约表示来分类：
+  $
+    M, j ("有质量")\
+    M=0, lambda ("无质量有限螺旋度")
+  $
+  如果内部$"U"(1)$还是理论的精确对称性，那么
+  $
+    [Q,H]=0
+  $
+  所以相应的内部荷仍然守恒。相互作用不会自动破坏对称群的表示理论。例如，强相互作用中稳定的复合粒子，同样能够具有明确的质量、自旋和电荷。它并不需要是一颗没有内部结构的基本粒子，才可以按照这些标签分类。
+]
+
+== 小结
+
+=== 量子力学与狭义相对论基本原理
+
+Hilbert23问之第6问——物理学的公理化，其五条基本原理如下
+#figure(
+  three-line-table[
+    | 条目 | 原理 | 核心意义 |
+    | 原理一 | 物理状态由 Hilbert 空间的态矢量描述；相差一个复数因子的两个态矢量描述同一物理状态 | 物理纯态是射线 |
+    | 原理二 | 可观测量由厄米算符表示；测量值为相应算符的本征值 | 可观测量与谱 |
+    | 原理三 | 对归一化态 $Psi$，测得归一化本征态 $Psi_n$ 对应结果的概率为 $|braket(Psi, Psi_n)|^2$ | Born 概率规则 |
+    | 原理四 | 惯性参考系等价；物理规律在非齐次 Lorentz 变换下保持不变 | Poincaré 对称性 |
+    | 原理五 | 光速在惯性参考系中不变；时空间隔在非齐次 Lorentz 变换下不变 | Minkowski 时空几何 |
+  ],
+  caption: [Hilbert23问之第6问——物理学的公理化],
+)
+
+我们在量子场论中使用的基本原理是：
+$
+  "态" --> "对称变换生成元" equiv "力学量" \
+  --> "完备集本征态" equiv "单粒子态" --> "本征值" equiv "物理参数"
+$
+我们实际做的是：利用对称群的表示，在已经选定的单粒子子空间中构造合适的共同本征基。
+- 原理一 + 原理四：态可以按照非齐次 Lorentz 变换的性质分类
+- 原理三 + 原理四：对称性在量子态空间上由幺正或反幺正算符实现。这里还使用了保持跃迁概率的 Wigner 定理
+- 原理二 + 原理四 + 原理五：可以利用时空对称性生成元的本征值标记态
+
+=== 量子力学的五项基本原理
+
+#figure(
+  three-line-table[
+    | 条目 | 原理 | 核心意义 |
+    | 原理一 | 描写微观系统状态的数学量是 Hilbert 空间中的矢量，相差一个复数因子的两个矢量，描写同一状态 | 态空间 |
+    | 原理二 | (1)描述可观测量 Hilbert 空间中的 Hermitian 算符\ (2)物理量测量的可能取值是相应算符的本征值 \ (3)如果 $Psi_n$ 是归一化本征态，那么测得对应本征值的概率为 | 可观测量与 Born 规则 |
+    | 原理三 | 每个粒子的直角坐标位置算符$X_i$和正则动量算符$P_i$ $[X_i, X_j] = 0, [P_i, P_j] = 0, [X_i, P_j] = i hbar delta_(i j)$ | 正则对易关系 |
+    | 原理四 | 量子态随时间变化的规律 $i hbar pdv(, t) Psi(t) = H Psi(t)$ | Schrödinger 方程 |
+    | 原理五 | 对于一对全同粒子的交换，态矢量或者对称，或者反对称；前者对应Boson，后者对应Fermion | 全同粒子的交换对称性 |
+  ],
+  caption: [高等量子力学的五项基本原理],
+)
+
+=== 单粒子态按 Poincaré 群不可约表示分类
+
+不同粒子的质量、自旋或螺旋度不同。它们在不同参考系之间可以互相转变，构成非齐次 Lorentz 变换形成的 Poincaré 群的*不可约表示*。
+
+也就是说，一种粒子对应的是一整个由时空变换联系起来的态空间，而不是单独某个动量态。不过，Poincaré 表示只负责时空方面的分类。如果两个粒子质量、自旋完全相同，却具有不同电荷，它们仍可能是不同粒子。
+
+对研究范围作出的假设
+- *不讨论的态：*负能态、虚质量态、真空态
+- *假设不存在的态：*负能态、零质量的连续态
+这里“零质量的连续态”结合前面 little group 的讨论，指的是无质量的连续自旋表示（continuous-spin representation），不是说无质量粒子的动量只能离散取值。
+
+连续 Poincaré 变换的总公式
+$
+  U(Lambda, a) = sqrt((Lambda p)^0/p^0) e^(i a dot (Lambda p)) sum_sigma' D_(sigma' sigma)(W(Lambda, p)) Psi_(Lambda p, sigma')
+$
+其中
+$
+  W(Lambda, p) = L^(-1)(Lambda p) Lambda L(p)
+$
+这就是我们前面整段小群分析最后得到的成果。它把一个复杂的时空变换拆成三个部分：
+- $p -> Lambda p$：动量的变换
+- $e^(i a dot (Lambda p))$：平移变换的相位
+- $D(W)$：非动量标签的变化
+其中
+$
+  D_(sigma' sigma)(W) = cases(
+    (e^1/2 Theta_(i k) (Lambda, p) J_(i k)^((j)))_(sigma' sigma) & \, "有质量"2j+1"自由度",
+    e^(i theta(Lambda, p) sigma) delta_(sigma' sigma) & \, "无质量有限螺旋度"
+  )
+$
+有Casimir 本征值为
+$
+                    P^2 Psi_(p,sigma) & = M^2 Psi_(p,sigma) \
+                    W^2 Psi_(p,sigma) & = - M^2 j(j+1) Psi_(p,sigma) "有质量" \
+                    W^2 Psi_(p,sigma) & = 0 Psi_(p,sigma) "无质量有限螺旋度" \
+  (vb(P) dot vb(J))/P^0 Psi_(p,sigma) & = sigma Psi_(p,sigma) "无质量有限螺旋度"
+$
+以及分立变换
+$
+  P Psi_(p,sigma) & = eta Psi_(cal(P) p,sigma)                                  &           "有质量" \
+  P Psi_(p,sigma) & = eta_sigma e^(minus.plus i pi sigma) Psi_(cal(P) p,-sigma) & "无质量有限螺旋度" \
+$
+$
+  T Psi_(p,sigma) & = (-1)^(j - sigma) Psi_(cal(P) p,-sigma)                    &           "有质量" \
+  T Psi_(p,sigma) & = zeta_sigma e^(plus.minus i pi sigma) Psi_(cal(P) p,sigma) & "无质量有限螺旋度"
+$
+
+#note(subname: [$sigma$到底是什么])[
+  单粒子态的定义
+  $
+    Psi_(p,sigma) = sqrt(kappa/p^0) U(L(p)) Psi_(k,sigma)
+  $
+  - 一般运动中的$Psi_(p,sigma)$不是$J^3$的本征态，因此$sigma$也不是$J^3$的本征值
+    - 它只是一个标签，标记了参考态$Psi_(k,sigma)$的$J^3$本征值
+    - 在四动量确定时候，不能同时确定$J^3$
+  - 有质量运动态一般是不同$J^3$本征态的线性叠加
+  - 无质量粒子且$L(p)=R_2$时，$Psi_(p,sigma)$是$J^3$的本征值为$- sigma$
+  - $sigma$是$Psi_(p,sigma)$退回到参考动量$k$时，参考态$Psi_(k,sigma)$的$J^3$本征值
+    - 对无质量态，$sigma$是螺旋度的本征值
+    - 对有质量态，$j(j+1)$是$W^2/M^2$的本征值
+]
+
+#note(subname: [为什么自然界有连续 Poincaré 对称性，却没有独立的$P,T$对称性？])[
+  完整的 Poincaré 对称性包含时空平移与转动、空间反射和时间反演。
+
+  目前的讨论假设自然界具有 Poincaré 对称性。但实验告诉我们，自然界不具有分立的空间反射和时间反演对称性，但确具有连续的时空平移和转动对称性。
+
+  为什么对完整 Poincaré 对称性中的连续和分立对称性分别给予不平等待遇？
+  - 数学层次：完整 Lorentz 群并不是连通的
+    $
+      "O"(1,3)
+    $
+    有四个连通分支。其中与恒等元连通的部分是
+    $
+      "SO"^+(1,3)
+    $
+    其连续变换可以由生成元$J^(mu nu)$通过指数构造。但空间反射和时间反演不属于这个连通部分。所以：对所有连续旋转、boost 不变并不意味对空间反射、时间反演不变。连续生成元的对易关系不能决定理论是否具有离散反射对称性。
+  - 物理层次：Lorentz 不变的相互作用完全可以违反宇称
+
+  时空几何允许某种变换不代表自然界的动力学必然在这种变换下不变。
+]
+
+- 第一，粒子不是先被定义为某个微小物体，再赋予质量、自旋等属性。 在这一章的表示理论框架中，单粒子态首先作为 Poincaré 对称性的表示被研究，质量、自旋和螺旋度成为相应的分类标签。
+- 第二，群的几何作用、群在量子态上的表示，以及粒子的动力学，是三个不同层次。 例如同一个空间旋转，在普通三维矢量上是$3 times 3$矩阵，在自旋$1/2$则是$2 times 2$的$"SU"(2)$表示。又如，一个变换可以在几何上保持时空间隔，却不一定是实际相互作用的对称性。
+- 第三，对称性分类并没有代替动力学。它告诉我们哪些质量、自旋、螺旋度与内部荷可以一致地存在，态如何变换，以及守恒律如何限制物理过程；但具体粒子有什么质量、哪些相互作用发生、散射振幅是多少，仍需建立具体的量子场论。
+
+#import "@preview/mitex:0.2.7": *
+
+#mitex(
+  `
+\begin{gathered}
+\text{量子态属于 Hilbert 空间}\\
+\Downarrow\\
+\text{时空对称性由幺正或反幺正算符实现}\\
+\Downarrow\\
+\text{连续 Poincaré 对称性给出 }P^\mu,J^{\mu\nu}\\
+\Downarrow\\
+\text{选定四动量轨道及标准动量 }k\\
+\Downarrow\\
+\text{求保持 }k\text{ 的 little group}\\
+\Downarrow\\
+\begin{cases}
+M>0:\ SO(3)\longrightarrow j,\\
+M=0:\ ISO(2)\longrightarrow\lambda
+\quad\text{（有限螺旋度分支）}
+\end{cases}\\
+\Downarrow\\
+\text{构造单粒子态的完整连续变换规律}\\
+\Downarrow\\
+\text{研究空间反射、时间反演与内部量子数}\\
+\Downarrow\\
+\text{得到粒子分类及相互作用的对称性约束}.
+\end{gathered}`,
+)
