@@ -2956,7 +2956,20 @@ $
 $
   (vb(P) dot vb(J))/abs(vb(P)) Psi_(p,sigma) = sigma Psi_(p,sigma)
 $
+#newpara()
 
+注意到
+$
+  W^mu P_mu = 0 => W^0 = (vb(P) dot vb(W))/P^0
+$
+其中
+$
+  [P^mu, W^nu] = 0
+$
+从而
+$
+  vb(W)_perp = vb(W) - (vb(P) dot vb(W))/P^0 vb(P)/P^0
+$
 
 // 为什么和有质量的结构完全不同？origin of mass？
 
