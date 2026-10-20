@@ -451,25 +451,48 @@ $
   进态、出态由波算符从自由态构造，但它们确实属于完整$H$的散射谱。
 ]
 
+#note[
+  *为什么$H$与$H_0$使用相同的质量和能量标签？*
+  - 因为自由参照态要描述的是相互作用理论中真正能够在远处观测到的渐近粒子。
+  - 例如在相互作用量子场论中，粒子的可测质量可能已经包含自能修正。构造用于散射的$H_0$时，我们通常希望它对应物理的渐近粒子质量，而不是未经修正的裸质量参数。
+  *为什么不显含时间的$Psi_alpha^plus.minus$能包含散射过程？*
+  $
+    H Psi_alpha^plus.minus = E_alpha Psi_alpha^plus.minus
+  $
+  表示它们是完整 Hamiltonian 的广义能量本征态。它们在时间演化下只获得相位：
+  $
+    e^(-i H t) Psi_alpha^plus.minus = e^(-i E_alpha t) Psi_alpha^plus.minus
+  $
+  但它们并不因为是定态就失去散射信息。完整散射信息已经包含在态的空间结构及其渐近边界条件中。若要描述粒子逐渐接近、碰撞、离开的实际时间过程，需要把不同能量的散射态叠加为波包：
+  $
+    ket(psi_"in" (t)) = integral dd(alpha) f(alpha) e^(- i E_alpha t) ket(Psi^+_alpha)
+  $
+  因此散射定态负责描述边界条件与散射振幅；散射波包负责描述碰撞如何在时间中发生。
+]
+
 === S矩阵
 
-进态和出态的内积定义为$S$矩阵
-$
-  S_(beta alpha) = braket(Psi^-_beta, Psi^+_alpha)
-$
-是$alpha -> beta$的跃迁几率幅，我们最终要建立
-$
-  S_(beta alpha) = braket(Phi_beta, S, Phi_alpha), S = Omega^dagger (+oo) Omega(-oo) = U(+oo,-oo)
-$
+#definition(subname: [S矩阵])[
+  进态和出态的内积定义为$S$矩阵
+  $
+    S_(beta alpha) = braket(Psi^-_beta, Psi^+_alpha)
+  $
+  是$alpha -> beta$的跃迁几率幅，其中
+  $
+    alpha = (p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N), beta = (p'_1, sigma'_1, n'_1; ...; p'_M, sigma'_M, n'_M)
+  $
+]
 #newpara()
 
-有性质
+可以证明，$S$矩阵有性质
 $
   S_(beta alpha) = delta(beta - alpha) - 2 pi i delta(E_beta - E_alpha) T^+_(beta alpha)
 $
-T矩阵的定义
+可以分解为单位矩阵部分以及散射贡献；跃迁信息在$T$矩阵中。
+#newpara()
+$T$矩阵的定义为
 $
-  T^+_(beta alpha) = braket(Phi_beta, V Psi^+_alpha)
+  T^+_(beta alpha) = braket(Phi_beta, V, Psi^+_alpha)
 $
 #newpara()
 利用进出态的完备性
@@ -477,10 +500,14 @@ $
   Psi^+_alpha = integral dd(beta) Psi^-_beta braket(Psi^-_beta, Psi^+_alpha) = integral dd(beta) S_(beta alpha) Psi^-_beta\
   Psi^-_alpha = integral dd(beta) Psi^+_beta braket(Psi^+_beta, Psi^-_alpha) = integral dd(beta) S^*_(alpha beta) Psi^+_beta
 $
-幺正性质
+幺正性质给出
 $
   integral dd(beta) S^*_(beta gamma) S_(beta alpha) &= integral dd(beta) braket(Psi^+_gamma, Psi^-_beta) braket(Psi^-_beta, Psi^+_alpha) \
   &= braket(Psi^+_gamma, Psi^+_alpha) = delta(gamma - alpha)
+$
+即
+$
+  S^dagger S = I
 $
 将$S$矩阵建立在自由粒子基上，引入$S$矩阵算符
 $
@@ -488,24 +515,156 @@ $
 $
 有矩阵元
 $
-  S_(beta alpha) = braket(Phi_beta, S Phi_alpha)\
+  S_(beta alpha) = braket(Phi_beta, S, Phi_alpha)\
   S = Omega^dagger (oo) Omega(-oo) = U(+oo,-oo)
 $
 其中
 $
-  U(tau, tau_0) = Omega^dagger (tau) Omega(tau_0) = e^(i H_0 tau) e^(-i H (tau - tau_0)) e^(-i H_0 tau_0) = U_0(1,tau) U^dagger (1, tau-tau_0) U_0^dagger (1, tau_0)
+  U(tau, tau_0) & = Omega^dagger (tau) Omega(tau_0) =^("如果"[H,H_0] = 0) e^(i H_0 tau) e^(-i H (tau - tau_0)) e^(-i H_0 tau_0) \
+  & = U_0(1,tau) U^dagger (1, tau-tau_0) U_0^dagger (1, tau_0) \
+  Omega(tau) & = U(1, tau) U^dagger_0 (1, tau) = e^(i H tau) e^(-i H_0 tau)
 $
+$U(tau, tau_0)$是有限时间算符，先用自由演化建立初始时刻的对应$e^(-i H_0 tau_0)$，再由完整 Hamiltonian 描述真实动力学$e^(-i H (tau - tau_0))$，最后去掉出射端的自由传播相位$e^(i H_0 tau)$。所以$U(tau,tau_0)$描述的不是单纯的 Schrödinger 完整时间演化，而是相对于自由演化定义的相互作用绘景演化算符。
+
+#theorem(subname: [S矩阵与$U$算符])[
+  S矩阵算符为
+  $
+    S = Omega^dagger (+oo) Omega(-oo) = U(+oo,-oo)
+  $
+  其中
+  $
+    U(tau, tau_0) = Omega^dagger (tau) Omega(tau_0) = e^(i H_0 tau) e^(-i H (tau - tau_0)) e^(-i H_0 tau_0)\
+  $
+  为有限时间算符，描述相对于自由演化的相互作用绘景演化
+  $
+    Omega(tau) = U(1, tau) U^dagger_0 (1, tau) = e^(i H tau) e^(-i H_0 tau)
+  $
+  而这里的$U$是Lorentz变换算符，$U(1,tau)$描述完整 Hamiltonian 的时间演化，$U_0(1,tau)$描述自由 Hamiltonian 的时间演化。
+]
 
 #newpara()
 
-利用洛仑兹变换和内部对称性变换算符的幺正性质⇛S矩阵在洛仑兹变换和内部对称性变换下是不变的
+下面我们利用Lorentz变换和内部对称性变换算符的幺正性质说明$S$矩阵在Lorentz变换和内部对称性变换下是不变的。
 
+先考虑自由粒子的Lorentz变换和内部对称性变换
+$
+  U_0 (Lambda, a) Phi_alpha = integral dd(alpha') (U_0)_(alpha' alpha) Phi_(alpha')\
+  S_(beta alpha) = braket(Phi_beta, S, Phi_alpha) \
+  S = integral dd(beta, alpha) Phi_beta S_(beta alpha) Phi_alpha
+$
+变换有
+$
+  S_(beta alpha) = braket(U Psi^-_beta, U Psi^+_alpha) = integral dd(overline(beta), overline(alpha)) (U^*_0)_(overline(beta) beta) (U_0)_(overline(alpha) alpha) S_(overline(beta) overline(alpha)) \
+$
+从而
+$
+  S = integral dd(beta, alpha) Phi_beta S_(beta alpha) Phi_alpha &= integral dd(overline(beta), overline(alpha), beta, alpha) Phi_(overline(beta)) (U^*_0)_(overline(beta) beta) (U_0)_(overline(alpha) alpha) S_(overline(beta) overline(alpha)) Phi_(overline(alpha))\
+  &= integral dd(overline(beta), overline(alpha), beta, alpha) Phi_(beta) (U^*_0)_(overline(beta) beta) braket(Phi_(overline(beta)), S, Phi_(overline(alpha))) (U_0)_(overline(alpha) alpha) Phi_(alpha)\
+  &= integral dd(overline(beta), overline(alpha), beta, alpha) Phi_(beta)braket(Phi_(overline(beta)), U^dagger_0 S U_0, Phi_(overline(alpha))) Phi_(alpha)\
+  &= integral dd(beta, alpha) Phi_(beta) braket(Phi_(beta), U^dagger_0 S U_0, Phi_(alpha)) Phi_(alpha) = U_0^(-1) S U_0
+$
+其中$U_0$是任意一个幺正算符。$S$矩阵算符是在Lorentz变换和内部对称性变换下不变的算符。
 
-$S$矩阵的微扰展开
+从而
+$
+  S_(beta alpha) = braket(Psi^-_beta, Psi^+_alpha) = braket(U(Lambda,a) Psi^-_beta, U(Lambda,a) Psi^+_alpha) = braket(Psi^-_(Lambda beta), Psi^+_(Lambda alpha)) = S_(Lambda beta, Lambda alpha)
+$
+这是因为Lorentz变换和内部对称性变换算符$U(Lambda,a)$是幺正的，且进态和出态在Lorentz变换下仍然是进态和出态。而
+$
+  S_(beta alpha) =& integral dd(overline(beta), overline(alpha)) (U^*_0)_(overline(beta) beta) (U_0)_(overline(alpha) alpha) S_(overline(beta) overline(alpha)) \
+  =& q^(i a_mu (sum_(i=1)^M (Lambda p'_i)^mu - sum_(i=1)^N (Lambda p_i)^mu)) sqrt((product_(i=1)^M (Lambda p'_i)^0 product_(i=1)^N (Lambda p_i)^0) / (product_(i=1)^M p'^0_i product_(i=1)^N p^0_i))\
+  & sum_(overline(sigma)'_1 ... overline(sigma)'_M) sum_(overline(sigma)_1 ... overline(sigma)_N) product_(i=1)^M D^*_(overline(sigma)'_i sigma'_i)(W(Lambda, p'_i)) product_(j=1)^N D_(overline(sigma)_j sigma_j)(W(Lambda, p_j)) S_((Lambda overline(beta)), (Lambda overline(alpha))) \
+$
+左边与平移参量$a$无关，从而有动量守恒
+$
+  sum_(i=1)^M (Lambda p'_i)^mu - sum_(i=1)^N (Lambda p_i)^mu = 0
+$
+记$p_alpha = p_beta$，四动量是连续变量，动量守恒意味着$S$矩阵元含有因子$delta(vb(p)_beta - vb(p)_alpha)$，即
+$
+  S_(beta alpha) - delta(beta - alpha) = - 2 pi i delta(E_beta - E_alpha) T^+_(beta alpha) = - 2 pi i M_(beta alpha) delta^4(p_beta - p_alpha)
+$
+#newpara()
+以及有$S$矩阵元的内部对称性交换不变
+$
+  S_(beta alpha) = braket(Psi^-_beta, Psi^+_alpha) = braket(U(T(theta)) Psi^-_beta, U(T(theta)) Psi^+_alpha) = braket(Psi^-_(T(theta) beta), Psi^+_(T(theta) alpha)) = S_(T(theta) beta, T(theta) alpha)
+$
+有
+$
+  S_(beta alpha) &= integral dd(overline(beta), overline(alpha)) (U^*_0)_(overline(beta) beta) (U_0)_(overline(alpha) alpha) S_(overline(beta) overline(alpha))\
+  &= e^(i (sum_(i=1)^M q_(a i) - sum_(i=1)^N q_(a i)) theta^a) S_((T(theta) overline(beta)), (T(theta) overline(alpha))) \
+$
+左边与平移参量$theta$无关，从而有内部对称性守恒
+$
+  sum_(i=1)^M q_(a i) - sum_(i=1)^N q_(a i) = 0
+$
+记
+$
+  q_alpha = q_beta
+$
 
+#theorem(subname: [S矩阵的Lorentz变换性与内部对称性])[
+  S矩阵在Lorentz变换和内部对称性变换下是不变的算符
+  $
+    S = U_0^(-1) S U_0
+  $
+  从而有动量守恒和内部对称性守恒
+  $
+    p_alpha = p_beta\
+    q_alpha = q_beta
+  $
+]
+
+=== $S$矩阵的微扰展开
+
+我们知道
+$
+  S & = U(+oo,-oo) = Omega^dagger (+oo) Omega(-oo)
+$
+其中
+$
+  U(tau, tau_0) = Omega^dagger (tau) Omega(tau_0) = e^(i H_0 tau) e^(-i H (tau - tau_0)) e^(-i H_0 tau_0)
+$
+注意到
+$
+  i dv(, tau) U(tau, tau_0) = e^(i H_0 tau) (H - H_0) e^(-i H (tau - tau_0)) e^(-i H_0 tau_0) = V(tau) U(tau, tau_0)
+$
+其中
+$
+  V(tau) = e^(i H_0 tau) V e^(-i H_0 tau), V = H - H_0
+$
+从而可以得到积分方程
+$
+  U(tau, tau_0) = 1 - i integral_(tau_0)^tau dd(tau') V(tau') U(tau', tau_0)
+$
+迭代得到Dyson级数展开
+$
+  U(tau, tau_0) &= 1 - i integral_(tau_0)^tau dd(tau') V(tau') + (-i)^2 integral_(tau_0)^tau dd(tau') integral_(tau_0)^(tau') dd(tau'') V(tau') V(tau'') + ...\
+  &= 1 + sum_(n=1)^oo (-i)^n integral_(tau_0)^tau dd(tau_1) integral_(tau_0)^(tau_1) dd(tau_2) ... integral_(tau_0)^(tau_(n-1)) dd(tau_n) V(tau_1) V(tau_2) ... V(tau_n)\
+  &= "T" exp(-i integral_(tau_0)^tau dd(tau') V(tau'))
+$
+其中$"T"$是编时乘积，它将事件按照时间顺序排列，时间靠前的算符放在右边，时间靠后的算符放在左边。
 
 反应率
 
 碰撞截面
 
 Lorentz变换性
+
+
+== 量子场
+
+关于量子场理论，目前我们已经：
+- 建立了自由粒子态
+- 引入时空平移和转动及内部对称性的生成元算符
+- 用$H$建立了$S$矩阵理论直接描述散射实验
+  - 相互作用通过$e^(-i H t)$演化引入
+  - 只需知道$V(t)$对自由粒子态的作用
+    $
+      S_(alpha beta) = braket(Phi_alpha, S Phi_beta) = braket(Phi_alpha, T exp(-i integral dd(t) V(t)) Phi_beta)
+    $
+
+#newpara()
+产生算符作用在某个多粒子态上定义为在此态上多加入一个粒子
+$
+  a^dagger (q)
+$
