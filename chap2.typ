@@ -82,6 +82,26 @@ $
   U_0(T(theta)) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) &= e^(i (sum_(i=1)^N q_(a i)) theta^a) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N)
 $
 
+#theorem(subname: [自由多粒子态])[
+  无相互作用的多粒子态可以由单粒子态的直乘构造而成
+  $
+    Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) = times.o.big_i Psi_(p_i, sigma_i, n_i)
+  $
+  其能动量、自旋的第三分量和内部$"U"(1)$本征值为
+  $
+    P_0^mu Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) &= (sum_(i=1)^N p_i^mu) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N)\
+    J_0^3 Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) &= (sum_(i=1)^N sigma_i) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N)\
+    (Q_0)_a Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) &= (sum_(i=1)^N q_(a i)) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N)\
+  $
+  其Lorentz变换以及内部$"U"(1)$变换为
+  $
+    &U_0(Lambda, a) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) \
+    =& e^(i a_mu (sum_(i=1)^N (Lambda p_i)^mu)) sqrt((product_(i=1)^N (Lambda p_i)^0) / (product_(i=1)^N p_i^0)) sum_(sigma'_1 ... sigma'_N) product_(i=1)^N D_(sigma'_i sigma_i)(W(Lambda, p_i)) Phi_(Lambda p_1, sigma'_1, n_1; ...; Lambda p_N, sigma'_N, n_N)\
+    &U_0(T(theta)) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N) \
+    =& e^(i (sum_(i=1)^N q_(a i)) theta^a) Phi_(p_1, sigma_1, n_1; ...; p_N, sigma_N, n_N)
+  $
+]
+
 === Fermion与Boson
 
 在量子力学中有*排序问题*。
@@ -144,6 +164,13 @@ $
 - 最近邻的Boson与Boson之间交换，Boson与Fermion之间交换不变号
 
 要证明整数自旋对应Boson，半整数自旋对应Fermion，需要相对论量子场论中的自旋—统计定理。它还要使用适当的局域性、正能量条件、Hilbert 空间正定性和 Lorentz 协变性等结构，将在后面给出。
+
+#theorem(subname: [Fermion与Boson])[
+  在$1+3$维时空中，同类粒子交换只可能出现两种情况：变号或不变号
+  - $alpha_n (p, sigma; p', sigma') = +1$的粒子称为*Boson*，对同类粒子交换不变号
+  - $alpha_n (p, sigma; p', sigma') = -1$的粒子称为*Fermion*，对同类粒子交换会变号
+]
+#newpara()
 
 下面讨论多粒子态的*归一化*，记
 $
@@ -259,7 +286,15 @@ $
 $
   Lambda = 1, a = (epsilon, vb(0))
 $
-根据Lorentz变换关系，进态和出态是携带入射渐近边界条件的完整散射态
+根据Lorentz变换关系
+$
+  U(1, a) = e^(i a^mu P_mu) = e^(i epsilon H)
+$
+就有
+$
+  U(1, (epsilon, vb(0))) Psi^plus.minus_(p, sigma) = e^(i epsilon p^0) Psi^plus.minus_(p, sigma)
+$
+进态和出态是携带入射渐近边界条件的完整散射态
 $
   e^(i epsilon H) Psi^plus.minus_alpha & = e^(i epsilon E_alpha) Psi^plus.minus_alpha \
                 H Psi^plus.minus_alpha & = E_alpha Psi^plus.minus_alpha
@@ -299,9 +334,21 @@ $
 $
 #newpara()
 
-时间的演化
+#figure(
+  three-line-table[
+    | \ | 自由多粒子态$Phi_alpha$ | 进态、出态$Psi^plus.minus_alpha$ |
+    | --- | --- | --- |
+    | Hamiltonian | $H_0$ | $H = H_0 + V$ |
+    | 本征方程 | $H_0 Phi_alpha = E_alpha Phi_alpha$ | $H Psi^plus.minus_alpha = E_alpha Psi^plus.minus_alpha$ |
+    | Lorentz变换 | $U_0(Lambda, a)$ | $U(Lambda, a)$ |
+    | 边界条件 | 自由演化 | 在过去或未来渐近于自由演化 |
+  ],
+  caption: [进态、出态以及自由多粒子态的关系],
+)
+其中$Psi_alpha^plus.minus$都是完整相互作用 Hamiltonian $H$ 的广义能量本征态，但分别由无穷过去和无穷未来的自由粒子条件来选定。
 
 
+什么是时间的演化？绝对的、真实的和数学的时间：由其特性决定，自身均匀地流逝，与一切外在事务无关，又名绵续。而相对的、表象的和普通的时间：可以感知、具有外在测量手段，是运动持续的量度，例如一小时、一天、一个月、一年。我们强调时间平移均匀性（time-translation homogeneity）。
 
 #note(subname: [时间的演化是均匀流逝])[
   绝对的、真实的和数学的时间，由其特性决定，自身均匀地流逝，  与一切外在事务无关，又名延续；相对的、表象的和普通的时间是可感知和外在的（不论是精确的或是不均匀的）对运动之延续的量度，它常被用以代替真实的时间，如一小时、一天、一个月、一年。 _—— Newton, 《自然哲学的数学原理》_
@@ -309,32 +356,47 @@ $
 
 #newpara()
 
-将态的演化时间翻译为两观测者的观测时间差：
+将态的演化时间翻译为两观测者的观测时间差：一个观察者 $O$ 知道某物理量在 $t=0$ 时对应的算符 $K$。如果要研究它在 $t=t_1$ 时的结果，可以引入另一个观察者 $O_tau$，让其时间坐标的零点比 $O$ 晚 $t_1$。
 - 观测者$O$的时钟标记$t$，观测到的为理论原始假设中的态$Psi$
 - 观测者$O_tau$的时钟标记$t' = t - tau$，感受*态的演化*，观测到的态为$Psi(tau)$
+与其说系统在时间中变化，也可以说我们利用时间平移变换，将同一个物理过程重新表达在不同时间原点的坐标系中
 $
   Psi(tau) = U(1, -tau) Psi = e^(-i H tau) Psi
 $
-其中
+可以得到
 $
   i pdv(, tau) Psi(tau) = H Psi(tau)
 $
 这正是Schrödinger方程。
 
-进态和出态与$H_0$的本征态的关系。
+#note[
+  从数学上说，我们已经知道时间平移由$e^(- i H t)$描述表示，所以求导得到 Schrödinger 方程，是一个直接结果。
+  $
+    "假定时间平移有强连续幺正表示" \
+    -> "存在自伴生成元"H \
+    -> U(tau)=e^(-i H tau) \
+    -> i pdv(, tau) Psi(tau) = H Psi(tau)
+  $
+  具体的$H$是什么，仍然属于动力学问题，需要根据物理体系确定。
+]
+
+#newpara()
+
+下面我们正式建立进态、出态与自由态的渐近关系。
 
 进态要求在无穷过去$O_(-oo)$观测的进态与自由粒子态完全相同
 $
   Psi^+ (-oo) = Phi(-oo)
 $
+更具体地写成时间演化算符
 $
   evaluated(U(1,-tau))_(tau = -oo) Psi^+ = evaluated(U_0 (1, -tau))_(tau = -oo) Phi
 $
-公式应在波包（不同本征态的叠加）意义下理解，否则带入本征值将导致$Psi^+_alpha = Phi_alpha$。
+公式应在波包（即不同本征态的叠加）意义下理解，否则带入本征值将导致$Psi^+_alpha = Phi_alpha$。从而
 $
   e^(-i H tau) evaluated(Psi^+_alpha)_(tau = -oo) = e^(-i H_0 tau) evaluated(Phi_alpha)_(tau = -oo)
 $
-记作
+我们可以将进态定义为
 $
   Psi^+_alpha = Omega(-oo) Phi_alpha
 $
@@ -342,6 +404,52 @@ $
 $
   Omega(tau) = U^dagger (1, -tau) U_0 (1, -tau) = U(1, tau) U^dagger_0 (1, tau) = e^(i H tau) e^(-i H_0 tau)
 $
+#newpara()
+而出态要求在无穷未来$O_(oo)$观测的出态与自由粒子态完全相同
+$
+  Psi^- (+oo) = Phi(+oo)
+$
+时间演化算符给出
+$
+  evaluated(U(1,-tau))_(tau = +oo) Psi^- = evaluated(U_0 (1, -tau))_(tau = +oo) Phi
+$
+同样
+$
+  Psi^-_alpha = Omega(+oo) Phi_alpha
+$
+
+#theorem(subname: [进态、出态与自由粒子态的渐近关系])[
+  进态和出态与自由粒子态的渐近关系为
+  $
+    Psi^+_alpha = Omega(-oo) Phi_alpha\
+    Psi^-_alpha = Omega(+oo) Phi_alpha
+  $
+]
+
+#note[
+  我们定义
+  $
+    Omega(t) = e^(i H t) e^(-i H_0 t)
+  $
+  考虑一个固定时间间隔$s$
+  $
+    e^(-i H s) Omega(t) = e^(-i H s) e^(i H t) e^(-i H_0 t) = e^(i H (t - s)) e^(-i H_0 t) = Omega(t - s) e^(-i H_0 s)
+  $
+  当$t->oo$有
+  $
+    e^(-i H s) Omega(plus.minus oo) = Omega(plus.minus oo) e^(-i H_0 s)\
+  $
+  在$s=0$附近求导
+  $
+    H Omega(plus.minus oo) = Omega(plus.minus oo) H_0
+  $
+  这正是两个 Hamiltonian 的交织关系。从而
+  $
+      Psi^+_alpha & = Omega(-oo) Phi_alpha \
+    H Psi^+_alpha & = Omega(-oo) H_0 Phi_alpha = E_alpha Omega(-oo) Phi_alpha = E_alpha Psi^+_alpha \
+  $
+  进态、出态由波算符从自由态构造，但它们确实属于完整$H$的散射谱。
+]
 
 === S矩阵
 
@@ -349,7 +457,13 @@ $
 $
   S_(beta alpha) = braket(Psi^-_beta, Psi^+_alpha)
 $
-是$alpha -> beta$的跃迁几率幅。有性质
+是$alpha -> beta$的跃迁几率幅，我们最终要建立
+$
+  S_(beta alpha) = braket(Phi_beta, S, Phi_alpha), S = Omega^dagger (+oo) Omega(-oo) = U(+oo,-oo)
+$
+#newpara()
+
+有性质
 $
   S_(beta alpha) = delta(beta - alpha) - 2 pi i delta(E_beta - E_alpha) T^+_(beta alpha)
 $
